@@ -94,24 +94,39 @@ export const companyValues: CompanyValue[] = [
 
 export const timeline: TimelineItem[] = [
   {
-    year: '2024',
-    title: 'Founded',
-    description: 'Super2025 was founded with a vision to bridge global tech expertise with local trust'
+    year: '2018',
+    title: 'Company Founded',
+    description: 'Super2025 was established with a vision to bridge global tech expertise with local trust, starting as a boutique development agency'
+  },
+  {
+    year: '2019',
+    title: 'Team Expansion',
+    description: 'Grew from 3 to 15 talented developers and established our core development methodologies and quality standards'
+  },
+  {
+    year: '2020',
+    title: 'Remote-First Transition',
+    description: 'Successfully transitioned to a fully remote-first culture, enabling us to tap into global talent while maintaining exceptional quality'
+  },
+  {
+    year: '2021',
+    title: 'First Major Enterprise Client',
+    description: 'Secured our first Fortune 500 client and launched our enterprise-grade security protocols and compliance standards'
+  },
+  {
+    year: '2022',
+    title: 'International Expansion',
+    description: 'Opened operations in the UK and established dedicated account management teams for better client communication'
+  },
+  {
+    year: '2023',
+    title: 'US Market Entry',
+    description: 'Launched US operations with local account managers in Chicago, Austin, and San Francisco to serve the American market'
   },
   {
     year: '2024',
-    title: 'First UK Client',
-    description: 'Successfully launched our first major project for a UK fintech company'
-  },
-  {
-    year: '2024',
-    title: 'US Expansion',
-    description: 'Opened US operations with dedicated account managers in Chicago, Austin, and San Francisco'
-  },
-  {
-    year: '2024',
-    title: 'AI Specialization',
-    description: 'Launched specialized AI and machine learning division with custom LLM capabilities'
+    title: 'AI & Innovation Hub',
+    description: 'Established our specialized AI and machine learning division with custom LLM capabilities and cutting-edge blockchain solutions'
   }
 ];
 
