@@ -1,8 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { AnimatedSection, StaggeredContainer } from "./ScrollAnimations";
-import { DotsPattern } from "./ThreeBackground";
-import Icon from "./Icon";
+import {
+  AnimatedSection,
+  StaggeredContainer,
+  DotsPattern,
+} from "../animations";
+import { Icon } from "../ui";
 
 const TrustBadges: React.FC = () => {
   const badges = [

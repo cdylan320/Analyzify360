@@ -1,16 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { pageTransition } from "@/components/ScrollAnimations";
 import {
+  pageTransition,
   SmoothSection,
   MorphingBackground,
-} from "@/components/ProfessionalMotions";
-import Hero from "@/components/Hero";
-import ServicesSection from "@/components/ServicesSection";
-import TrustBadges from "@/components/TrustBadges";
-import TeamPreview from "@/components/TeamPreview";
-import ProjectShowcase from "@/components/ProjectShowcase";
+  Hero,
+  ServicesSection,
+  TrustBadges,
+  TeamPreview,
+  ProjectShowcase,
+} from "@/components";
 
 export default function Home() {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Icon from "./Icon";
+import { Icon } from "../ui";
 import { companyInfo } from "@/data/content";
 
 const Footer: React.FC = () => {

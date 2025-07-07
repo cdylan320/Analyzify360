@@ -4,9 +4,8 @@ import {
   ProfessionalCard,
   ParallaxText,
   professionalMotions,
-} from "./ProfessionalMotions";
-import Button from "./Button";
-import Icon from "./Icon";
+} from "../animations";
+import { Button, Icon } from "../ui";
 
 const ServicesSection: React.FC = () => {
   const services = [

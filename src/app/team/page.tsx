@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Card from "@/components/Card";
-import Button from "@/components/Button";
+import { Card, Button } from "@/components";
 import { teamMembers, getTechTeam, getClientTeam } from "@/data/team";
 
 export default function Team() {

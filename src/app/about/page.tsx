@@ -5,15 +5,14 @@ import { motion } from "framer-motion";
 import {
   AnimatedSection,
   StaggeredContainer,
-} from "@/components/ScrollAnimations";
-import {
   SmoothSection,
   ProfessionalCard,
   ParallaxText,
-} from "@/components/ProfessionalMotions";
-import { DotsPattern, GridBackground } from "@/components/ThreeBackground";
-import Icon from "@/components/Icon";
-import Button from "@/components/Button";
+  DotsPattern,
+  GridBackground,
+  Icon,
+  Button,
+} from "@/components";
 import { companyInfo, companyValues, timeline } from "@/data/content";
 import { teamMembers } from "@/data/team";
 

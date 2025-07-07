@@ -2,9 +2,12 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { AnimatedSection, StaggeredContainer } from "./ScrollAnimations";
-import { GridBackground } from "./ThreeBackground";
-import TeamMemberCard from "./TeamMemberCard";
+import {
+  AnimatedSection,
+  StaggeredContainer,
+  GridBackground,
+} from "../animations";
+import { TeamMemberCard } from "../sections";
 import { teamMembers, getTechTeam, getClientTeam } from "@/data/team";
 
 // Tech Team Section Component

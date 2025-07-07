@@ -4,8 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import Button from "./Button";
-import Icon from "./Icon";
+import { Button, Icon } from "../ui";
 import { companyInfo } from "@/data/content";
 
 const Navbar: React.FC = () => {

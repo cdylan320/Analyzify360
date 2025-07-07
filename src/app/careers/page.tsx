@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Card from "@/components/Card";
-import Button from "@/components/Button";
-import Icon from "@/components/Icon";
+import { Card, Button, Icon } from "@/components";
 import { careerPositions } from "@/data/content";
 
 export default function Careers() {

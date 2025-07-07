@@ -1,6 +1,5 @@
 import React from "react";
-import Button from "./Button";
-import Icon from "./Icon";
+import { Button, Icon } from "../ui";
 
 const ProjectShowcase: React.FC = () => {
   const projects = [

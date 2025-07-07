@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import Icon from "./Icon";
+import { Icon } from "../ui";
 import { TeamMember } from "@/data/team";
 
 interface TeamMemberCardProps {

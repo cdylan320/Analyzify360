@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { ScrollProvider, MouseFollower } from "@/components/ScrollAnimations";
 import {
+  Navbar,
+  Footer,
+  ScrollProvider,
+  MouseFollower,
   ScrollProgressIndicator,
   Professional3DBackground,
-} from "@/components/ProfessionalMotions";
-import { ErrorBoundary } from "@/components/PerformanceOptimizations";
-import { PerformanceProvider } from "@/components/PerformanceProvider";
+  ErrorBoundary,
+  PerformanceProvider,
+} from "@/components";
 
 const inter = Inter({
   subsets: ["latin"],

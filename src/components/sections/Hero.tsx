@@ -2,10 +2,9 @@
 
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import Button from "./Button";
-import Icon from "./Icon";
+import { Button, Icon } from "../ui";
 import { companyInfo } from "@/data/content";
-import { professionalMotions, ParallaxText } from "./ProfessionalMotions";
+import { professionalMotions, ParallaxText } from "../animations";
 
 const Hero: React.FC = () => {
   const particlesRef = useRef<SVGSVGElement>(null);

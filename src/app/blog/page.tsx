@@ -1,8 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Card from "@/components/Card";
-import Button from "@/components/Button";
-import Icon from "@/components/Icon";
+import { Card, Button, Icon } from "@/components";
 import { blogPosts } from "@/data/content";
 
 export default function Blog() {
