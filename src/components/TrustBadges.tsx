@@ -86,7 +86,7 @@ const TrustBadges: React.FC = () => {
     <section className="relative py-24 lg:py-32 bg-gradient-to-b from-white via-slate-50 to-white">
       <DotsPattern className="opacity-30" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <AnimatedSection className="text-center mb-20">
           <motion.div
@@ -120,11 +120,11 @@ const TrustBadges: React.FC = () => {
             <motion.div
               key={index}
               variants={{
-                initial: { opacity: 0, y: 60 },
+                initial: { opacity: 0, y: 30 },
                 animate: { opacity: 1, y: 0 },
               }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className={`group relative bg-white rounded-2xl border ${badge.borderColor} shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden`}
+              className={`group relative bg-white rounded-2xl border ${badge.borderColor} shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden min-h-[320px] flex flex-col`}
             >
               {/* Card Background */}
               <div
@@ -132,9 +132,9 @@ const TrustBadges: React.FC = () => {
               ></div>
 
               {/* Card Content */}
-              <div className="relative z-10 p-8 text-center">
+              <div className="relative z-10 p-6 text-center flex-1 flex flex-col">
                 {/* Icon */}
-                <div className="flex justify-center mb-6">
+                <div className="flex justify-center mb-4">
                   <div
                     className={`w-16 h-16 bg-gradient-to-br ${badge.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
                   >
@@ -152,12 +152,12 @@ const TrustBadges: React.FC = () => {
                 </h3>
 
                 {/* Description */}
-                <p className="text-slate-600 leading-relaxed mb-6 text-sm">
+                <p className="text-slate-600 leading-relaxed mb-8 text-sm flex-1">
                   {badge.description}
                 </p>
 
                 {/* Metric */}
-                <div className="pt-4 border-t border-slate-200">
+                <div className="pt-4 border-t border-slate-200 mt-auto">
                   <div
                     className={`text-2xl font-black bg-gradient-to-r ${badge.color} bg-clip-text text-transparent mb-1`}
                   >

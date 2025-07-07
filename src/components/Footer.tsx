@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
 
       <div className="relative z-10">
         {/* Main Footer Content */}
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">
+        <div className="w-[95%] mx-auto px-4 lg:px-8 py-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
             {/* Company Info & Contact - 4 columns */}
             <div className="lg:col-span-4 space-y-8">
@@ -282,7 +282,7 @@ const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-slate-800/50 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
+          <div className="w-[95%] mx-auto px-4 lg:px-8 py-8">
             <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
               <div className="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-8">
                 <p className="text-slate-400 text-sm font-medium">

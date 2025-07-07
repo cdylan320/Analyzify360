@@ -2,429 +2,488 @@
 
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import * as d3 from "d3";
 import Button from "./Button";
 import Icon from "./Icon";
 import { companyInfo } from "@/data/content";
 import { professionalMotions, ParallaxText } from "./ProfessionalMotions";
 
 const Hero: React.FC = () => {
-  const svgRef = useRef<SVGSVGElement>(null);
   const particlesRef = useRef<SVGSVGElement>(null);
-
-  useEffect(() => {
-    if (!svgRef.current) return;
-
-    const svg = d3.select(svgRef.current);
-    const width = 1200;
-    const height = 600;
-
-    // Clear previous content
-    svg.selectAll("*").remove();
-
-    // Create simple network visualization
-    const nodes = [
-      { id: "center", x: width / 2, y: height / 2, r: 25, color: "#0ea5e9" },
-      {
-        id: "web",
-        x: width / 2 - 200,
-        y: height / 2 - 100,
-        r: 20,
-        color: "#f59e0b",
-      },
-      {
-        id: "mobile",
-        x: width / 2 + 200,
-        y: height / 2 - 100,
-        r: 20,
-        color: "#10b981",
-      },
-      {
-        id: "cloud",
-        x: width / 2 - 150,
-        y: height / 2 + 120,
-        r: 18,
-        color: "#8b5cf6",
-      },
-      {
-        id: "ai",
-        x: width / 2 + 150,
-        y: height / 2 + 120,
-        r: 18,
-        color: "#ef4444",
-      },
-      {
-        id: "data",
-        x: width / 2,
-        y: height / 2 - 180,
-        r: 16,
-        color: "#06b6d4",
-      },
-      {
-        id: "security",
-        x: width / 2,
-        y: height / 2 + 200,
-        r: 16,
-        color: "#f97316",
-      },
-    ];
-
-    const links = [
-      { source: "center", target: "web" },
-      { source: "center", target: "mobile" },
-      { source: "center", target: "cloud" },
-      { source: "center", target: "ai" },
-      { source: "center", target: "data" },
-      { source: "center", target: "security" },
-    ];
-
-    // Create gradients
-    const defs = svg.append("defs");
-
-    // Link gradient
-    const linkGradient = defs
-      .append("linearGradient")
-      .attr("id", "link-gradient")
-      .attr("gradientUnits", "userSpaceOnUse");
-
-    linkGradient
-      .append("stop")
-      .attr("offset", "0%")
-      .attr("stop-color", "#0ea5e9")
-      .attr("stop-opacity", 0.8);
-
-    linkGradient
-      .append("stop")
-      .attr("offset", "100%")
-      .attr("stop-color", "#8b5cf6")
-      .attr("stop-opacity", 0.8);
-
-    // Create links
-    links.forEach((link) => {
-      const sourceNode = nodes.find((n) => n.id === link.source);
-      const targetNode = nodes.find((n) => n.id === link.target);
-
-      if (sourceNode && targetNode) {
-        svg
-          .append("line")
-          .attr("x1", sourceNode.x)
-          .attr("y1", sourceNode.y)
-          .attr("x2", targetNode.x)
-          .attr("y2", targetNode.y)
-          .attr("stroke", "url(#link-gradient)")
-          .attr("stroke-width", 3)
-          .attr("opacity", 0.7)
-          .attr("class", "network-link");
-      }
-    });
-
-    // Create nodes
-    nodes.forEach((node, i) => {
-      const nodeGroup = svg
-        .append("g")
-        .attr("transform", `translate(${node.x}, ${node.y})`)
-        .attr("class", "network-node");
-
-      // Add gradient for node
-      const nodeGradient = defs
-        .append("radialGradient")
-        .attr("id", `node-gradient-${i}`)
-        .attr("cx", "50%")
-        .attr("cy", "50%")
-        .attr("r", "50%");
-
-      nodeGradient
-        .append("stop")
-        .attr("offset", "0%")
-        .attr("stop-color", node.color)
-        .attr("stop-opacity", 1);
-
-      nodeGradient
-        .append("stop")
-        .attr("offset", "100%")
-        .attr(
-          "stop-color",
-          d3.color(node.color)?.darker(1)?.toString() || node.color
-        )
-        .attr("stop-opacity", 0.8);
-
-      nodeGroup
-        .append("circle")
-        .attr("r", node.r)
-        .attr("fill", `url(#node-gradient-${i})`)
-        .attr("stroke", "#ffffff")
-        .attr("stroke-width", 2)
-        .attr("filter", "drop-shadow(0 0 10px rgba(0,0,0,0.3))");
-    });
-
-    // Add simple CSS animations via classes
-    const style = document.createElement("style");
-    style.textContent = `
-      .network-node {
-        animation: pulse 2s ease-in-out infinite;
-      }
-      .network-link {
-        animation: flow 3s linear infinite;
-        stroke-dasharray: 10, 5;
-      }
-      @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.1); }
-      }
-      @keyframes flow {
-        0% { stroke-dashoffset: 0; }
-        100% { stroke-dashoffset: -100; }
-      }
-    `;
-    document.head.appendChild(style);
-  }, []);
 
   useEffect(() => {
     if (!particlesRef.current) return;
 
-    const svg = d3.select(particlesRef.current);
+    const svg = particlesRef.current;
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    svg.selectAll("*").remove();
+    // Clear previous content
+    svg.innerHTML = "";
 
-    // Create simple floating particles
-    const particles = Array.from({ length: 30 }, (_, i) => ({
+    // Create elegant floating particles
+    const particles = Array.from({ length: 12 }, (_, i) => ({
       id: i,
       x: Math.random() * width,
       y: Math.random() * height,
       r: Math.random() * 2 + 1,
-      opacity: Math.random() * 0.3 + 0.1,
-      color: ["#0ea5e9", "#f59e0b", "#10b981", "#8b5cf6", "#ef4444"][
-        Math.floor(Math.random() * 5)
-      ],
+      opacity: Math.random() * 0.4 + 0.2,
+      color: ["#ffffff", "#e0f2fe", "#bae6fd"][Math.floor(Math.random() * 3)],
+      velocity: {
+        x: (Math.random() - 0.5) * 0.15,
+        y: (Math.random() - 0.5) * 0.15,
+      },
     }));
 
-    particles.forEach((particle) => {
-      svg
-        .append("circle")
-        .attr("cx", particle.x)
-        .attr("cy", particle.y)
-        .attr("r", particle.r)
-        .attr("fill", particle.color)
-        .attr("opacity", particle.opacity)
-        .attr("class", "floating-particle");
+    // Create SVG elements
+    particles.forEach((particle, i) => {
+      const circle = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "circle"
+      );
+      circle.setAttribute("cx", particle.x.toString());
+      circle.setAttribute("cy", particle.y.toString());
+      circle.setAttribute("r", particle.r.toString());
+      circle.setAttribute("fill", particle.color);
+      circle.setAttribute("opacity", particle.opacity.toString());
+      circle.setAttribute("class", "floating-particle");
+      circle.setAttribute("data-index", i.toString());
+      svg.appendChild(circle);
     });
 
-    // Add particle animation CSS
-    const particleStyle = document.createElement("style");
-    particleStyle.textContent = `
-      .floating-particle {
-        animation: float 8s ease-in-out infinite;
-      }
-      @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-20px); }
-      }
-    `;
-    document.head.appendChild(particleStyle);
+    // Smooth particle animation
+    const animate = () => {
+      particles.forEach((particle, i) => {
+        particle.x += particle.velocity.x;
+        particle.y += particle.velocity.y;
+
+        // Wrap around edges
+        if (particle.x < 0) particle.x = width;
+        if (particle.x > width) particle.x = 0;
+        if (particle.y < 0) particle.y = height;
+        if (particle.y > height) particle.y = 0;
+
+        const circle = svg.querySelector(
+          `[data-index="${i}"]`
+        ) as SVGCircleElement;
+        if (circle) {
+          circle.setAttribute("cx", particle.x.toString());
+          circle.setAttribute("cy", particle.y.toString());
+        }
+      });
+
+      requestAnimationFrame(animate);
+    };
+
+    animate();
   }, []);
 
   return (
-    <motion.section
-      className="relative min-h-screen overflow-hidden"
-      style={{
-        background: `linear-gradient(135deg, 
-          rgba(15, 23, 42, 0.95) 0%, 
-          rgba(30, 58, 138, 0.9) 35%, 
-          rgba(67, 56, 202, 0.85) 70%, 
-          rgba(15, 23, 42, 0.9) 100%)`,
-      }}
-      initial="initial"
-      animate="animate"
-      variants={professionalMotions.sectionTransition}
-    >
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Professional Background with Enhanced Integration */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/background.jpg')",
+        }}
+      />
+
+      {/* Enhanced Professional Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/85 via-slate-900/80 to-indigo-900/85"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20"></div>
+
+      {/* Subtle Geometric Pattern Overlay */}
+      <div
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage: `
+            radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 1px, transparent 1px),
+            radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: "50px 50px",
+        }}
+      ></div>
+
       {/* Floating Particles Background */}
       <svg
         ref={particlesRef}
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        style={{ zIndex: 1 }}
+        className="absolute inset-0 w-full h-full pointer-events-none z-10"
+        style={{ opacity: 0.6 }}
       />
 
-      {/* Professional Announcement Bar */}
-      <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-900/90 via-indigo-900/90 to-purple-900/90 backdrop-blur-xl border-b border-blue-400/30 z-20">
-        <div className="max-w-none px-8 py-4">
-          <div className="flex items-center justify-center space-x-4">
-            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-            <p className="text-blue-100 font-semibold tracking-wide text-sm uppercase">
-              {companyInfo.announcement}
-            </p>
-            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content - Full Width Professional Layout */}
-      <div className="relative z-10 pt-20">
-        <div className="max-w-none px-8 lg:px-16 py-20 lg:py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center min-h-[80vh]">
-            {/* Left Content - 7 columns */}
-            <motion.div
-              className="lg:col-span-7 space-y-12"
-              variants={professionalMotions.staggerContainer}
-              initial="initial"
-              animate="animate"
-            >
-              {/* Main Heading */}
-              <div className="space-y-8">
-                <ParallaxText speed={0.3}>
-                  <motion.h1
-                    className="text-5xl lg:text-8xl font-black leading-tight"
-                    variants={professionalMotions.textReveal}
+      {/* Main Content */}
+      <div className="relative z-20 w-[95%] max-w-7xl mx-auto px-4 lg:px-8 py-20">
+        <div className="flex items-center justify-center min-h-[85vh]">
+          {/* Main Content - Centered */}
+          <div className="max-w-5xl mx-auto text-center space-y-12">
+            {/* Main Heading with Enhanced Animations */}
+            <div className="space-y-8">
+              <ParallaxText speed={0.3}>
+                <motion.h1
+                  className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.9] tracking-tight"
+                  variants={professionalMotions.fadeInUp}
+                  initial="initial"
+                  animate="animate"
+                  transition={{ duration: 1, delay: 0.2 }}
+                >
+                  <motion.span
+                    className="text-white block mt-10 mb-3"
+                    style={{
+                      textShadow:
+                        "0 4px 20px rgba(0, 0, 0, 0.8), 0 8px 40px rgba(0, 0, 0, 0.6)",
+                    }}
+                    initial={{ opacity: 0, y: 50, scale: 0.8 }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      scale: 1,
+                      textShadow: [
+                        "0 4px 20px rgba(0, 0, 0, 0.8), 0 8px 40px rgba(0, 0, 0, 0.6)",
+                        "0 6px 30px rgba(255, 255, 255, 0.3), 0 10px 50px rgba(0, 0, 0, 0.8)",
+                        "0 4px 20px rgba(0, 0, 0, 0.8), 0 8px 40px rgba(0, 0, 0, 0.6)",
+                      ],
+                    }}
+                    transition={{
+                      duration: 1.2,
+                      delay: 0.3,
+                      textShadow: {
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      },
+                    }}
                   >
-                    <motion.span
-                      className="block text-white mb-4"
-                      variants={professionalMotions.slideInLeft}
-                    >
-                      Transform Your
-                    </motion.span>
-                    <motion.span
-                      className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent mb-4"
-                      variants={professionalMotions.scaleInBounce}
-                    >
-                      Digital Vision
-                    </motion.span>
-                    <motion.span
-                      className="block text-white"
-                      variants={professionalMotions.slideInRight}
-                    >
-                      Into Reality
-                    </motion.span>
-                  </motion.h1>
-                </ParallaxText>
+                    Building
+                  </motion.span>
+                  <motion.span
+                    className="bg-gradient-to-r from-cyan-300 via-blue-300 to-indigo-300 bg-clip-text text-transparent block"
+                    style={{
+                      textShadow: "0 4px 20px rgba(34, 211, 238, 0.4)",
+                      backgroundSize: "200% 200%",
+                    }}
+                    initial={{ opacity: 0, y: 50, scale: 0.8 }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      scale: 1,
+                      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                    }}
+                    transition={{
+                      duration: 1.2,
+                      delay: 0.6,
+                      backgroundPosition: {
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "linear",
+                      },
+                    }}
+                  >
+                    Digital Excellence
+                  </motion.span>
+                </motion.h1>
+              </ParallaxText>
 
-                <div className="w-32 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full"></div>
+              {/* Animated Subtitle */}
+              <motion.p
+                className="text-xl md:text-2xl lg:text-3xl text-slate-200 leading-relaxed font-medium max-w-4xl mx-auto"
+                variants={professionalMotions.fadeInUp}
+                initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  filter: "blur(0px)",
+                  textShadow: [
+                    "0 2px 10px rgba(0, 0, 0, 0.8)",
+                    "0 4px 20px rgba(34, 211, 238, 0.3)",
+                    "0 2px 10px rgba(0, 0, 0, 0.8)",
+                  ],
+                }}
+                transition={{
+                  duration: 1.2,
+                  delay: 0.9,
+                  textShadow: {
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  },
+                }}
+                style={{
+                  textShadow: "0 2px 10px rgba(0, 0, 0, 0.8)",
+                }}
+              >
+                {companyInfo.description}
+              </motion.p>
 
-                <p className="text-xl lg:text-2xl text-slate-300 leading-relaxed max-w-4xl font-light">
-                  {companyInfo.description}
-                </p>
-              </div>
-
-              {/* Professional CTA Section */}
-              <div className="flex flex-col lg:flex-row gap-6 items-start">
-                <Button
-                  variant="primary"
-                  size="xl"
-                  className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-bold px-12 py-6 rounded-2xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 border border-blue-400/30"
-                  rightIcon={<Icon name="arrow-right" size="md" />}
+              {/* Animated Action Buttons */}
+              <motion.div
+                className="flex flex-col sm:flex-row gap-6 justify-center pt-6"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 1.2 }}
+              >
+                <motion.div
+                  initial={{ opacity: 0, x: -50, rotateY: -15 }}
+                  animate={{ opacity: 1, x: 0, rotateY: 0 }}
+                  transition={{ duration: 0.8, delay: 1.4 }}
+                  whileHover={{
+                    scale: 1.05,
+                    y: -5,
+                    boxShadow: "0 20px 60px rgba(34, 211, 238, 0.4)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  Start Your Project
-                </Button>
-
-                <Button
-                  variant="outline"
-                  size="xl"
-                  className="border-2 border-slate-400 text-slate-300 hover:bg-slate-800 hover:text-white font-bold px-12 py-6 rounded-2xl backdrop-blur-sm transition-all duration-300 hover:border-slate-300"
+                  <Button
+                    variant="primary"
+                    size="xl"
+                    className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold px-12 py-6 text-lg rounded-2xl shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 border border-cyan-400/30"
+                    rightIcon={<Icon name="arrow-right" size="md" />}
+                  >
+                    Start Your Project
+                  </Button>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: 50, rotateY: 15 }}
+                  animate={{ opacity: 1, x: 0, rotateY: 0 }}
+                  transition={{ duration: 0.8, delay: 1.6 }}
+                  whileHover={{
+                    scale: 1.05,
+                    y: -5,
+                    boxShadow: "0 20px 60px rgba(255, 255, 255, 0.2)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  View Portfolio
-                </Button>
-              </div>
+                  <Button
+                    variant="outline"
+                    size="xl"
+                    className="border-2 border-white/60 text-white hover:bg-white/10 hover:border-white/80 hover:text-white font-bold px-12 py-6 text-lg rounded-2xl backdrop-blur-md shadow-2xl transition-all duration-300"
+                    rightIcon={<Icon name="users" size="md" />}
+                  >
+                    Meet Our Team
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </div>
 
-              {/* Professional Stats Grid */}
-              <div className="grid grid-cols-3 gap-8 pt-12 border-t border-slate-700">
-                <div className="text-center">
-                  <div className="text-4xl lg:text-5xl font-black text-blue-400 mb-2">
-                    150+
-                  </div>
-                  <div className="text-slate-400 font-medium text-sm uppercase tracking-wide">
-                    Projects Delivered
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl lg:text-5xl font-black text-cyan-400 mb-2">
-                    24/7
-                  </div>
-                  <div className="text-slate-400 font-medium text-sm uppercase tracking-wide">
-                    Expert Support
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl lg:text-5xl font-black text-teal-400 mb-2">
-                    99%
-                  </div>
-                  <div className="text-slate-400 font-medium text-sm uppercase tracking-wide">
-                    Client Satisfaction
-                  </div>
-                </div>
-              </div>
+            {/* Animated Key Features Grid */}
+            <motion.div
+              className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-16 max-w-5xl mx-auto"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.8 }}
+            >
+              {[
+                {
+                  icon: "globe",
+                  text: "Global Reach",
+                  desc: "Worldwide presence",
+                  color: "from-cyan-400 to-blue-500",
+                },
+                {
+                  icon: "shield",
+                  text: "Secure Solutions",
+                  desc: "Enterprise-grade security",
+                  color: "from-emerald-400 to-teal-500",
+                },
+                {
+                  icon: "zap",
+                  text: "Fast Delivery",
+                  desc: "Rapid implementation",
+                  color: "from-orange-400 to-amber-500",
+                },
+                {
+                  icon: "users",
+                  text: "Expert Team",
+                  desc: "Skilled professionals",
+                  color: "from-purple-400 to-indigo-500",
+                },
+              ].map((feature, index) => (
+                <motion.div
+                  key={feature.text}
+                  className="group"
+                  initial={{
+                    opacity: 0,
+                    y: 60,
+                    rotateX: -20,
+                    scale: 0.8,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    rotateX: 0,
+                    scale: 1,
+                  }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 2.0 + index * 0.15,
+                    type: "spring",
+                    stiffness: 100,
+                  }}
+                  whileHover={{
+                    scale: 1.05,
+                    y: -8,
+                    rotateY: 5,
+                    boxShadow: "0 25px 50px rgba(34, 211, 238, 0.3)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <motion.div
+                    className="flex flex-col items-center space-y-4 p-6 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl hover:shadow-cyan-500/10 hover:bg-white/15 transition-all duration-300"
+                    animate={{
+                      y: [0, -5, 0],
+                    }}
+                    transition={{
+                      duration: 3 + index * 0.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <motion.div
+                      className={`w-14 h-14 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center shadow-xl group-hover:shadow-2xl transition-shadow duration-300`}
+                      animate={{
+                        rotate: [0, 5, -5, 0],
+                        scale: [1, 1.05, 1],
+                      }}
+                      transition={{
+                        duration: 4 + index * 0.3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      whileHover={{
+                        rotate: 360,
+                        transition: { duration: 0.6 },
+                      }}
+                    >
+                      <Icon
+                        name={feature.icon as any}
+                        size="lg"
+                        className="text-white"
+                      />
+                    </motion.div>
+                    <div className="text-center">
+                      <motion.h3
+                        className="text-white font-bold text-lg mb-1"
+                        style={{ textShadow: "0 1px 5px rgba(0, 0, 0, 0.8)" }}
+                        animate={{
+                          textShadow: [
+                            "0 1px 5px rgba(0, 0, 0, 0.8)",
+                            "0 2px 10px rgba(34, 211, 238, 0.4)",
+                            "0 1px 5px rgba(0, 0, 0, 0.8)",
+                          ],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      >
+                        {feature.text}
+                      </motion.h3>
+                      <p
+                        className="text-slate-300 text-sm"
+                        style={{ textShadow: "0 1px 3px rgba(0, 0, 0, 0.8)" }}
+                      >
+                        {feature.desc}
+                      </p>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              ))}
             </motion.div>
 
-            {/* Right Content - 5 columns - D3.js Visualization */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative bg-gradient-to-br from-slate-900/50 to-blue-900/30 backdrop-blur-xl rounded-3xl border border-slate-700/50 p-8 shadow-2xl">
-                {/* D3.js Network Visualization */}
-                <svg
-                  ref={svgRef}
-                  viewBox="0 0 1200 600"
-                  className="w-full h-auto max-h-[500px]"
-                  style={{
-                    filter: "drop-shadow(0 0 20px rgba(59, 130, 246, 0.3))",
-                  }}
-                />
-
-                {/* Technology Labels */}
-                <div className="absolute top-4 left-4 right-4 flex justify-between items-center">
-                  <div className="bg-slate-900/80 backdrop-blur-sm rounded-xl px-4 py-2 border border-slate-700">
-                    <span className="text-blue-400 font-bold text-sm">
-                      Web Development
-                    </span>
-                  </div>
-                  <div className="bg-slate-900/80 backdrop-blur-sm rounded-xl px-4 py-2 border border-slate-700">
-                    <span className="text-cyan-400 font-bold text-sm">
-                      Cloud Solutions
-                    </span>
-                  </div>
-                </div>
-
-                <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center">
-                  <div className="bg-slate-900/80 backdrop-blur-sm rounded-xl px-4 py-2 border border-slate-700">
-                    <span className="text-teal-400 font-bold text-sm">
-                      Mobile Apps
-                    </span>
-                  </div>
-                  <div className="bg-slate-900/80 backdrop-blur-sm rounded-xl px-4 py-2 border border-slate-700">
-                    <span className="text-purple-400 font-bold text-sm">
-                      AI Integration
-                    </span>
-                  </div>
-                </div>
-
-                {/* Floating Tech Icons */}
-                <div className="absolute -top-6 -right-6 w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center animate-bounce shadow-lg">
-                  <Icon name="code" size="lg" className="text-white" />
-                </div>
-
-                <div
-                  className="absolute -bottom-6 -left-6 w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center animate-bounce shadow-lg"
-                  style={{ animationDelay: "1s" }}
-                >
-                  <Icon name="rocket" size="lg" className="text-white" />
-                </div>
-
-                <div
-                  className="absolute top-1/2 -right-8 w-14 h-14 bg-gradient-to-br from-teal-500 to-green-500 rounded-2xl flex items-center justify-center animate-bounce shadow-lg"
-                  style={{ animationDelay: "2s" }}
-                >
-                  <Icon name="chip" size="md" className="text-white" />
-                </div>
-              </div>
-            </div>
+            {/* Animated Trust Indicators */}
+            <motion.div
+              className="flex flex-wrap justify-center items-center gap-8 pt-12 opacity-80"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 0.8, scale: 1 }}
+              transition={{ duration: 0.8, delay: 2.8 }}
+            >
+              {[
+                {
+                  number: "150+",
+                  label: "Projects Delivered",
+                  color: "text-cyan-300",
+                },
+                {
+                  number: "99%",
+                  label: "Client Satisfaction",
+                  color: "text-emerald-300",
+                },
+                {
+                  number: "24/7",
+                  label: "Support Available",
+                  color: "text-purple-300",
+                },
+              ].map((stat, index) => (
+                <React.Fragment key={stat.label}>
+                  <motion.div
+                    className="text-center"
+                    initial={{ opacity: 0, y: 30, scale: 0.5 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{
+                      duration: 0.6,
+                      delay: 3.0 + index * 0.2,
+                      type: "spring",
+                      stiffness: 200,
+                    }}
+                    whileHover={{
+                      scale: 1.1,
+                      y: -5,
+                      transition: { duration: 0.2 },
+                    }}
+                  >
+                    <motion.div
+                      className={`text-3xl font-black ${stat.color} mb-1`}
+                      style={{ textShadow: "0 2px 10px rgba(0, 0, 0, 0.8)" }}
+                      animate={{
+                        scale: [1, 1.05, 1],
+                        textShadow: [
+                          "0 2px 10px rgba(0, 0, 0, 0.8)",
+                          "0 4px 20px rgba(34, 211, 238, 0.5)",
+                          "0 2px 10px rgba(0, 0, 0, 0.8)",
+                        ],
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    >
+                      {stat.number}
+                    </motion.div>
+                    <div
+                      className="text-slate-300 text-sm font-medium"
+                      style={{ textShadow: "0 1px 5px rgba(0, 0, 0, 0.8)" }}
+                    >
+                      {stat.label}
+                    </div>
+                  </motion.div>
+                  {index < 2 && (
+                    <motion.div
+                      className="w-px h-8 bg-white/20"
+                      initial={{ scaleY: 0, opacity: 0 }}
+                      animate={{ scaleY: 1, opacity: 1 }}
+                      transition={{ duration: 0.4, delay: 3.2 + index * 0.2 }}
+                    />
+                  )}
+                </React.Fragment>
+              ))}
+            </motion.div>
           </div>
         </div>
       </div>
 
-      {/* Professional Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/5 rounded-full blur-3xl"></div>
-      </div>
-    </motion.section>
+      {/* Enhanced Custom Animations */}
+      <style jsx>{`
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0px) scale(1);
+          }
+          50% {
+            transform: translateY(-8px) scale(1.01);
+          }
+        }
+      `}</style>
+    </section>
   );
 };
 

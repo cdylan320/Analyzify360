@@ -7,7 +7,7 @@ const ProjectShowcase: React.FC = () => {
     {
       title: "E-Commerce Platform",
       category: "Full-Stack Development",
-      image: "/api/placeholder/600/400",
+      image: "/images/1.jpg",
       description:
         "A comprehensive e-commerce solution with advanced inventory management, payment processing, and analytics dashboard.",
       technologies: ["React", "Node.js", "PostgreSQL", "AWS"],
@@ -116,7 +116,7 @@ const ProjectShowcase: React.FC = () => {
         ></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-20">
           <div className="inline-flex items-center justify-center px-4 py-2 mb-6 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full border border-blue-200">
@@ -144,7 +144,7 @@ const ProjectShowcase: React.FC = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group relative bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden"
+              className="group relative bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden h-[600px] flex flex-col"
             >
               {/* Card Background */}
               <div
@@ -153,7 +153,7 @@ const ProjectShowcase: React.FC = () => {
 
               {/* Project Image */}
               <div className="relative overflow-hidden">
-                <div className="aspect-video">
+                <div className="aspect-[16/10] h-[280px]">
                   <img
                     src={project.image}
                     alt={project.title}
@@ -183,52 +183,64 @@ const ProjectShowcase: React.FC = () => {
               </div>
 
               {/* Card Content */}
-              <div className="relative z-10 p-8">
+              <div className="relative z-10 p-6 flex-1 flex flex-col">
                 {/* Title & Description */}
-                <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-slate-800 transition-colors">
-                    {project.title}
+                <div className="mb-4 flex-1">
+                  <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-slate-800 transition-colors overflow-hidden">
+                    <span className="block truncate">{project.title}</span>
                   </h3>
-                  <p className="text-slate-600 leading-relaxed">
+                  <p
+                    className="text-slate-600 leading-relaxed overflow-hidden text-sm"
+                    style={{
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: "vertical",
+                    }}
+                  >
                     {project.description}
                   </p>
                 </div>
 
                 {/* Technologies */}
-                <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-3">
-                    Technologies Used
+                <div className="mb-4">
+                  <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">
+                    Technologies
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, idx) => (
+                    {project.technologies.slice(0, 4).map((tech, idx) => (
                       <span
                         key={idx}
-                        className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-slate-100 text-slate-700 group-hover:bg-white group-hover:text-slate-800 transition-colors"
+                        className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 group-hover:bg-white group-hover:text-slate-800 transition-colors"
                       >
                         {tech}
                       </span>
                     ))}
+                    {project.technologies.length > 4 && (
+                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-slate-200 text-slate-500">
+                        +{project.technologies.length - 4}
+                      </span>
+                    )}
                   </div>
                 </div>
 
                 {/* Metrics */}
-                <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-3">
+                <div className="mb-4 flex-shrink-0">
+                  <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">
                     Key Metrics
                   </h4>
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-3 gap-2">
                     {Object.entries(project.metrics).map(
                       ([key, value], idx) => (
                         <div
                           key={idx}
-                          className="text-center p-3 rounded-xl bg-slate-50 group-hover:bg-white transition-colors"
+                          className="text-center p-2 rounded-lg bg-slate-50 group-hover:bg-white transition-colors"
                         >
                           <div
-                            className={`text-lg font-bold bg-gradient-to-r ${project.color} bg-clip-text text-transparent`}
+                            className={`text-sm font-bold bg-gradient-to-r ${project.color} bg-clip-text text-transparent`}
                           >
                             {value}
                           </div>
-                          <div className="text-xs text-slate-500 capitalize font-medium">
+                          <div className="text-xs text-slate-500 capitalize font-medium truncate">
                             {key}
                           </div>
                         </div>
@@ -238,21 +250,21 @@ const ProjectShowcase: React.FC = () => {
                 </div>
 
                 {/* Timeline */}
-                <div className="flex items-center justify-between pt-4 border-t border-slate-200">
+                <div className="flex items-center justify-between pt-3 border-t border-slate-200 mt-auto">
                   <div className="flex items-center space-x-2">
                     <Icon name="clock" size="sm" className="text-slate-400" />
-                    <span className="text-sm text-slate-500 font-medium">
-                      Timeline: {project.timeline}
+                    <span className="text-xs text-slate-500 font-medium">
+                      {project.timeline}
                     </span>
                   </div>
 
                   <Button
                     variant="outline"
                     size="sm"
-                    className="border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 transition-all duration-300"
+                    className="border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 transition-all duration-300 text-xs px-3 py-1"
                     rightIcon={<Icon name="arrow-right" size="sm" />}
                   >
-                    View Details
+                    Details
                   </Button>
                 </div>
               </div>

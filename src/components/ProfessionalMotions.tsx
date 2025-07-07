@@ -7,6 +7,7 @@ import {
   useTransform,
   useSpring,
   useInView,
+  Variants,
 } from "framer-motion";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
@@ -19,7 +20,7 @@ import {
 import * as THREE from "three";
 
 // Professional Motion Variants
-export const professionalMotions = {
+export const professionalMotions: { [key: string]: Variants } = {
   // Smooth section transitions
   sectionTransition: {
     initial: { opacity: 0, y: 100 },
@@ -28,7 +29,7 @@ export const professionalMotions = {
       y: 0,
       transition: {
         duration: 1.2,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
         staggerChildren: 0.15,
       },
     },
@@ -37,7 +38,7 @@ export const professionalMotions = {
       y: -100,
       transition: {
         duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
       },
     },
   },
@@ -62,7 +63,7 @@ export const professionalMotions = {
       scale: 1,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 260,
         damping: 20,
         duration: 0.8,
@@ -78,7 +79,7 @@ export const professionalMotions = {
       opacity: 1,
       transition: {
         duration: 1,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
       },
     },
   },
@@ -90,7 +91,7 @@ export const professionalMotions = {
       opacity: 1,
       transition: {
         duration: 1,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
       },
     },
   },
@@ -103,7 +104,7 @@ export const professionalMotions = {
       opacity: 1,
       transition: {
         duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
       },
     },
   },
@@ -410,7 +411,7 @@ export const ProfessionalCard: React.FC<ProfessionalCardProps> = ({
       transition={{
         duration: 0.8,
         delay,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
       }}
       {...hoverVariants[hoverEffect]}
     >

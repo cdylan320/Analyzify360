@@ -101,7 +101,7 @@ const ServicesSection: React.FC = () => {
     <div className="relative py-24 lg:py-32">
       {/* Remove background since it's handled by SmoothSection wrapper */}
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-20">
           <div className="inline-flex items-center justify-center px-4 py-2 mb-6 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full border border-blue-200">
@@ -129,15 +129,14 @@ const ServicesSection: React.FC = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
           variants={professionalMotions.staggerContainer}
           initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, amount: 0.3 }}
+          animate="animate"
         >
           {services.map((service, index) => (
             <ProfessionalCard
               key={index}
               delay={index * 0.1}
               hoverEffect="lift"
-              className={`group relative bg-white rounded-2xl border ${service.borderColor} shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden`}
+              className={`group relative bg-white rounded-2xl border ${service.borderColor} shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden h-[420px] flex flex-col`}
             >
               {/* Card Background Gradient */}
               <div
@@ -145,7 +144,7 @@ const ServicesSection: React.FC = () => {
               ></div>
 
               {/* Card Content */}
-              <div className="relative z-10 p-8">
+              <div className="relative z-10 p-8 flex-1 flex flex-col">
                 {/* Icon */}
                 <div className="flex items-center justify-between mb-6">
                   <div
@@ -161,28 +160,35 @@ const ServicesSection: React.FC = () => {
                     <Icon
                       name="arrow-right"
                       size="sm"
-                      className="text-slate-600 group-hover:translate-x-0.5 transition-transform"
+                      className="text-slate-600"
                     />
                   </div>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-slate-800 transition-colors">
-                  {service.title}
+                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-slate-800 transition-colors overflow-hidden">
+                  <span className="block truncate">{service.title}</span>
                 </h3>
 
                 {/* Description */}
-                <p className="text-slate-600 leading-relaxed mb-6 text-sm">
+                <p
+                  className="text-slate-600 leading-relaxed mb-6 text-sm flex-1 overflow-hidden"
+                  style={{
+                    display: "-webkit-box",
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: "vertical",
+                  }}
+                >
                   {service.description}
                 </p>
 
                 {/* Features */}
-                <div className="space-y-2">
+                <div className="mt-auto">
                   <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">
                     Key Technologies
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {service.features.map((feature, idx) => (
+                    {service.features.slice(0, 4).map((feature, idx) => (
                       <span
                         key={idx}
                         className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 group-hover:bg-white group-hover:text-slate-800 transition-colors"
@@ -190,6 +196,11 @@ const ServicesSection: React.FC = () => {
                         {feature}
                       </span>
                     ))}
+                    {service.features.length > 4 && (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-200 text-slate-500">
+                        +{service.features.length - 4} more
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
