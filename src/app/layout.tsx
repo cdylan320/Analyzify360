@@ -3,6 +3,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { ScrollProvider, MouseFollower } from "@/components/ScrollAnimations";
+import {
+  ScrollProgressIndicator,
+  Professional3DBackground,
+} from "@/components/ProfessionalMotions";
+import { ErrorBoundary } from "@/components/PerformanceOptimizations";
+import { PerformanceProvider } from "@/components/PerformanceProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,9 +52,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased`}>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <ErrorBoundary>
+          <PerformanceProvider>
+            <ScrollProvider>
+              <ScrollProgressIndicator />
+              <Professional3DBackground variant="mixed" />
+              <MouseFollower />
+              <Navbar />
+              <main>{children}</main>
+              <Footer />
+            </ScrollProvider>
+          </PerformanceProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

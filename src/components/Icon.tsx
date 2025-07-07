@@ -25,7 +25,45 @@ import {
   ClockIcon,
 } from "@heroicons/react/24/outline";
 
+// Import Lucide icons for better social media support
+import {
+  Github,
+  Linkedin,
+  Twitter,
+  Instagram,
+  Youtube,
+  Facebook,
+  MessageCircle, // Discord alternative
+  ExternalLink,
+  Mail,
+  Phone,
+  MapPin,
+  Calendar,
+  Clock,
+  User,
+  Users,
+  Search,
+  Code,
+  Zap,
+  Shield,
+  DollarSign,
+  BarChart,
+  Eye,
+  Lock,
+  CheckCircle,
+  X,
+  ArrowRight,
+  Menu,
+  Heart,
+  Briefcase,
+  Globe,
+  Lightbulb,
+  Cpu,
+  Monitor,
+} from "lucide-react";
+
 const iconMap = {
+  // Heroicons (keeping for compatibility)
   users: UserIcon,
   search: MagnifyingGlassIcon,
   link: LinkIcon,
@@ -49,24 +87,68 @@ const iconMap = {
   mail: EnvelopeIcon,
   location: MapPinIcon,
   heart: HeartIcon,
-  linkedin: LinkIcon,
-  twitter: LinkIcon,
-  github: LinkIcon,
-  instagram: LinkIcon,
   briefcase: BriefcaseIcon,
   clock: ClockIcon,
+
+  // Lucide icons (better quality and more options)
+  github: Github,
+  linkedin: Linkedin,
+  twitter: Twitter,
+  instagram: Instagram,
+  youtube: Youtube,
+  facebook: Facebook,
+  discord: MessageCircle,
+  "external-link": ExternalLink,
+
+  // Alternative names for better consistency
+  user: User,
+  "users-alt": Users,
+  "search-alt": Search,
+  "code-alt": Code,
+  zap: Zap,
+  shield: Shield,
+  dollar: DollarSign,
+  "bar-chart": BarChart,
+  "eye-alt": Eye,
+  lock: Lock,
+  check: CheckCircle,
+  close: X,
+  arrow: ArrowRight,
+  "menu-alt": Menu,
+  "heart-alt": Heart,
+  "briefcase-alt": Briefcase,
+  "globe-alt": Globe,
+  lightbulb: Lightbulb,
+  cpu: Cpu,
+  monitor: Monitor,
+  "mail-alt": Mail,
+  "phone-alt": Phone,
+  map: MapPin,
+  calendar: Calendar,
+  "clock-alt": Clock,
+
+  // Missing icons
+  rocket: Zap, // Using Zap as rocket alternative
+  support: Shield, // Using Shield as support alternative
 };
 
 export interface IconProps {
   name: keyof typeof iconMap;
-  size?: "sm" | "md" | "lg" | "xl";
+  size?: "sm" | "md" | "lg" | "xl" | "2xl";
   className?: string;
+  strokeWidth?: number;
 }
 
-const Icon: React.FC<IconProps> = ({ name, size = "md", className = "" }) => {
+const Icon: React.FC<IconProps> = ({
+  name,
+  size = "md",
+  className = "",
+  strokeWidth = 2,
+}) => {
   const IconComponent = iconMap[name];
 
   if (!IconComponent) {
+    console.warn(`Icon "${name}" not found`);
     return null;
   }
 
@@ -75,8 +157,56 @@ const Icon: React.FC<IconProps> = ({ name, size = "md", className = "" }) => {
     md: "h-6 w-6",
     lg: "h-8 w-8",
     xl: "h-12 w-12",
+    "2xl": "h-16 w-16",
   };
 
+  // Check if it's a Lucide icon (has strokeWidth prop)
+  const isLucideIcon = [
+    Github,
+    Linkedin,
+    Twitter,
+    Instagram,
+    Youtube,
+    Facebook,
+    MessageCircle,
+    ExternalLink,
+    Mail,
+    Phone,
+    MapPin,
+    Calendar,
+    Clock,
+    User,
+    Users,
+    Search,
+    Code,
+    Zap,
+    Shield,
+    DollarSign,
+    BarChart,
+    Eye,
+    Lock,
+    CheckCircle,
+    X,
+    ArrowRight,
+    Menu,
+    Heart,
+    Briefcase,
+    Globe,
+    Lightbulb,
+    Cpu,
+    Monitor,
+  ].includes(IconComponent as any);
+
+  if (isLucideIcon) {
+    return (
+      <IconComponent
+        className={`${sizeClasses[size]} ${className}`}
+        strokeWidth={strokeWidth}
+      />
+    );
+  }
+
+  // Heroicons don't support strokeWidth
   return <IconComponent className={`${sizeClasses[size]} ${className}`} />;
 };
 

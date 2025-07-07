@@ -214,7 +214,7 @@ const Footer: React.FC = () => {
               {/* Social Media */}
               <div className="space-y-4">
                 <h5 className="text-white font-semibold">Follow Us</h5>
-                <div className="flex space-x-3">
+                <div className="grid grid-cols-4 gap-3">
                   {[
                     {
                       name: "LinkedIn",
@@ -235,10 +235,28 @@ const Footer: React.FC = () => {
                       color: "from-gray-700 to-gray-800",
                     },
                     {
+                      name: "Discord",
+                      icon: "discord",
+                      href: companyInfo.social?.discord || "#",
+                      color: "from-indigo-500 to-purple-600",
+                    },
+                    {
                       name: "Instagram",
                       icon: "instagram",
-                      href: "#",
+                      href: companyInfo.social?.instagram || "#",
                       color: "from-pink-500 to-purple-600",
+                    },
+                    {
+                      name: "YouTube",
+                      icon: "youtube",
+                      href: companyInfo.social?.youtube || "#",
+                      color: "from-red-500 to-red-600",
+                    },
+                    {
+                      name: "Facebook",
+                      icon: "facebook",
+                      href: companyInfo.social?.facebook || "#",
+                      color: "from-blue-500 to-blue-600",
                     },
                   ].map((social) => (
                     <a
@@ -246,10 +264,14 @@ const Footer: React.FC = () => {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`w-12 h-12 bg-gradient-to-br ${social.color} rounded-xl flex items-center justify-center text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300`}
+                      className={`w-12 h-12 bg-gradient-to-br ${social.color} rounded-xl flex items-center justify-center text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 group`}
                       aria-label={social.name}
                     >
-                      <Icon name={social.icon} size="md" />
+                      <Icon
+                        name={social.icon as any}
+                        size="md"
+                        className="group-hover:scale-110 transition-transform"
+                      />
                     </a>
                   ))}
                 </div>

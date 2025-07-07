@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import Button from "./Button";
 import Icon from "./Icon";
 import { companyInfo } from "@/data/content";
@@ -35,148 +36,175 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav
-      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className={`fixed w-full top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-gradient-to-r from-black/95 via-slate-900/95 to-black/95 backdrop-blur-xl shadow-2xl border-b border-yellow-400/30"
-          : "bg-gradient-to-r from-black/50 via-slate-900/50 to-black/50 backdrop-blur-sm"
+          ? "bg-white/95 backdrop-blur-xl shadow-lg border-b border-slate-200/50"
+          : "bg-white/90 backdrop-blur-sm"
       }`}
     >
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 via-pink-500 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg border-2 border-white/30">
-              <span className="text-black font-black text-xl drop-shadow-lg">
-                S
+          <Link href="/" className="flex items-center space-x-3 group">
+            <motion.div
+              whileHover={{ scale: 1.05, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative"
+            >
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 rounded-xl flex items-center justify-center shadow-lg border border-blue-200">
+                <Icon
+                  name="zap"
+                  size="md"
+                  className="text-white"
+                  strokeWidth={2.5}
+                />
+              </div>
+              <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center">
+                <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+              </div>
+            </motion.div>
+            <div className="flex flex-col">
+              <span className="text-xl font-black text-slate-900 tracking-tight">
+                {companyInfo.name}
+              </span>
+              <span className="text-xs text-slate-500 font-medium -mt-1">
+                Tech Solutions
               </span>
             </div>
-            <span className="text-2xl font-black bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 bg-clip-text text-transparent drop-shadow-lg">
-              Super
-            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link
-              href="/"
-              className="text-white hover:text-yellow-300 transition-colors duration-300 font-bold text-lg hover:drop-shadow-lg"
-            >
-              Home
-            </Link>
-            <Link
-              href="/services"
-              className="text-white hover:text-yellow-300 transition-colors duration-300 font-bold text-lg hover:drop-shadow-lg"
-            >
-              Services
-            </Link>
-            <Link
-              href="/about"
-              className="text-white hover:text-yellow-300 transition-colors duration-300 font-bold text-lg hover:drop-shadow-lg"
-            >
-              About
-            </Link>
-            <Link
-              href="/team"
-              className="text-white hover:text-yellow-300 transition-colors duration-300 font-bold text-lg hover:drop-shadow-lg"
-            >
-              Team
-            </Link>
-            <Link
-              href="/contact"
-              className="text-white hover:text-yellow-300 transition-colors duration-300 font-bold text-lg hover:drop-shadow-lg"
-            >
-              Contact
-            </Link>
+          <div className="hidden md:flex items-center space-x-1">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`relative px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 group ${
+                  pathname === item.href
+                    ? "text-blue-600 bg-blue-50"
+                    : "text-slate-700 hover:text-blue-600 hover:bg-slate-50"
+                }`}
+              >
+                {item.name}
+                {pathname === item.href && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-full"
+                    initial={false}
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
+              </Link>
+            ))}
           </div>
 
           {/* Desktop CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3">
             <Link href="/careers">
-              <Button
-                variant="outline"
-                className="border-2 border-yellow-400 text-yellow-300 hover:bg-yellow-400 hover:text-black transition-all duration-300 font-bold shadow-lg hover:shadow-xl transform hover:scale-105"
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 border border-slate-300 rounded-lg hover:border-blue-300 transition-all duration-300 hover:shadow-sm"
               >
                 Careers
-              </Button>
+              </motion.button>
             </Link>
             <Link href="/contact">
-              <Button className="bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 hover:from-yellow-500 hover:via-pink-600 hover:to-purple-700 text-black font-black shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-white/30">
-                Get Started
-              </Button>
+              <motion.button
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
+                className="px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:from-blue-700 hover:to-indigo-700 flex items-center space-x-2"
+              >
+                <span>Get Started</span>
+                <Icon name="arrow-right" size="sm" className="text-white" />
+              </motion.button>
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={toggleMenu}
-              className="text-white hover:text-yellow-300 transition-colors duration-300 p-2 rounded-lg bg-gradient-to-r from-yellow-400/20 to-purple-600/20 hover:from-yellow-400/30 hover:to-purple-600/30 border border-yellow-400/30"
+              className="p-2 text-slate-700 hover:text-blue-600 border border-slate-300 rounded-lg hover:border-blue-300 transition-all duration-300 hover:bg-slate-50"
             >
-              <Icon name={isOpen ? "close" : "menu"} size="lg" />
-            </button>
+              <Icon name={isOpen ? "close" : "menu"} size="md" />
+            </motion.button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-gradient-to-b from-black/95 via-slate-900/95 to-black/95 backdrop-blur-xl border-b border-yellow-400/30 shadow-2xl">
-            <div className="px-4 py-6 space-y-4">
-              <Link
-                href="/"
-                className="block text-white hover:text-yellow-300 transition-colors duration-300 font-bold text-lg py-2 hover:drop-shadow-lg"
-                onClick={() => setIsOpen(false)}
-              >
-                Home
-              </Link>
-              <Link
-                href="/services"
-                className="block text-white hover:text-yellow-300 transition-colors duration-300 font-bold text-lg py-2 hover:drop-shadow-lg"
-                onClick={() => setIsOpen(false)}
-              >
-                Services
-              </Link>
-              <Link
-                href="/about"
-                className="block text-white hover:text-yellow-300 transition-colors duration-300 font-bold text-lg py-2 hover:drop-shadow-lg"
-                onClick={() => setIsOpen(false)}
-              >
-                About
-              </Link>
-              <Link
-                href="/team"
-                className="block text-white hover:text-yellow-300 transition-colors duration-300 font-bold text-lg py-2 hover:drop-shadow-lg"
-                onClick={() => setIsOpen(false)}
-              >
-                Team
-              </Link>
-              <Link
-                href="/contact"
-                className="block text-white hover:text-yellow-300 transition-colors duration-300 font-bold text-lg py-2 hover:drop-shadow-lg"
-                onClick={() => setIsOpen(false)}
-              >
-                Contact
-              </Link>
-              <div className="pt-4 space-y-3 border-t border-yellow-400/30">
-                <Link href="/careers" onClick={() => setIsOpen(false)}>
-                  <Button
-                    variant="outline"
-                    className="w-full border-2 border-yellow-400 text-yellow-300 hover:bg-yellow-400 hover:text-black transition-all duration-300 font-bold shadow-lg"
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="md:hidden overflow-hidden"
+            >
+              <div className="px-4 py-6 space-y-4 bg-white/95 backdrop-blur-xl border-t border-slate-200/50">
+                {navigation.map((item, index) => (
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
                   >
-                    Careers
-                  </Button>
-                </Link>
-                <Link href="/contact" onClick={() => setIsOpen(false)}>
-                  <Button className="w-full bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 hover:from-yellow-500 hover:via-pink-600 hover:to-purple-700 text-black font-black shadow-lg border-2 border-white/30">
-                    Get Started
-                  </Button>
-                </Link>
+                    <Link
+                      href={item.href}
+                      className={`block px-4 py-3 rounded-lg text-base font-semibold transition-all duration-300 ${
+                        pathname === item.href
+                          ? "text-blue-600 bg-blue-50 border-l-4 border-blue-600"
+                          : "text-slate-700 hover:text-blue-600 hover:bg-slate-50"
+                      }`}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  </motion.div>
+                ))}
+
+                <div className="pt-4 space-y-3 border-t border-slate-200/50">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.6 }}
+                  >
+                    <Link href="/careers" onClick={() => setIsOpen(false)}>
+                      <button className="w-full px-4 py-3 text-base font-semibold text-slate-700 hover:text-blue-600 border border-slate-300 rounded-lg hover:border-blue-300 transition-all duration-300 hover:bg-slate-50">
+                        Careers
+                      </button>
+                    </Link>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.7 }}
+                  >
+                    <Link href="/contact" onClick={() => setIsOpen(false)}>
+                      <button className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-base font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:from-blue-700 hover:to-indigo-700 flex items-center justify-center space-x-2">
+                        <span>Get Started</span>
+                        <Icon
+                          name="arrow-right"
+                          size="sm"
+                          className="text-white"
+                        />
+                      </button>
+                    </Link>
+                  </motion.div>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

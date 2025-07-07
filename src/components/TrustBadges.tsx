@@ -1,4 +1,7 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { AnimatedSection, StaggeredContainer } from "./ScrollAnimations";
+import { DotsPattern } from "./ThreeBackground";
 import Icon from "./Icon";
 
 const TrustBadges: React.FC = () => {
@@ -81,25 +84,20 @@ const TrustBadges: React.FC = () => {
 
   return (
     <section className="relative py-24 lg:py-32 bg-gradient-to-b from-white via-slate-50 to-white">
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 opacity-40">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
-                           radial-gradient(circle at 75% 75%, rgba(16, 185, 129, 0.03) 0%, transparent 50%),
-                           radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.03) 0%, transparent 50%)`,
-          }}
-        ></div>
-      </div>
+      <DotsPattern className="opacity-30" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center justify-center px-4 py-2 mb-6 text-sm font-semibold text-purple-600 bg-purple-50 rounded-full border border-purple-200">
+        <AnimatedSection className="text-center mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center justify-center px-4 py-2 mb-6 text-sm font-semibold text-purple-600 bg-purple-50 rounded-full border border-purple-200"
+          >
             <Icon name="shield-check" size="sm" className="mr-2" />
             Why Choose Us
-          </div>
+          </motion.div>
 
           <h2 className="text-4xl lg:text-6xl font-black text-slate-900 mb-6 leading-tight">
             Trusted by
@@ -114,13 +112,18 @@ const TrustBadges: React.FC = () => {
             We've earned the trust of businesses worldwide through our
             commitment to excellence, innovation, and results.
           </p>
-        </div>
+        </AnimatedSection>
 
         {/* Trust Badges Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+        <StaggeredContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           {badges.map((badge, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={{
+                initial: { opacity: 0, y: 60 },
+                animate: { opacity: 1, y: 0 },
+              }}
+              whileHover={{ y: -8, scale: 1.02 }}
               className={`group relative bg-white rounded-2xl border ${badge.borderColor} shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden`}
             >
               {/* Card Background */}
@@ -168,44 +171,46 @@ const TrustBadges: React.FC = () => {
 
               {/* Hover Effect Border */}
               <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-slate-200 transition-colors duration-300"></div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </StaggeredContainer>
 
         {/* Statistics Section */}
-        <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-12 lg:p-16 shadow-2xl">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl lg:text-4xl font-black text-white mb-4">
-              Our Track Record
-            </h3>
-            <div className="w-20 h-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mx-auto mb-4"></div>
-            <p className="text-slate-300 text-lg leading-relaxed max-w-2xl mx-auto">
-              Numbers that speak to our commitment to excellence and client
-              satisfaction.
-            </p>
-          </div>
+        <AnimatedSection>
+          <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-12 lg:p-16 shadow-2xl">
+            <div className="text-center mb-12">
+              <h3 className="text-3xl lg:text-4xl font-black text-white mb-4">
+                Our Track Record
+              </h3>
+              <div className="w-20 h-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mx-auto mb-4"></div>
+              <p className="text-slate-300 text-lg leading-relaxed max-w-2xl mx-auto">
+                Numbers that speak to our commitment to excellence and client
+                satisfaction.
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div
-                key={index}
-                className="group text-center p-6 rounded-2xl bg-slate-800/50 border border-slate-700/50 hover:bg-slate-700/50 hover:border-slate-600/50 transition-all duration-300"
-              >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {stats.map((stat, index) => (
                 <div
-                  className={`text-4xl lg:text-5xl font-black bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300`}
+                  key={index}
+                  className="group text-center p-6 rounded-2xl bg-slate-800/50 border border-slate-700/50 hover:bg-slate-700/50 hover:border-slate-600/50 transition-all duration-300"
                 >
-                  {stat.value}
+                  <div
+                    className={`text-4xl lg:text-5xl font-black bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    {stat.value}
+                  </div>
+                  <div className="text-white font-bold text-lg mb-2">
+                    {stat.label}
+                  </div>
+                  <div className="text-slate-400 text-sm leading-relaxed">
+                    {stat.description}
+                  </div>
                 </div>
-                <div className="text-white font-bold text-lg mb-2">
-                  {stat.label}
-                </div>
-                <div className="text-slate-400 text-sm leading-relaxed">
-                  {stat.description}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        </AnimatedSection>
       </div>
     </section>
   );

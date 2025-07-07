@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Import professional animations */
+@import '../styles/professional-animations.css';
+
 :root {
   --color-primary: #15304b;
   --color-accent: #1976d2;

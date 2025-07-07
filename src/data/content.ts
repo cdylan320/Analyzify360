@@ -244,6 +244,10 @@ export const companyInfo = {
   social: {
     twitter: 'https://twitter.com/super2025',
     linkedin: 'https://linkedin.com/company/super2025',
-    github: 'https://github.com/super2025'
+    github: 'https://github.com/super2025',
+    discord: 'https://discord.gg/super2025',
+    instagram: 'https://instagram.com/super2025',
+    youtube: 'https://youtube.com/@super2025',
+    facebook: 'https://facebook.com/super2025'
   }
 }; 

@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import * as d3 from "d3";
 import Button from "./Button";
 import Icon from "./Icon";
 import { companyInfo } from "@/data/content";
+import { professionalMotions, ParallaxText } from "./ProfessionalMotions";
 
 const Hero: React.FC = () => {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -224,7 +226,19 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950 overflow-hidden">
+    <motion.section
+      className="relative min-h-screen overflow-hidden"
+      style={{
+        background: `linear-gradient(135deg, 
+          rgba(15, 23, 42, 0.95) 0%, 
+          rgba(30, 58, 138, 0.9) 35%, 
+          rgba(67, 56, 202, 0.85) 70%, 
+          rgba(15, 23, 42, 0.9) 100%)`,
+      }}
+      initial="initial"
+      animate="animate"
+      variants={professionalMotions.sectionTransition}
+    >
       {/* Floating Particles Background */}
       <svg
         ref={particlesRef}
@@ -250,16 +264,39 @@ const Hero: React.FC = () => {
         <div className="max-w-none px-8 lg:px-16 py-20 lg:py-32">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center min-h-[80vh]">
             {/* Left Content - 7 columns */}
-            <div className="lg:col-span-7 space-y-12">
+            <motion.div
+              className="lg:col-span-7 space-y-12"
+              variants={professionalMotions.staggerContainer}
+              initial="initial"
+              animate="animate"
+            >
               {/* Main Heading */}
               <div className="space-y-8">
-                <h1 className="text-5xl lg:text-8xl font-black leading-tight">
-                  <span className="block text-white mb-4">Transform Your</span>
-                  <span className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent mb-4">
-                    Digital Vision
-                  </span>
-                  <span className="block text-white">Into Reality</span>
-                </h1>
+                <ParallaxText speed={0.3}>
+                  <motion.h1
+                    className="text-5xl lg:text-8xl font-black leading-tight"
+                    variants={professionalMotions.textReveal}
+                  >
+                    <motion.span
+                      className="block text-white mb-4"
+                      variants={professionalMotions.slideInLeft}
+                    >
+                      Transform Your
+                    </motion.span>
+                    <motion.span
+                      className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent mb-4"
+                      variants={professionalMotions.scaleInBounce}
+                    >
+                      Digital Vision
+                    </motion.span>
+                    <motion.span
+                      className="block text-white"
+                      variants={professionalMotions.slideInRight}
+                    >
+                      Into Reality
+                    </motion.span>
+                  </motion.h1>
+                </ParallaxText>
 
                 <div className="w-32 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full"></div>
 
@@ -315,7 +352,7 @@ const Hero: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right Content - 5 columns - D3.js Visualization */}
             <div className="lg:col-span-5 relative">
@@ -387,7 +424,7 @@ const Hero: React.FC = () => {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/5 rounded-full blur-3xl"></div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

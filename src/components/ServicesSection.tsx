@@ -1,4 +1,10 @@
 import React from "react";
+import { motion } from "framer-motion";
+import {
+  ProfessionalCard,
+  ParallaxText,
+  professionalMotions,
+} from "./ProfessionalMotions";
 import Button from "./Button";
 import Icon from "./Icon";
 
@@ -92,18 +98,8 @@ const ServicesSection: React.FC = () => {
   ];
 
   return (
-    <section className="relative py-24 lg:py-32 bg-gradient-to-b from-slate-50 via-white to-slate-50">
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 opacity-30">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-                           radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
-                           radial-gradient(circle at 40% 60%, rgba(139, 92, 246, 0.05) 0%, transparent 50%)`,
-          }}
-        ></div>
-      </div>
+    <div className="relative py-24 lg:py-32">
+      {/* Remove background since it's handled by SmoothSection wrapper */}
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
@@ -129,10 +125,18 @@ const ServicesSection: React.FC = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+          variants={professionalMotions.staggerContainer}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           {services.map((service, index) => (
-            <div
+            <ProfessionalCard
               key={index}
+              delay={index * 0.1}
+              hoverEffect="lift"
               className={`group relative bg-white rounded-2xl border ${service.borderColor} shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden`}
             >
               {/* Card Background Gradient */}
@@ -192,9 +196,9 @@ const ServicesSection: React.FC = () => {
 
               {/* Hover Effect Border */}
               <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-slate-200 transition-colors duration-300"></div>
-            </div>
+            </ProfessionalCard>
           ))}
-        </div>
+        </motion.div>
 
         {/* Call to Action */}
         <div className="text-center">
@@ -218,7 +222,7 @@ const ServicesSection: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
