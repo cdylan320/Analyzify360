@@ -1,70 +1,221 @@
 import React from "react";
-import Card from "./Card";
+import Button from "./Button";
 import Icon from "./Icon";
-import { services } from "@/data/services";
 
 const ServicesSection: React.FC = () => {
+  const services = [
+    {
+      icon: "code",
+      title: "Web Development",
+      description:
+        "Custom web applications built with modern technologies and best practices for optimal performance and user experience.",
+      features: [
+        "React/Next.js",
+        "Node.js/Express",
+        "TypeScript",
+        "API Integration",
+      ],
+      color: "from-blue-500 to-blue-600",
+      bgColor: "bg-blue-500/5",
+      borderColor: "border-blue-500/20",
+    },
+    {
+      icon: "phone",
+      title: "Mobile Development",
+      description:
+        "Native and cross-platform mobile applications that deliver seamless user experiences across all devices.",
+      features: [
+        "React Native",
+        "iOS/Android",
+        "Flutter",
+        "Progressive Web Apps",
+      ],
+      color: "from-green-500 to-green-600",
+      bgColor: "bg-green-500/5",
+      borderColor: "border-green-500/20",
+    },
+    {
+      icon: "globe",
+      title: "Cloud Solutions",
+      description:
+        "Scalable cloud infrastructure and deployment solutions that grow with your business needs.",
+      features: ["AWS/Azure", "Docker", "Kubernetes", "CI/CD Pipelines"],
+      color: "from-purple-500 to-purple-600",
+      bgColor: "bg-purple-500/5",
+      borderColor: "border-purple-500/20",
+    },
+    {
+      icon: "chip",
+      title: "AI Integration",
+      description:
+        "Intelligent solutions powered by machine learning and artificial intelligence to automate and optimize your processes.",
+      features: [
+        "Machine Learning",
+        "Natural Language Processing",
+        "Computer Vision",
+        "Data Analytics",
+      ],
+      color: "from-orange-500 to-orange-600",
+      bgColor: "bg-orange-500/5",
+      borderColor: "border-orange-500/20",
+    },
+    {
+      icon: "shield-check",
+      title: "Cybersecurity",
+      description:
+        "Comprehensive security solutions to protect your digital assets and ensure compliance with industry standards.",
+      features: [
+        "Security Audits",
+        "Penetration Testing",
+        "Compliance",
+        "Risk Assessment",
+      ],
+      color: "from-red-500 to-red-600",
+      bgColor: "bg-red-500/5",
+      borderColor: "border-red-500/20",
+    },
+    {
+      icon: "support",
+      title: "Technical Consulting",
+      description:
+        "Expert guidance and strategic planning to help you make informed technology decisions and optimize your systems.",
+      features: [
+        "Architecture Design",
+        "Performance Optimization",
+        "Technology Strategy",
+        "Code Review",
+      ],
+      color: "from-cyan-500 to-cyan-600",
+      bgColor: "bg-cyan-500/5",
+      borderColor: "border-cyan-500/20",
+    },
+  ];
+
   return (
-    <section className="py-16 lg:py-24 bg-background">
-      <div className="max-w-screen-xl mx-auto px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-4">
+    <section className="relative py-24 lg:py-32 bg-gradient-to-b from-slate-50 via-white to-slate-50">
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-30">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                           radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+                           radial-gradient(circle at 40% 60%, rgba(139, 92, 246, 0.05) 0%, transparent 50%)`,
+          }}
+        ></div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center justify-center px-4 py-2 mb-6 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full border border-blue-200">
+            <Icon name="code" size="sm" className="mr-2" />
             Our Services
+          </div>
+
+          <h2 className="text-4xl lg:text-6xl font-black text-slate-900 mb-6 leading-tight">
+            Comprehensive
+            <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text text-transparent">
+              Digital Solutions
+            </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We deliver cutting-edge solutions across the full spectrum of modern
-            technology
+
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-6"></div>
+
+          <p className="text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto">
+            We deliver cutting-edge technology solutions that drive business
+            growth and digital transformation.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service) => (
-            <Card
-              key={service.id}
-              hover
-              className="group cursor-pointer"
-              background="white"
-              shadow
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className={`group relative bg-white rounded-2xl border ${service.borderColor} shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden`}
             >
-              <div className="text-center space-y-6">
+              {/* Card Background Gradient */}
+              <div
+                className={`absolute inset-0 ${service.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+              ></div>
+
+              {/* Card Content */}
+              <div className="relative z-10 p-8">
                 {/* Icon */}
-                <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
-                  <Icon
-                    name={service.icon as any}
-                    size="xl"
-                    className="text-white"
-                  />
+                <div className="flex items-center justify-between mb-6">
+                  <div
+                    className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    <Icon
+                      name={service.icon as any}
+                      size="lg"
+                      className="text-white"
+                    />
+                  </div>
+                  <div className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center group-hover:bg-slate-200 transition-colors">
+                    <Icon
+                      name="arrow-right"
+                      size="sm"
+                      className="text-slate-600 group-hover:translate-x-0.5 transition-transform"
+                    />
+                  </div>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-primary">
+                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-slate-800 transition-colors">
                   {service.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-accent font-medium">{service.description}</p>
+                <p className="text-slate-600 leading-relaxed mb-6 text-sm">
+                  {service.description}
+                </p>
 
-                {/* Capabilities */}
+                {/* Features */}
                 <div className="space-y-2">
-                  {service.capabilities.slice(0, 4).map((capability, index) => (
-                    <div key={index} className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-accent rounded-full"></div>
-                      <span className="text-sm text-gray-600">
-                        {capability}
+                  <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">
+                    Key Technologies
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {service.features.map((feature, idx) => (
+                      <span
+                        key={idx}
+                        className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 group-hover:bg-white group-hover:text-slate-800 transition-colors"
+                      >
+                        {feature}
                       </span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Learn More Link */}
-                <div className="pt-4">
-                  <button className="text-accent font-medium hover:text-blue-600 transition-colors duration-200 group-hover:underline">
-                    Learn More →
-                  </button>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </Card>
+
+              {/* Hover Effect Border */}
+              <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-slate-200 transition-colors duration-300"></div>
+            </div>
           ))}
+        </div>
+
+        {/* Call to Action */}
+        <div className="text-center">
+          <div className="inline-flex flex-col sm:flex-row gap-4 items-center">
+            <Button
+              variant="primary"
+              size="lg"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              rightIcon={<Icon name="arrow-right" size="md" />}
+            >
+              Get Started Today
+            </Button>
+
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-2 border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 font-bold px-8 py-4 rounded-2xl transition-all duration-300"
+            >
+              View Our Portfolio
+            </Button>
+          </div>
         </div>
       </div>
     </section>
