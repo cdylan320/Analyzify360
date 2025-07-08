@@ -30,7 +30,13 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const { scrollYProgress } = useScroll();
+
+  // Fix hydration by only rendering random elements on client
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Get client team (account managers)
   const clientTeam = teamMembers.filter((member) => member.role === "client");
@@ -45,7 +51,7 @@ export default function Contact() {
       value: companyInfo.email,
       description: "Get a response within 2 hours",
       color: "from-blue-500 to-cyan-600",
-      action: `mailto:${companyInfo.email}?subject=New Project Inquiry`,
+      action: `https://mail.google.com/mail/?view=cm&fs=1&to=${companyInfo.email}&su=New Project Inquiry&body=Hi Super2025 Team,%0D%0A%0D%0AI'm interested in discussing a project with you.%0D%0A%0D%0AProject details:%0D%0A-%0D%0A-%0D%0A-%0D%0A%0D%0ABest regards`,
     },
     {
       icon: "phone",
@@ -69,7 +75,7 @@ export default function Contact() {
       value: "Schedule Call",
       description: "15-min consultation",
       color: "from-orange-500 to-red-600",
-      action: "#",
+      action: "https://calendly.com/brian-logan94727/30min",
     },
   ];
 
@@ -187,75 +193,79 @@ export default function Contact() {
         </div>
 
         {/* Floating Particles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-blue-400/30 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -100, 0],
-                x: [0, Math.random() * 100 - 50, 0],
-                opacity: [0, 1, 0],
-              }}
-              transition={{
-                duration: Math.random() * 10 + 10,
-                repeat: Infinity,
-                delay: Math.random() * 5,
-              }}
-            />
-          ))}
-        </div>
+        {isClient && (
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-2 h-2 bg-blue-400/30 rounded-full"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  y: [0, -100, 0],
+                  x: [0, Math.random() * 100 - 50, 0],
+                  opacity: [0, 1, 0],
+                }}
+                transition={{
+                  duration: Math.random() * 10 + 10,
+                  repeat: Infinity,
+                  delay: Math.random() * 5,
+                }}
+              />
+            ))}
+          </div>
+        )}
 
         {/* Communication Network Background */}
-        <div className="absolute inset-0 opacity-20">
-          <svg className="w-full h-full" viewBox="0 0 1000 1000">
-            <defs>
-              <linearGradient
-                id="lineGradient"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
-              >
-                <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.2" />
-              </linearGradient>
-            </defs>
-            {[...Array(12)].map((_, i) => (
-              <g key={i}>
-                <motion.line
-                  x1={Math.random() * 1000}
-                  y1={Math.random() * 1000}
-                  x2={Math.random() * 1000}
-                  y2={Math.random() * 1000}
-                  stroke="url(#lineGradient)"
-                  strokeWidth="1"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    delay: i * 0.3,
-                  }}
-                />
-                <motion.circle
-                  cx={Math.random() * 1000}
-                  cy={Math.random() * 1000}
-                  r="3"
-                  fill="#3b82f6"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: [0, 1, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
-                />
-              </g>
-            ))}
-          </svg>
-        </div>
+        {isClient && (
+          <div className="absolute inset-0 opacity-20">
+            <svg className="w-full h-full" viewBox="0 0 1000 1000">
+              <defs>
+                <linearGradient
+                  id="lineGradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.6" />
+                  <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.2" />
+                </linearGradient>
+              </defs>
+              {[...Array(12)].map((_, i) => (
+                <g key={i}>
+                  <motion.line
+                    x1={Math.random() * 1000}
+                    y1={Math.random() * 1000}
+                    x2={Math.random() * 1000}
+                    y2={Math.random() * 1000}
+                    stroke="url(#lineGradient)"
+                    strokeWidth="1"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                      delay: i * 0.3,
+                    }}
+                  />
+                  <motion.circle
+                    cx={Math.random() * 1000}
+                    cy={Math.random() * 1000}
+                    r="3"
+                    fill="#3b82f6"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: [0, 1, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
+                  />
+                </g>
+              ))}
+            </svg>
+          </div>
+        )}
 
         <div className="relative z-20 w-[95%] mx-auto px-4 lg:px-8 py-20">
           <div className="text-center max-w-7xl mx-auto">
@@ -385,12 +395,7 @@ export default function Contact() {
               <div
                 key={index}
                 className="cursor-pointer"
-                onClick={() =>
-                  window.open(
-                    method.action,
-                    method.icon === "mail" ? "_self" : "_blank"
-                  )
-                }
+                onClick={() => window.open(method.action, "_blank")}
               >
                 <ProfessionalCard
                   delay={index * 0.1}
@@ -822,13 +827,15 @@ export default function Contact() {
 
       {/* Account Managers Section */}
       <SmoothSection
-        className="relative py-24 bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950"
+        className="relative py-24 bg-gradient-to-b from-slate-50 to-white"
         id="team-section"
       >
-        {/* Advanced Background Effects */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.4),transparent_70%)]"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(139,92,246,0.3),transparent_70%)]"></div>
+        {/* Professional Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgb(59 130 246) 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }}></div>
         </div>
 
         <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
@@ -837,20 +844,22 @@ export default function Contact() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="inline-flex items-center justify-center px-8 py-4 mb-8 text-sm font-bold text-white bg-white/10 rounded-full border border-white/20 backdrop-blur-2xl shadow-2xl"
+              className="inline-flex items-center justify-center px-8 py-4 mb-8 text-sm font-bold text-blue-700 bg-blue-50 rounded-full border border-blue-200 shadow-lg"
             >
-              <div className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse"></div>
+              <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
               <span>Your Dedicated Account Managers</span>
             </motion.div>
 
             <h2 className="text-5xl lg:text-7xl font-black mb-8 leading-tight">
-              <span className="text-white">Meet Your</span>
-              <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <span className="text-slate-900">Meet Your</span>
+              <span className="block bg-gradient-to-r from-blue-700 via-cyan-700 to-indigo-700 bg-clip-text text-transparent">
                 Success Team
               </span>
             </h2>
 
-            <p className="text-xl text-white/70 leading-relaxed max-w-4xl mx-auto font-medium">
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full mx-auto mb-8"></div>
+
+            <p className="text-xl text-slate-600 leading-relaxed max-w-4xl mx-auto font-medium">
               Local account managers who understand your market, speak your
               language, and are committed to your success.
             </p>
@@ -862,7 +871,7 @@ export default function Contact() {
                 key={member.id}
                 delay={index * 0.1}
                 hoverEffect="lift"
-                className="group bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500 p-8 text-center min-h-[420px] flex flex-col"
+                className="group bg-white rounded-3xl border border-slate-200/80 shadow-xl hover:shadow-2xl transition-all duration-500 p-8 text-center min-h-[420px] flex flex-col"
               >
                 {/* Avatar */}
                 <div className="relative mb-6">
@@ -870,7 +879,7 @@ export default function Contact() {
                     {member.avatar}
                   </div>
                   {member.flag && (
-                    <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg text-2xl">
+                    <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg text-2xl border-2 border-slate-100">
                       {member.flag}
                     </div>
                   )}
@@ -878,26 +887,26 @@ export default function Contact() {
 
                 {/* Content */}
                 <div className="flex-1 flex flex-col">
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors">
+                  <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-700 transition-colors">
                     {member.name}
                   </h3>
-                  <p className="text-blue-300 font-semibold mb-2">
+                  <p className="text-blue-700 font-semibold mb-2">
                     {member.title}
                   </p>
                   {member.location && (
-                    <p className="text-sm text-white/60 mb-4 flex items-center justify-center space-x-1 font-medium">
-                      <Icon name="map-pin" size="sm" />
+                    <p className="text-sm text-slate-500 mb-4 flex items-center justify-center space-x-1 font-medium">
+                      <Icon name="map-pin" size="sm" className="text-slate-400" />
                       <span>{member.location}</span>
                     </p>
                   )}
 
-                  <p className="text-white/70 leading-relaxed mb-6 flex-1 font-medium">
+                  <p className="text-slate-600 leading-relaxed mb-6 flex-1 font-medium">
                     {member.bio}
                   </p>
 
                   {member.quote && (
-                    <div className="mb-6 p-4 bg-white/5 rounded-xl border border-white/10">
-                      <p className="text-white/80 italic text-sm leading-relaxed">
+                    <div className="mb-6 p-4 bg-blue-50 rounded-xl border border-blue-100">
+                      <p className="text-slate-700 italic text-sm leading-relaxed">
                         "{member.quote}"
                       </p>
                     </div>
@@ -905,19 +914,19 @@ export default function Contact() {
 
                   {/* Experience & Projects */}
                   <div className="grid grid-cols-2 gap-4 mb-6">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-blue-300">
+                    <div className="text-center p-3 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100">
+                      <div className="text-2xl font-bold text-blue-700">
                         {member.experience}
                       </div>
-                      <div className="text-xs text-white/60 font-semibold">
+                      <div className="text-xs text-slate-600 font-semibold">
                         Experience
                       </div>
                     </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-purple-300">
+                    <div className="text-center p-3 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl border border-purple-100">
+                      <div className="text-2xl font-bold text-purple-700">
                         {member.projects}+
                       </div>
-                      <div className="text-xs text-white/60 font-semibold">
+                      <div className="text-xs text-slate-600 font-semibold">
                         Projects
                       </div>
                     </div>
@@ -933,7 +942,7 @@ export default function Contact() {
                         "_self"
                       )
                     }
-                    className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-xl font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300"
                   >
                     <div className="flex items-center justify-center space-x-2">
                       <Icon name="mail" size="sm" />

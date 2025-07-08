@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   AnimatedSection,
@@ -17,10 +17,38 @@ import { companyInfo, companyValues, timeline } from "@/data/content";
 import { teamMembers } from "@/data/team";
 
 export default function About() {
-  const [currentTimelineIndex, setCurrentTimelineIndex] = useState(0);
+  const [currentTimelineIndex, setCurrentTimelineIndex] = useState(-1);
   const [isDragging, setIsDragging] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const timelineRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
+
+  // Pre-computed values for consistent SSR/CSR
+  const particlePositions = useRef<Array<{ left: number, top: number, x: number, duration: number, delay: number }>>([]);
+  const networkElements = useRef<Array<{ x1: number, y1: number, x2: number, y2: number, cx: number, cy: number }>>([]);
+
+  useEffect(() => {
+    setIsClient(true);
+
+    // Generate particle positions once on client side
+    particlePositions.current = Array.from({ length: 15 }, () => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      x: Math.random() * 100 - 50,
+      duration: Math.random() * 10 + 10,
+      delay: Math.random() * 5,
+    }));
+
+    // Generate network element positions once on client side
+    networkElements.current = Array.from({ length: 8 }, () => ({
+      x1: Math.random() * 1000,
+      y1: Math.random() * 1000,
+      x2: Math.random() * 1000,
+      y2: Math.random() * 1000,
+      cx: Math.random() * 1000,
+      cy: Math.random() * 1000,
+    }));
+  }, []);
 
   const leadership = teamMembers.filter(
     (member) =>
@@ -65,15 +93,18 @@ export default function About() {
     },
   ];
 
-  // 3D Timeline Navigation
+  // Timeline Navigation
   const handleTimelineNavigation = (direction: "prev" | "next") => {
-    if (direction === "prev" && currentTimelineIndex > 0) {
-      setCurrentTimelineIndex(currentTimelineIndex - 1);
-    } else if (
-      direction === "next" &&
-      currentTimelineIndex < timeline.length - 1
-    ) {
-      setCurrentTimelineIndex(currentTimelineIndex + 1);
+    if (direction === "prev") {
+      if (currentTimelineIndex > 0) {
+        setCurrentTimelineIndex(currentTimelineIndex - 1);
+      } else if (currentTimelineIndex === 0) {
+        setCurrentTimelineIndex(-1); // Close all cards
+      }
+    } else if (direction === "next") {
+      if (currentTimelineIndex < timeline.length - 1) {
+        setCurrentTimelineIndex(currentTimelineIndex + 1);
+      }
     }
   };
 
@@ -122,23 +153,23 @@ export default function About() {
 
         {/* Floating Particles */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(15)].map((_, i) => (
+          {isClient && particlePositions.current.map((position, index) => (
             <motion.div
-              key={i}
+              key={index}
               className="absolute w-2 h-2 bg-blue-400/30 rounded-full"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: `${position.left}%`,
+                top: `${position.top}%`,
               }}
               animate={{
                 y: [0, -100, 0],
-                x: [0, Math.random() * 100 - 50, 0],
+                x: [0, position.x, 0],
                 opacity: [0, 1, 0],
               }}
               transition={{
-                duration: Math.random() * 10 + 10,
+                duration: position.duration,
                 repeat: Infinity,
-                delay: Math.random() * 5,
+                delay: position.delay,
               }}
             />
           ))}
@@ -159,13 +190,13 @@ export default function About() {
                 <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.2" />
               </linearGradient>
             </defs>
-            {[...Array(8)].map((_, i) => (
-              <g key={i}>
+            {isClient && networkElements.current.map((element, index) => (
+              <g key={index}>
                 <motion.line
-                  x1={Math.random() * 1000}
-                  y1={Math.random() * 1000}
-                  x2={Math.random() * 1000}
-                  y2={Math.random() * 1000}
+                  x1={element.x1}
+                  y1={element.y1}
+                  x2={element.x2}
+                  y2={element.y2}
                   stroke="url(#lineGradient)"
                   strokeWidth="1"
                   initial={{ pathLength: 0 }}
@@ -174,17 +205,17 @@ export default function About() {
                     duration: 3,
                     repeat: Infinity,
                     repeatType: "reverse",
-                    delay: i * 0.5,
+                    delay: index * 0.5,
                   }}
                 />
                 <motion.circle
-                  cx={Math.random() * 1000}
-                  cy={Math.random() * 1000}
+                  cx={element.cx}
+                  cy={element.cy}
                   r="3"
                   fill="#3b82f6"
                   initial={{ scale: 0 }}
                   animate={{ scale: [0, 1, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+                  transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
                 />
               </g>
             ))}
@@ -369,35 +400,37 @@ export default function About() {
       </SmoothSection>
 
       {/* Professional Serpentine Roadmap Timeline */}
-      <SmoothSection className="relative py-32 bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950 overflow-hidden">
+      <SmoothSection className="relative py-32 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
         {/* Advanced Background Effects */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.4),transparent_70%)]"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(139,92,246,0.3),transparent_70%)]"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(168,85,247,0.2),transparent_60%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.2),transparent_70%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(139,92,246,0.15),transparent_70%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(168,85,247,0.1),transparent_60%)]"></div>
+          {/* Dark overlay for better contrast */}
+          <div className="absolute inset-0 bg-slate-900/40"></div>
         </div>
 
         <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
           {/* Section Header */}
-          <AnimatedSection className="text-center mb-20">
+          <AnimatedSection className="text-center mb-5">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="inline-flex items-center justify-center px-8 py-4 mb-8 text-sm font-bold text-white bg-white/10 rounded-full border border-white/20 backdrop-blur-2xl shadow-2xl"
+              className="inline-flex items-center justify-center px-8 py-4 mt-8 mb-6 text-sm font-bold text-white bg-slate-800/80 rounded-full border border-white/60 backdrop-blur-2xl shadow-2xl"
             >
-              <div className="w-2 h-2 bg-purple-400 rounded-full mr-3 animate-pulse"></div>
-              <span>Our Evolution • 2018-2024</span>
+              <div className="w-2 h-2 bg-purple-400 rounded-full mr-3 animate-pulse drop-shadow-sm"></div>
+              <span style={{ textShadow: "1px 1px 4px rgba(0,0,0,0.8)" }}>Our Evolution • 2018-2024</span>
             </motion.div>
 
             <h2 className="text-5xl lg:text-8xl font-black mb-8 leading-tight">
-              <span className="text-white">Business</span>
-              <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <span className="text-white" style={{ textShadow: "2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5)" }}>Business</span>
+              <span className="block text-white" style={{ textShadow: "2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5)" }}>
                 Roadmap
               </span>
             </h2>
 
-            <p className="text-xl text-white/70 leading-relaxed max-w-4xl mx-auto font-medium">
+            <p className="text-white text-xl leading-relaxed max-w-4xl mx-auto font-semibold" style={{ textShadow: "2px 2px 6px rgba(0,0,0,0.8), 0 0 15px rgba(0,0,0,0.6)" }}>
               Navigate through our 7-year serpentine journey of innovation and
               growth
             </p>
@@ -489,17 +522,17 @@ export default function About() {
               </svg>
             </div>
 
-            {/* Pins Positioned ALONG the Serpentine Road Path */}
+            {/* Year Icons Positioned ABOVE the Serpentine Road Path */}
             {timeline.map((item, index) => {
-              // Calculate exact positions along the serpentine road curve
+              // Calculate positions ABOVE the serpentine road curve (following red arrows)
               const roadPoints = [
-                { x: 15, y: 85, roadX: 15, roadY: 85 }, // 2018 - start of road
-                { x: 23, y: 78, roadX: 23, roadY: 78 }, // 2019 - along first curve
-                { x: 35, y: 70, roadX: 35, roadY: 70 }, // 2020 - continuing curve
-                { x: 42, y: 55, roadX: 42, roadY: 55 }, // 2021 - curve back
-                { x: 50, y: 40, roadX: 50, roadY: 40 }, // 2022 - middle curve
-                { x: 60, y: 25, roadX: 60, roadY: 25 }, // 2023 - upper curve
-                { x: 80, y: 12, roadX: 80, roadY: 12 }, // 2024 - end of road
+                { x: 10, y: 78 }, // 2018 - ABOVE start of road
+                { x: 22, y: 68 }, // 2019 - ABOVE first curve  
+                { x: 31, y: 60 }, // 2020 - ABOVE continuing curve
+                { x: 30, y: 45 }, // 2021 - ABOVE curve back
+                { x: 47, y: 30 }, // 2022 - ABOVE middle curve
+                { x: 60, y: 13 }, // 2023 - ABOVE upper curve
+                { x: 75, y: 11 },  // 2024 - ABOVE end of road
               ];
 
               const position = roadPoints[index];
@@ -508,201 +541,230 @@ export default function About() {
 
               return (
                 <div key={index}>
-                  {/* Flag Pole - From Road Surface to Pin */}
-                  <motion.div
-                    className="absolute z-20"
-                    style={{
-                      left: `${position.roadX}%`,
-                      top: `${position.roadY}%`,
-                      transform: "translateX(-50%)",
-                    }}
-                    initial={{ scaleY: 0 }}
-                    animate={{ scaleY: 1 }}
-                    transition={{
-                      duration: 1,
-                      delay: 1.5 + index * 0.15,
-                      type: "spring",
-                    }}
-                  >
-                    {/* Vertical Flag Pole */}
-                    <div
-                      className={`w-2 bg-gradient-to-t transition-all duration-500 transform-origin-bottom ${
-                        isActive
-                          ? "from-orange-600 to-yellow-400 h-24 shadow-xl"
-                          : isPast
-                          ? "from-blue-600 to-cyan-400 h-20 shadow-lg"
-                          : "from-slate-600 to-slate-400 h-16 shadow-md"
-                      } rounded-full`}
-                    ></div>
-                  </motion.div>
-
-                  {/* Business Pin - Connected by Flag Pole */}
+                  {/* Year Icon - Positioned ABOVE the Road */}
                   <motion.div
                     className="absolute cursor-pointer group z-30"
                     style={{
                       left: `${position.x}%`,
-                      top: `${position.y - (isActive ? 12 : isPast ? 10 : 8)}%`,
+                      top: `${position.y}%`,
                       transform: "translate(-50%, -50%)",
                     }}
-                    initial={{ opacity: 0, scale: 0, y: -100 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    initial={{ opacity: 0, scale: 0, y: -50 }}
+                    animate={{
+                      opacity: 1,
+                      scale: 1,
+                      y: [0, -8, 0], // Bouncing effect
+                    }}
                     transition={{
                       duration: 1.2,
                       delay: 2 + index * 0.2,
                       type: "spring",
                       stiffness: 100,
+                      y: {
+                        duration: 2,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut",
+                        delay: 3 + index * 0.3,
+                      }
                     }}
-                    whileHover={{ scale: 1.15, y: -10 }}
-                    onClick={() => setCurrentTimelineIndex(index)}
+                    whileHover={{
+                      scale: 1.3,
+                      y: -12,
+                      rotateY: 15,
+                      transition: { duration: 0.3 }
+                    }}
+                    onClick={() => setCurrentTimelineIndex(isActive ? -1 : index)}
                   >
-                    {/* Pin Drop Shadow */}
-                    <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-black/40 rounded-full blur-lg"></div>
+                    {/* 3D Drop Shadow with perspective */}
+                    <div
+                      className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-16 w-16 h-8 bg-black/20 rounded-full blur-lg"
+                      style={{
+                        transform: `translateX(-50%) translateY(64px) scaleX(${isActive ? 1.2 : 1})`,
+                      }}
+                    ></div>
 
-                    {/* Professional Business Pin */}
-                    <div className="relative">
-                      {/* Pin Outer Ring */}
-                      <div
-                        className={`w-24 h-24 rounded-full border-4 transition-all duration-500 flex items-center justify-center relative overflow-hidden ${
-                          isActive
-                            ? "bg-gradient-to-br from-yellow-300 via-yellow-400 to-orange-500 border-white shadow-2xl scale-110"
-                            : isPast
-                            ? "bg-gradient-to-br from-emerald-400 via-blue-500 to-blue-600 border-white/90 shadow-xl"
-                            : "bg-gradient-to-br from-slate-400 via-slate-500 to-slate-700 border-white/70 shadow-lg"
-                        }`}
-                      >
-                        {/* Pin Inner Circle */}
-                        <div
-                          className={`w-16 h-16 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
-                            isActive
-                              ? "bg-white border-yellow-200"
-                              : "bg-white/95 border-white/50"
+                    {/* Year Icon Circle - BIGGER SIZE */}
+                    <div className="relative" style={{ perspective: "1000px" }}>
+                      <motion.div
+                        className={`w-20 h-20 rounded-full border-4 transition-all duration-500 flex items-center justify-center relative overflow-hidden ${isActive
+                          ? "bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500 border-white shadow-2xl scale-110 ring-4 ring-yellow-300/50"
+                          : isPast
+                            ? "bg-gradient-to-br from-emerald-500 via-blue-600 to-blue-700 border-white shadow-xl"
+                            : "bg-gradient-to-br from-slate-500 via-slate-600 to-slate-700 border-white/80 shadow-lg hover:shadow-xl"
                           }`}
-                        >
-                          {/* Pin Icon */}
+                        style={{
+                          boxShadow: isActive
+                            ? "0 20px 40px rgba(255, 193, 7, 0.4), 0 0 0 4px rgba(255, 193, 7, 0.3)"
+                            : "0 10px 25px rgba(0, 0, 0, 0.2)",
+                          transformStyle: "preserve-3d",
+                        }}
+                        animate={{
+                          rotateX: [0, 5, 0],
+                          rotateY: [0, 10, 0],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          repeatType: "reverse",
+                          ease: "easeInOut",
+                          delay: index * 0.5,
+                        }}
+                      >
+                        {/* Inner Icon Circle - BIGGER */}
+                        <div className="w-12 h-12 rounded-full bg-white/95 flex items-center justify-center shadow-inner">
                           <Icon
                             name={
                               index === 0
                                 ? "briefcase"
                                 : index === 1
-                                ? "users"
-                                : index === 2
-                                ? "globe-alt"
-                                : index === 3
-                                ? "shield"
-                                : index === 4
-                                ? "map"
-                                : index === 5
-                                ? "external-link"
-                                : "cpu"
+                                  ? "users"
+                                  : index === 2
+                                    ? "globe-alt"
+                                    : index === 3
+                                      ? "shield"
+                                      : index === 4
+                                        ? "map"
+                                        : index === 5
+                                          ? "external-link"
+                                          : "cpu"
                             }
                             size="lg"
-                            className={`transition-all duration-300 ${
-                              isActive
-                                ? "text-yellow-600 scale-110"
-                                : isPast
-                                ? "text-blue-600"
-                                : "text-slate-600"
-                            }`}
+                            className={`transition-all duration-300 ${isActive
+                              ? "text-yellow-700"
+                              : isPast
+                                ? "text-blue-700"
+                                : "text-slate-700"
+                              }`}
                           />
                         </div>
 
-                        {/* Active Glow */}
+                        {/* 3D Highlight Ring */}
+                        <div className="absolute inset-1 rounded-full bg-gradient-to-tr from-white/20 to-transparent pointer-events-none"></div>
+
+                        {/* Active Pulse Animation */}
                         {isActive && (
-                          <div className="absolute inset-0 bg-gradient-to-br from-yellow-200/50 to-orange-300/50 rounded-full animate-pulse"></div>
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-br from-yellow-300/40 to-orange-400/40 rounded-full"
+                            animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                          />
                         )}
-                      </div>
-                    </div>
+                      </motion.div>
 
-                    {/* Year Label */}
-                    <div
-                      className={`absolute -top-12 left-1/2 transform -translate-x-1/2 transition-all duration-500 ${
-                        isActive ? "scale-110 z-40" : "z-30"
-                      }`}
-                    >
-                      <div
-                        className={`px-3 py-2 rounded-xl font-bold text-sm shadow-xl transition-all duration-500 ${
-                          isActive
-                            ? "bg-yellow-400 text-yellow-900 shadow-yellow-400/50"
-                            : "bg-white text-slate-800 shadow-lg"
-                        }`}
-                      >
-                        {item.year}
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Content Cards - Positioned Around the Serpentine Path */}
-                  <motion.div
-                    className="absolute z-25"
-                    style={{
-                      left: `${position.x + (index % 2 === 0 ? -25 : 25)}%`,
-                      top: `${position.y - 8}%`,
-                      transform: "translateX(-50%)",
-                    }}
-                    initial={{
-                      opacity: 0,
-                      scale: 0.8,
-                      x: index % 2 === 0 ? 50 : -50,
-                    }}
-                    animate={{
-                      opacity: isActive ? 1 : 0.85,
-                      scale: isActive ? 1.02 : 0.9,
-                      x: 0,
-                    }}
-                    transition={{ duration: 0.8, delay: 2.5 + index * 0.1 }}
-                  >
-                    <div
-                      className={`w-72 bg-white/95 backdrop-blur-xl rounded-xl border-2 shadow-2xl transition-all duration-500 ${
-                        isActive
-                          ? "border-yellow-300 ring-2 ring-yellow-400/30"
-                          : "border-white/40"
-                      } p-5 relative`}
-                    >
-                      <div
-                        className={`inline-flex items-center justify-center px-3 py-1 mb-3 rounded-full text-xs font-bold transition-all duration-500 ${
-                          isActive
-                            ? "bg-yellow-400 text-yellow-900"
-                            : "bg-blue-100 text-blue-800"
-                        }`}
-                      >
-                        {item.year} • Milestone {index + 1}
-                      </div>
-
-                      <h3 className="text-lg font-bold text-slate-900 mb-3 leading-tight">
-                        {item.title}
-                      </h3>
-
-                      <p className="text-slate-600 leading-relaxed text-sm">
-                        {item.description}
-                      </p>
-
-                      {/* Card Pointer to Pin */}
-                      <div
-                        className={`absolute top-1/2 transform -translate-y-1/2 ${
-                          index % 2 === 0
-                            ? "right-0 translate-x-full"
-                            : "left-0 -translate-x-full"
-                        }`}
+                      {/* Year Label - Positioned above icon */}
+                      <motion.div
+                        className={`absolute -top-12 left-1/2 transform -translate-x-1/2 transition-all duration-500 ${isActive ? "scale-110" : ""
+                          }`}
+                        animate={{ y: [0, -2, 0] }}
+                        transition={{
+                          duration: 2.5,
+                          repeat: Infinity,
+                          repeatType: "reverse",
+                          ease: "easeInOut",
+                          delay: index * 0.2,
+                        }}
                       >
                         <div
-                          className={`w-0 h-0 ${
-                            index % 2 === 0
-                              ? "border-l-6 border-l-white/95 border-t-4 border-b-4 border-t-transparent border-b-transparent"
-                              : "border-r-6 border-r-white/95 border-t-4 border-b-4 border-t-transparent border-b-transparent"
-                          }`}
-                        ></div>
-                      </div>
+                          className={`px-4 py-2 rounded-xl font-bold text-sm shadow-xl transition-all duration-500 ${isActive
+                            ? "bg-yellow-400 text-yellow-900 shadow-yellow-400/50"
+                            : "bg-white text-slate-800 shadow-slate-500/30"
+                            }`}
+                          style={{
+                            boxShadow: isActive
+                              ? "0 8px 25px rgba(255, 193, 7, 0.3)"
+                              : "0 4px 15px rgba(0, 0, 0, 0.1)",
+                          }}
+                        >
+                          {item.year}
+                        </div>
+                      </motion.div>
                     </div>
                   </motion.div>
+
+                  {/* Content Card - Only Show When Active */}
+                  {isActive && (
+                    <motion.div
+                      className="absolute z-40"
+                      style={{
+                        left: `${position.x + (index % 2 === 0 ? -22 : 22)}%`,
+                        top: `${position.y - 5}%`,
+                        transform: "translateX(-50%)",
+                      }}
+                      initial={{
+                        opacity: 0,
+                        scale: 0.8,
+                        y: 20,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        scale: 1,
+                        y: 0,
+                      }}
+                      exit={{
+                        opacity: 0,
+                        scale: 0.8,
+                        y: 20,
+                      }}
+                      transition={{
+                        duration: 0.5,
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30
+                      }}
+                    >
+                      <div className="w-80 bg-white/98 backdrop-blur-xl rounded-2xl border-2 border-yellow-300 ring-2 ring-yellow-400/30 shadow-2xl p-6 relative">
+                        {/* Card Header */}
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="inline-flex items-center justify-center px-3 py-1 bg-yellow-400 text-yellow-900 rounded-full text-xs font-bold">
+                            {item.year} • Milestone {index + 1}
+                          </div>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setCurrentTimelineIndex(-1); // Close card
+                            }}
+                            className="w-6 h-6 rounded-full bg-slate-200 hover:bg-slate-300 flex items-center justify-center text-slate-600 transition-colors"
+                          >
+                            ×
+                          </button>
+                        </div>
+
+                        {/* Card Content */}
+                        <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight">
+                          {item.title}
+                        </h3>
+
+                        <p className="text-slate-600 leading-relaxed">
+                          {item.description}
+                        </p>
+
+                        {/* Card Pointer to Year Icon */}
+                        <div
+                          className={`absolute top-1/2 transform -translate-y-1/2 ${index % 2 === 0
+                            ? "right-0 translate-x-full"
+                            : "left-0 -translate-x-full"
+                            }`}
+                        >
+                          <div
+                            className={`w-0 h-0 ${index % 2 === 0
+                              ? "border-l-8 border-l-white/98 border-t-6 border-b-6 border-t-transparent border-b-transparent"
+                              : "border-r-8 border-r-white/98 border-t-6 border-b-6 border-t-transparent border-b-transparent"
+                              }`}
+                          ></div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
                 </div>
               );
             })}
 
             {/* Navigation Controls */}
-            <div className="absolute top-8 left-8 z-50">
+            <div className="absolute top-108 left-8 z-50">
               <motion.button
                 onClick={() => handleTimelineNavigation("prev")}
-                disabled={currentTimelineIndex === 0}
+                disabled={currentTimelineIndex === -1}
                 className="w-14 h-14 bg-white/95 backdrop-blur-xl rounded-xl border border-white/50 flex items-center justify-center text-slate-700 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white hover:shadow-xl transition-all duration-300 shadow-lg"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -711,7 +773,7 @@ export default function About() {
               </motion.button>
             </div>
 
-            <div className="absolute top-8 right-8 z-50">
+            <div className="absolute top-108 right-8 z-50">
               <motion.button
                 onClick={() => handleTimelineNavigation("next")}
                 disabled={currentTimelineIndex === timeline.length - 1}
@@ -724,54 +786,7 @@ export default function About() {
             </div>
           </div>
 
-          {/* Progress Indicator */}
-          <div className="flex justify-center mt-16 mb-8">
-            <div className="flex space-x-3 bg-white/15 backdrop-blur-xl px-6 py-3 rounded-xl border border-white/30 shadow-xl">
-              {timeline.map((_, index) => (
-                <motion.button
-                  key={index}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentTimelineIndex
-                      ? "bg-yellow-400 w-8 shadow-lg"
-                      : index < currentTimelineIndex
-                      ? "bg-emerald-400"
-                      : "bg-white/50 hover:bg-white/80"
-                  }`}
-                  onClick={() => setCurrentTimelineIndex(index)}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
-                />
-              ))}
-            </div>
-          </div>
 
-          {/* Instructions */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 4 }}
-            className="text-center"
-          >
-            <div className="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-2xl rounded-xl border border-white/30 shadow-xl">
-              <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 text-white">
-                <div className="flex items-center space-x-2">
-                  <div className="w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
-                  <span className="font-medium">
-                    Follow the serpentine road journey
-                  </span>
-                </div>
-                <div className="hidden sm:block w-px h-4 bg-white/30"></div>
-                <div className="flex items-center space-x-2">
-                  <Icon
-                    name="arrow-right"
-                    size="sm"
-                    className="text-blue-400"
-                  />
-                  <span className="font-medium">Click pins along the path</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </SmoothSection>
 

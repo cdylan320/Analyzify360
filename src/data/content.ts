@@ -445,7 +445,7 @@ export const companyInfo = {
   description: 'Super2025 unites top engineers and US/UK partners to deliver secure, seamless digital solutions.',
   mission: 'To bridge the gap between global technical excellence and local business understanding, creating technology solutions that drive real business value.',
   announcement: 'Now serving US & UK clients—ask about our launch offer.',
-  email: 'hello@super2025.com',
+  email: 'jam.joyce320@gmail.com',
   phone: '+1 (555) 123-4567',
   address: 'Global Remote Team with Local Presence',
   social: {

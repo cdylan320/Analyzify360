@@ -130,6 +130,7 @@ const iconMap = {
   // Missing icons
   rocket: Zap, // Using Zap as rocket alternative
   support: Shield, // Using Shield as support alternative
+  chat: MessageCircle, // Chat/messaging icon
 };
 
 export interface IconProps {
