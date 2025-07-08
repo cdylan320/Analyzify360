@@ -26,6 +26,22 @@ export interface BlogPost {
   date: string;
   category: string;
   readTime: string;
+  image?: string;
+  featured?: boolean;
+  tags?: string[];
+  authorAvatar?: string;
+  authorRole?: string;
+  views?: number;
+  likes?: number;
+}
+
+export interface BlogCategory {
+  id: string;
+  name: string;
+  description: string;
+  color: string;
+  icon: string;
+  count: number;
 }
 
 export interface CareerPosition {
@@ -130,33 +146,209 @@ export const timeline: TimelineItem[] = [
   }
 ];
 
+export const blogCategories: BlogCategory[] = [
+  {
+    id: 'ai-ml',
+    name: 'AI & Machine Learning',
+    description: 'Latest trends in artificial intelligence and machine learning',
+    color: 'from-purple-500 to-blue-600',
+    icon: 'cpu',
+    count: 5
+  },
+  {
+    id: 'blockchain',
+    name: 'Blockchain',
+    description: 'Blockchain technology, DeFi, and smart contracts',
+    color: 'from-orange-500 to-red-600',
+    icon: 'shield-check',
+    count: 4
+  },
+  {
+    id: 'design',
+    name: 'Design',
+    description: 'UX/UI design principles and best practices',
+    color: 'from-pink-500 to-purple-600',
+    icon: 'lightbulb',
+    count: 3
+  },
+  {
+    id: 'development',
+    name: 'Development',
+    description: 'Full-stack development and programming tutorials',
+    color: 'from-emerald-500 to-teal-600',
+    icon: 'code',
+    count: 6
+  },
+  {
+    id: 'industry',
+    name: 'Industry Insights',
+    description: 'Market trends and industry analysis',
+    color: 'from-blue-500 to-cyan-600',
+    icon: 'briefcase',
+    count: 3
+  }
+];
+
 export const blogPosts: BlogPost[] = [
   {
     id: 'future-of-ai',
     title: 'The Future of AI in Enterprise Applications',
-    excerpt: 'Exploring how custom LLMs are revolutionizing business processes and decision-making across industries.',
+    excerpt: 'Exploring how custom LLMs are revolutionizing business processes and decision-making across industries, from automated customer service to predictive analytics.',
     author: 'Priya Sharma',
+    authorAvatar: 'PS',
+    authorRole: 'Lead AI Engineer',
     date: '2024-12-15',
     category: 'AI & Machine Learning',
-    readTime: '8 min read'
+    readTime: '8 min read',
+    image: '/images/blog/ai-enterprise.jpg',
+    featured: true,
+    tags: ['AI', 'LLM', 'Enterprise', 'Automation'],
+    views: 2847,
+    likes: 156
   },
   {
     id: 'blockchain-security',
     title: 'Blockchain Security: Best Practices for Smart Contracts',
-    excerpt: 'Essential security measures and audit practices for building secure DeFi protocols and smart contracts.',
+    excerpt: 'Essential security measures and audit practices for building secure DeFi protocols and smart contracts that protect user assets.',
     author: 'Sergio Alvarez',
+    authorAvatar: 'SA',
+    authorRole: 'Blockchain Developer',
     date: '2024-12-10',
     category: 'Blockchain',
-    readTime: '6 min read'
+    readTime: '6 min read',
+    image: '/images/blog/blockchain-security.jpg',
+    featured: true,
+    tags: ['Blockchain', 'Security', 'DeFi', 'Smart Contracts'],
+    views: 1932,
+    likes: 89
   },
   {
     id: 'ux-conversion',
     title: 'UX Design That Converts: Psychology Meets Technology',
-    excerpt: 'How understanding user psychology can dramatically improve conversion rates and user satisfaction.',
+    excerpt: 'How understanding user psychology can dramatically improve conversion rates and user satisfaction in digital products.',
     author: 'Design Team',
+    authorAvatar: 'DT',
+    authorRole: 'UX Design Lead',
     date: '2024-12-05',
     category: 'Design',
-    readTime: '5 min read'
+    readTime: '5 min read',
+    image: '/images/blog/ux-psychology.jpg',
+    featured: false,
+    tags: ['UX', 'Psychology', 'Conversion', 'Design'],
+    views: 1567,
+    likes: 73
+  },
+  {
+    id: 'nextjs-performance',
+    title: 'Next.js 14 Performance Optimization: A Deep Dive',
+    excerpt: 'Advanced techniques for optimizing Next.js applications including App Router, Server Components, and streaming strategies.',
+    author: 'Yuki Tanaka',
+    authorAvatar: 'YT',
+    authorRole: 'Fullstack Developer',
+    date: '2024-11-28',
+    category: 'Development',
+    readTime: '12 min read',
+    image: '/images/blog/nextjs-performance.jpg',
+    featured: false,
+    tags: ['Next.js', 'Performance', 'React', 'Web Development'],
+    views: 3241,
+    likes: 198
+  },
+  {
+    id: 'cloud-architecture',
+    title: 'Modern Cloud Architecture Patterns for Scalable Applications',
+    excerpt: 'Exploring microservices, serverless, and container orchestration patterns for building scalable cloud-native applications.',
+    author: 'Fatima Ali',
+    authorAvatar: 'FA',
+    authorRole: 'Cloud Architect',
+    date: '2024-11-20',
+    category: 'Development',
+    readTime: '10 min read',
+    image: '/images/blog/cloud-architecture.jpg',
+    featured: false,
+    tags: ['Cloud', 'Architecture', 'Microservices', 'DevOps'],
+    views: 2156,
+    likes: 134
+  },
+  {
+    id: 'web3-trends-2025',
+    title: 'Web3 Trends to Watch in 2025: Beyond the Hype',
+    excerpt: 'A practical look at emerging Web3 technologies that will actually impact businesses, from RWA tokenization to zkEVMs.',
+    author: 'Michael Thompson',
+    authorAvatar: 'MT',
+    authorRole: 'US Account Manager',
+    date: '2024-11-15',
+    category: 'Industry Insights',
+    readTime: '7 min read',
+    image: '/images/blog/web3-trends.jpg',
+    featured: false,
+    tags: ['Web3', 'Trends', 'Blockchain', '2025'],
+    views: 1876,
+    likes: 92
+  },
+  {
+    id: 'ai-code-review',
+    title: 'AI-Powered Code Review: Enhancing Development Workflows',
+    excerpt: 'How AI tools are transforming code review processes, improving code quality, and accelerating development cycles.',
+    author: 'Priya Sharma',
+    authorAvatar: 'PS',
+    authorRole: 'Lead AI Engineer',
+    date: '2024-11-08',
+    category: 'AI & Machine Learning',
+    readTime: '9 min read',
+    image: '/images/blog/ai-code-review.jpg',
+    featured: false,
+    tags: ['AI', 'Code Review', 'Development', 'Productivity'],
+    views: 2687,
+    likes: 147
+  },
+  {
+    id: 'design-systems-2024',
+    title: 'Building Design Systems That Scale: Lessons from Enterprise Projects',
+    excerpt: 'Key principles and practical strategies for creating design systems that grow with your organization and maintain consistency.',
+    author: 'Design Team',
+    authorAvatar: 'DT',
+    authorRole: 'UX Design Lead',
+    date: '2024-10-30',
+    category: 'Design',
+    readTime: '11 min read',
+    image: '/images/blog/design-systems.jpg',
+    featured: false,
+    tags: ['Design Systems', 'Enterprise', 'Scalability', 'UI'],
+    views: 1823,
+    likes: 105
+  },
+  {
+    id: 'defi-protocols-guide',
+    title: 'DeFi Protocol Development: From Concept to Mainnet',
+    excerpt: 'A comprehensive guide to building DeFi protocols, from smart contract development to tokenomics and governance design.',
+    author: 'Sergio Alvarez',
+    authorAvatar: 'SA',
+    authorRole: 'Blockchain Developer',
+    date: '2024-10-22',
+    category: 'Blockchain',
+    readTime: '15 min read',
+    image: '/images/blog/defi-protocols.jpg',
+    featured: true,
+    tags: ['DeFi', 'Protocol', 'Smart Contracts', 'Tokenomics'],
+    views: 3542,
+    likes: 234
+  },
+  {
+    id: 'typescript-advanced',
+    title: 'Advanced TypeScript Patterns for Large-Scale Applications',
+    excerpt: 'Master advanced TypeScript patterns including conditional types, template literals, and advanced generics for enterprise development.',
+    author: 'Yuki Tanaka',
+    authorAvatar: 'YT',
+    authorRole: 'Fullstack Developer',
+    date: '2024-10-15',
+    category: 'Development',
+    readTime: '13 min read',
+    image: '/images/blog/typescript-advanced.jpg',
+    featured: false,
+    tags: ['TypeScript', 'Advanced', 'Patterns', 'Enterprise'],
+    views: 2945,
+    likes: 189
   }
 ];
 
