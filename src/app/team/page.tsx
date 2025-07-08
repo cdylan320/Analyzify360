@@ -270,27 +270,13 @@ export default function Team() {
             </motion.div>
           </div>
         </div>
-
-        {/* Modern Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-            <motion.div
-              className="w-1 h-3 bg-white/60 rounded-full mt-2"
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </div>
-        </motion.div>
       </motion.section>
 
-      {/* Premium Team Filter Section */}
-      <SmoothSection className="relative pt-16 pb-6 bg-white">
-        <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
+      {/* Premium Team Grid */}
+      <SmoothSection className="relative py-12 bg-gradient-to-b from-white to-slate-50">
+        <GridBackground className="opacity-5" />
+
+        <div className="relative z-10 w-[95%] mx-auto mb-12 px-4 lg:px-8">
           <div className="text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -327,11 +313,6 @@ export default function Team() {
             </motion.div>
           </div>
         </div>
-      </SmoothSection>
-
-      {/* Premium Team Grid */}
-      <SmoothSection className="relative py-12 bg-gradient-to-b from-white to-slate-50">
-        <GridBackground className="opacity-5" />
 
         <div
           className="relative z-10 w-[95%] mx-auto px-4 lg:px-8"

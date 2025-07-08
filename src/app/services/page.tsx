@@ -154,7 +154,7 @@ export default function Services() {
                 <Icon
                   name={
                     ["cpu", "shield-check", "desktop-computer", "light-bulb"][
-                      i % 4
+                    i % 4
                     ] as any
                   }
                   size="lg"
@@ -339,21 +339,7 @@ export default function Services() {
           </div>
         </div>
 
-        {/* Modern Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-            <motion.div
-              className="w-1 h-3 bg-white/60 rounded-full mt-2"
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </div>
-        </motion.div>
+
       </motion.section>
 
       {/* Premium Services Grid */}
@@ -405,9 +391,8 @@ export default function Services() {
                 >
                   {/* Background Gradient Overlay */}
                   <div
-                    className={`absolute inset-0 bg-gradient-to-br ${
-                      serviceColors[service.id as keyof typeof serviceColors]
-                    } opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
+                    className={`absolute inset-0 bg-gradient-to-br ${serviceColors[service.id as keyof typeof serviceColors]
+                      } opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
                   ></div>
 
                   {/* Content */}
@@ -415,16 +400,15 @@ export default function Services() {
                     {/* Header */}
                     <div className="flex items-start justify-between mb-8">
                       <div
-                        className={`w-20 h-20 bg-gradient-to-br ${
-                          serviceColors[
-                            service.id as keyof typeof serviceColors
-                          ]
-                        } rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                        className={`w-20 h-20 bg-gradient-to-br ${serviceColors[
+                          service.id as keyof typeof serviceColors
+                        ]
+                          } rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
                       >
                         <Icon
                           name={
                             serviceIcons[
-                              service.id as keyof typeof serviceIcons
+                            service.id as keyof typeof serviceIcons
                             ] as any
                           }
                           size="xl"
@@ -468,11 +452,10 @@ export default function Services() {
                               className="flex items-center space-x-3 group/item"
                             >
                               <div
-                                className={`w-6 h-6 bg-gradient-to-br ${
-                                  serviceColors[
-                                    service.id as keyof typeof serviceColors
-                                  ]
-                                } rounded-lg flex items-center justify-center group-hover/item:scale-110 transition-transform duration-200`}
+                                className={`w-6 h-6 bg-gradient-to-br ${serviceColors[
+                                  service.id as keyof typeof serviceColors
+                                ]
+                                  } rounded-lg flex items-center justify-center group-hover/item:scale-110 transition-transform duration-200`}
                               >
                                 <Icon
                                   name="check"
@@ -715,16 +698,15 @@ export default function Services() {
               <div className="flex justify-between items-start mb-10">
                 <div className="flex items-center space-x-6">
                   <div
-                    className={`w-24 h-24 bg-gradient-to-br ${
-                      serviceColors[
-                        selectedService.id as keyof typeof serviceColors
-                      ]
-                    } rounded-3xl flex items-center justify-center shadow-xl`}
+                    className={`w-24 h-24 bg-gradient-to-br ${serviceColors[
+                      selectedService.id as keyof typeof serviceColors
+                    ]
+                      } rounded-3xl flex items-center justify-center shadow-xl`}
                   >
                     <Icon
                       name={
                         serviceIcons[
-                          selectedService.id as keyof typeof serviceIcons
+                        selectedService.id as keyof typeof serviceIcons
                         ] as any
                       }
                       size="2xl"
@@ -755,11 +737,10 @@ export default function Services() {
                 <div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
                     <div
-                      className={`w-3 h-3 bg-gradient-to-r ${
-                        serviceColors[
-                          selectedService.id as keyof typeof serviceColors
-                        ]
-                      } rounded-full mr-3`}
+                      className={`w-3 h-3 bg-gradient-to-r ${serviceColors[
+                        selectedService.id as keyof typeof serviceColors
+                      ]
+                        } rounded-full mr-3`}
                     ></div>
                     Core Capabilities
                   </h3>
@@ -774,11 +755,10 @@ export default function Services() {
                           className="flex items-start space-x-4 group"
                         >
                           <div
-                            className={`w-8 h-8 bg-gradient-to-br ${
-                              serviceColors[
-                                selectedService.id as keyof typeof serviceColors
-                              ]
-                            } rounded-xl flex items-center justify-center mt-0.5 group-hover:scale-110 transition-transform duration-200`}
+                            className={`w-8 h-8 bg-gradient-to-br ${serviceColors[
+                              selectedService.id as keyof typeof serviceColors
+                            ]
+                              } rounded-xl flex items-center justify-center mt-0.5 group-hover:scale-110 transition-transform duration-200`}
                           >
                             <Icon
                               name="check"
@@ -799,11 +779,10 @@ export default function Services() {
                 <div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
                     <div
-                      className={`w-3 h-3 bg-gradient-to-r ${
-                        serviceColors[
-                          selectedService.id as keyof typeof serviceColors
-                        ]
-                      } rounded-full mr-3`}
+                      className={`w-3 h-3 bg-gradient-to-r ${serviceColors[
+                        selectedService.id as keyof typeof serviceColors
+                      ]
+                        } rounded-full mr-3`}
                     ></div>
                     Key Features
                   </h3>
@@ -818,11 +797,10 @@ export default function Services() {
                           className="flex items-start space-x-4 group"
                         >
                           <div
-                            className={`w-8 h-8 bg-gradient-to-br ${
-                              serviceColors[
-                                selectedService.id as keyof typeof serviceColors
-                              ]
-                            } rounded-xl flex items-center justify-center mt-0.5 group-hover:scale-110 transition-transform duration-200`}
+                            className={`w-8 h-8 bg-gradient-to-br ${serviceColors[
+                              selectedService.id as keyof typeof serviceColors
+                            ]
+                              } rounded-xl flex items-center justify-center mt-0.5 group-hover:scale-110 transition-transform duration-200`}
                           >
                             <Icon
                               name="heart"
@@ -845,11 +823,10 @@ export default function Services() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`px-8 py-4 bg-gradient-to-r ${
-                    serviceColors[
-                      selectedService.id as keyof typeof serviceColors
-                    ]
-                  } rounded-2xl font-bold text-white shadow-xl hover:shadow-2xl transition-all duration-300`}
+                  className={`px-8 py-4 bg-gradient-to-r ${serviceColors[
+                    selectedService.id as keyof typeof serviceColors
+                  ]
+                    } rounded-2xl font-bold text-white shadow-xl hover:shadow-2xl transition-all duration-300`}
                 >
                   <span className="flex items-center justify-center space-x-2">
                     <span>Start Your Project</span>
