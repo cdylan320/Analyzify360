@@ -11,7 +11,7 @@ import (
 
 // NewPostgresDB creates a new PostgreSQL database connection
 func NewPostgresDB(cfg *config.Config) (*gorm.DB, error) {
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d sslmode=%s",
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
 		cfg.Database.Host,
 		cfg.Database.User,
 		cfg.Database.Password,

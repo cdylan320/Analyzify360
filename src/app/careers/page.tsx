@@ -15,6 +15,8 @@ import {
 } from "@/components";
 import { careerPositions } from "@/data/content";
 import { teamMembers } from "@/data/team";
+import { FILE_CONFIG } from "@/lib/config";
+import { ApiService, ApiError } from "@/lib/api";
 
 export default function Careers() {
   const [selectedPosition, setSelectedPosition] = useState<any>(null);
@@ -211,37 +213,29 @@ export default function Careers() {
     setIsSubmitting(true);
 
     try {
-      const formData = new FormData();
-      // formData.append('position_id', selectedPosition.id);
-      formData.append('name', applicationData.name);
-      formData.append('email', applicationData.email);
-      formData.append('phone', applicationData.phone);
-      formData.append('coverLetter', applicationData.coverLetter);
-
-      if (applicationData.resume) {
-        formData.append('resume', applicationData.resume);
+      if (!applicationData.resume) {
+        throw new ApiError('Please upload your resume');
       }
 
-      const response = await fetch('http://localhost:8080/api/v1/applications', {
-        method: 'POST',
-        body: formData,
+      // Submit application using API service
+      const result = await ApiService.submitApplication({
+        name: applicationData.name,
+        email: applicationData.email,
+        phone: applicationData.phone,
+        position: selectedPosition.id,
+        coverLetter: applicationData.coverLetter,
+        resume: applicationData.resume,
       });
 
-      if (response.ok) {
-        const result = await response.json();
-        console.log('Application submitted successfully:', result);
+      console.log('Application submitted successfully:', result);
 
-        // Show success message
-        alert('Application submitted successfully! You will receive a confirmation email shortly.');
-        closeApplicationModal();
-      } else {
-        const error = await response.json();
-        console.error('Application failed:', error);
-        alert('Failed to submit application: ' + (error.message || 'Unknown error'));
-      }
+      // Show success message
+      alert('Application submitted successfully! You will receive a confirmation email shortly.');
+      closeApplicationModal();
     } catch (error) {
-      console.error('Network error:', error);
-      alert('Network error. Please check your connection and try again.');
+      console.error('Application submission error:', error);
+      const message = error instanceof ApiError ? error.message : 'An unexpected error occurred. Please try again.';
+      alert(message);
     } finally {
       setIsSubmitting(false);
     }
@@ -1184,12 +1178,12 @@ export default function Careers() {
                   <input
                     type="file"
                     onChange={handleFileChange}
-                    accept=".pdf,.doc,.docx"
+                    accept={FILE_CONFIG.ALLOWED_TYPES.join(',')}
                     required
                     className="w-full px-4 py-3 border border-section rounded-xl focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                   />
                   <p className="text-sm text-gray-500 mt-1">
-                    Accepted formats: PDF, DOC, DOCX (max 5MB)
+                    Accepted formats: {FILE_CONFIG.ALLOWED_TYPES.join(', ').toUpperCase()} (max {FILE_CONFIG.MAX_SIZE_MB}MB)
                   </p>
                 </div>
 
