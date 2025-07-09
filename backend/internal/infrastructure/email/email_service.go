@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/smtp"
+	"time"
 
 	"super2025-backend/internal/infrastructure/config"
 
@@ -19,14 +20,54 @@ type EmailService struct {
 
 // NewEmailService creates a new email service instance
 func NewEmailService(cfg *config.Config, logger *zap.Logger) *EmailService {
-	return &EmailService{
+	emailService := &EmailService{
 		config: &cfg.Email,
 		logger: logger,
 	}
+
+	// Validate email configuration
+	if err := emailService.validateConfig(); err != nil {
+		logger.Warn("Email service configuration validation failed", zap.Error(err))
+		logger.Warn("Email notifications will be disabled until configuration is fixed")
+	} else {
+		logger.Info("Email service initialized successfully", 
+			zap.String("smtp_host", cfg.Email.SMTPHost),
+			zap.String("smtp_port", cfg.Email.SMTPPort),
+			zap.String("from_email", cfg.Email.FromEmail),
+			zap.String("hr_email", cfg.Email.HREmail))
+	}
+
+	return emailService
+}
+
+// validateConfig validates the email configuration
+func (es *EmailService) validateConfig() error {
+	if es.config.SMTPHost == "" {
+		return fmt.Errorf("SMTP_HOST is required")
+	}
+	if es.config.SMTPPort == "" {
+		return fmt.Errorf("SMTP_PORT is required")
+	}
+	if es.config.SMTPUsername == "" {
+		return fmt.Errorf("SMTP_USERNAME is required")
+	}
+	if es.config.SMTPPassword == "" {
+		return fmt.Errorf("SMTP_PASSWORD is required")
+	}
+	if es.config.FromEmail == "" {
+		return fmt.Errorf("FROM_EMAIL is required")
+	}
+	return nil
 }
 
 // SendApplicationConfirmation sends a thank you email to the candidate
 func (es *EmailService) SendApplicationConfirmation(candidateEmail, candidateName, position string) error {
+	// Validate configuration before sending
+	if err := es.validateConfig(); err != nil {
+		es.logger.Error("Email configuration invalid, skipping confirmation email", zap.Error(err))
+		return fmt.Errorf("email configuration invalid: %w", err)
+	}
+
 	subject := "Thank you for your application to Super 2025"
 	
 	// Prepare email template data
@@ -65,10 +106,34 @@ func (es *EmailService) SendApplicationConfirmation(candidateEmail, candidateNam
 }
 
 // SendHRNotification sends notification to HR about new application
+// Parameters:
+// - candidateEmail: The applicant's email address (for reference in notification)
+// - candidateName: The applicant's name
+// - position: The position they applied for  
+// - resumeURL: Link to the candidate's resume
+// Note: The HR recipient email comes from es.config.HREmail
 func (es *EmailService) SendHRNotification(candidateEmail, candidateName, position, resumeURL string) error {
-	hrEmail := "hr@super2025.com" // You can make this configurable
+	// Validate configuration before sending
+	if err := es.validateConfig(); err != nil {
+		es.logger.Error("Email configuration invalid, skipping HR notification", zap.Error(err))
+		return fmt.Errorf("email configuration invalid: %w", err)
+	}
+
+	// Get HR email from configuration (this is WHO we're sending TO)
+	hrEmail := es.config.HREmail
+	if hrEmail == "" {
+		es.logger.Error("HR_EMAIL not configured, cannot send notification")
+		return fmt.Errorf("HR_EMAIL not configured")
+	}
+
 	subject := fmt.Sprintf("New Job Application: %s for %s", candidateName, position)
 	
+	es.logger.Info("Preparing HR notification", 
+		zap.String("hr_recipient", hrEmail),
+		zap.String("candidate_email", candidateEmail),
+		zap.String("candidate_name", candidateName),
+		zap.String("position", position))
+
 	// Prepare email template data
 	data := struct {
 		CandidateName  string
@@ -76,12 +141,14 @@ func (es *EmailService) SendHRNotification(candidateEmail, candidateName, positi
 		Position       string
 		ResumeURL      string
 		CompanyName    string
+		CurrentTime    string
 	}{
 		CandidateName:  candidateName,
 		CandidateEmail: candidateEmail,
 		Position:       position,
 		ResumeURL:      resumeURL,
 		CompanyName:    "Super 2025",
+		CurrentTime:    time.Now().Format("January 2, 2006 at 3:04 PM"),
 	}
 
 	// Generate HTML email body
@@ -203,6 +270,7 @@ func (es *EmailService) generateHRNotificationTemplate(data struct {
 	Position       string
 	ResumeURL      string
 	CompanyName    string
+	CurrentTime    string
 }) (string, error) {
 	tmpl := `
 <!DOCTYPE html>

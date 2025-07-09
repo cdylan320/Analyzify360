@@ -270,6 +270,32 @@ func (h *ApplicationHandler) GetResumeFile(c *gin.Context) {
 	io.Copy(c.Writer, file)
 }
 
+// TestEmail handles GET /api/v1/test-email for testing email configuration
+func (h *ApplicationHandler) TestEmail(c *gin.Context) {
+	email := c.Query("email")
+	if email == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Email parameter is required"})
+		return
+	}
+
+	// Test sending a simple email
+	err := h.applicationService.TestEmailConfiguration(c.Request.Context(), email)
+	if err != nil {
+		h.logger.Error("Failed to send test email", zap.String("email", email), zap.Error(err))
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "Failed to send test email",
+			"details": err.Error(),
+		})
+		return
+	}
+
+	h.logger.Info("Test email sent successfully", zap.String("email", email))
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Test email sent successfully",
+		"email": email,
+	})
+}
+
 // Utility functions
 func contains(slice []string, item string) bool {
 	for _, s := range slice {

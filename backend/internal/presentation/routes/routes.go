@@ -54,5 +54,8 @@ func SetupRoutes(
 		{
 			files.GET("/resumes/:filename", applicationHandler.GetResumeFile)
 		}
+
+		// Test routes (for development/debugging)
+		v1.GET("/test-email", applicationHandler.TestEmail)
 	}
 } 

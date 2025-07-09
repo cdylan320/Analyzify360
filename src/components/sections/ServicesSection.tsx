@@ -210,27 +210,7 @@ const ServicesSection: React.FC = () => {
           ))}
         </motion.div>
 
-        {/* Call to Action */}
-        <div className="text-center">
-          <div className="inline-flex flex-col sm:flex-row gap-4 items-center">
-            <Button
-              variant="primary"
-              size="lg"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              rightIcon={<Icon name="arrow-right" size="md" />}
-            >
-              Get Started Today
-            </Button>
 
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 font-bold px-8 py-4 rounded-2xl transition-all duration-300"
-            >
-              View Our Portfolio
-            </Button>
-          </div>
-        </div>
       </div>
     </div>
   );

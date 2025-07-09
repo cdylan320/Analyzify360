@@ -36,7 +36,7 @@ const TrustBadges: React.FC = () => {
       title: "Proven Results",
       description:
         "Consistent delivery of high-quality solutions that exceed client expectations and drive measurable business growth.",
-      metric: "200+",
+      metric: "70+",
       metricLabel: "Projects",
       color: "from-purple-500 to-purple-600",
       bgColor: "bg-purple-50",
@@ -57,7 +57,7 @@ const TrustBadges: React.FC = () => {
 
   const stats = [
     {
-      value: "98%",
+      value: "99%",
       label: "Client Retention Rate",
       description:
         "Long-term partnerships built on trust and exceptional service delivery",

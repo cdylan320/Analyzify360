@@ -54,6 +54,7 @@ type EmailConfig struct {
 	SMTPUsername string
 	SMTPPassword string
 	FromEmail    string
+	HREmail      string
 }
 
 // ApplicationConfig holds application configuration
@@ -102,6 +103,7 @@ func Load() (*Config, error) {
 			SMTPUsername: getEnv("SMTP_USERNAME", ""),
 			SMTPPassword: getEnv("SMTP_PASSWORD", ""),
 			FromEmail:    getEnv("FROM_EMAIL", "careers@super2025.com"),
+			HREmail:      getEnv("HR_EMAIL", "hr@super2025.com"),
 		},
 		Application: ApplicationConfig{
 			BaseURL:     getEnv("API_BASE_URL", "http://localhost:8080"),

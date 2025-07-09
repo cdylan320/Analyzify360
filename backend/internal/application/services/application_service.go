@@ -116,9 +116,18 @@ func (s *ApplicationService) CreateApplication(
 	}()
 
 	// Send notification email to HR (async)
+	// Note: Sending TO HR ABOUT this candidate
 	go func() {
-		if err := s.emailService.SendHRNotification(application.Email, application.Name, application.PositionID, application.ResumeURL); err != nil {
-			s.logger.Error("Failed to send notification email", zap.Error(err))
+		if err := s.emailService.SendHRNotification(
+			application.Email,     // Candidate's email (for reference)
+			application.Name,      // Candidate's name
+			application.PositionID, // Position applied for
+			application.ResumeURL, // Resume download link
+		); err != nil {
+			s.logger.Error("Failed to send HR notification email", 
+				zap.String("candidate_email", application.Email),
+				zap.String("candidate_name", application.Name),
+				zap.Error(err))
 		}
 	}()
 
@@ -318,4 +327,10 @@ func (s *ApplicationService) isValidResumeFile(filename string) bool {
 		}
 	}
 	return false
+} 
+
+// TestEmailConfiguration sends a test email to verify email setup
+func (s *ApplicationService) TestEmailConfiguration(ctx context.Context, testEmail string) error {
+	// Send a simple test email
+	return s.emailService.SendApplicationConfirmation(testEmail, "Test User", "Email Configuration Test")
 } 

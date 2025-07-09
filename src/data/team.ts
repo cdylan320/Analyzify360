@@ -31,12 +31,12 @@ export const teamMembers: TeamMember[] = [
     bio: 'Leading AI innovation with 8+ years in machine learning and deep learning. Specialized in custom LLMs and generative AI solutions.',
     avatar: 'PS',
     experience: '8+ years',
-    projects: 45,
+    projects: 25,
     social: {
-      linkedin: 'https://linkedin.com/in/priya-sharma-ai',
-      github: 'https://github.com/priya-ai',
-      twitter: 'https://twitter.com/priya_ai_dev',
-      email: 'priya@analyzify360.com'
+      // linkedin: 'https://linkedin.com/in/priya-sharma-ai',
+      // github: 'https://github.com/priya-ai',
+      // twitter: 'https://twitter.com/priya_ai_dev',
+      // email: 'priya@analyzify360.com'
     }
   },
   {
@@ -48,12 +48,12 @@ export const teamMembers: TeamMember[] = [
     bio: 'Blockchain architect with expertise in cross-chain solutions and DeFi protocols. Security-first approach to smart contract development.',
     avatar: 'SA',
     experience: '6+ years',
-    projects: 32,
+    projects: 17,
     social: {
-      linkedin: 'https://linkedin.com/in/sergio-alvarez-blockchain',
-      github: 'https://github.com/sergio-blockchain',
-      twitter: 'https://twitter.com/sergio_defi',
-      email: 'sergio@analyzify360.com'
+      // linkedin: 'https://linkedin.com/in/sergio-alvarez-blockchain',
+      // github: 'https://github.com/sergio-blockchain',
+      // twitter: 'https://twitter.com/sergio_defi',
+      // email: 'sergio@analyzify360.com'
     }
   },
   {
@@ -65,12 +65,12 @@ export const teamMembers: TeamMember[] = [
     bio: 'Full-stack engineer creating seamless user experiences with modern web technologies and cloud infrastructure.',
     avatar: 'YT',
     experience: '5+ years',
-    projects: 28,
+    projects: 20,
     social: {
-      linkedin: 'https://linkedin.com/in/yuki-tanaka-fullstack',
-      github: 'https://github.com/yuki-dev',
-      twitter: 'https://twitter.com/yuki_fullstack',
-      email: 'yuki@analyzify360.com'
+      // linkedin: 'https://linkedin.com/in/yuki-tanaka-fullstack',
+      // github: 'https://github.com/yuki-dev',
+      // twitter: 'https://twitter.com/yuki_fullstack',
+      // email: 'yuki@analyzify360.com'
     }
   },
   {
@@ -82,12 +82,12 @@ export const teamMembers: TeamMember[] = [
     bio: 'Cloud infrastructure specialist ensuring scalable, secure, and efficient deployments across multiple cloud platforms.',
     avatar: 'FA',
     experience: '7+ years',
-    projects: 38,
+    projects: 11,
     social: {
-      linkedin: 'https://linkedin.com/in/fatima-ali-cloud',
-      github: 'https://github.com/fatima-cloud',
-      twitter: 'https://twitter.com/fatima_devops',
-      email: 'fatima@analyzify360.com'
+      // linkedin: 'https://linkedin.com/in/fatima-ali-cloud',
+      // github: 'https://github.com/fatima-cloud',
+      // twitter: 'https://twitter.com/fatima_devops',
+      // email: 'fatima@analyzify360.com'
     }
   },
   // US/UK Client Team
@@ -102,12 +102,12 @@ export const teamMembers: TeamMember[] = [
     bio: 'Dedicated to understanding your business needs and ensuring project success.',
     quote: 'Your success is our mission. We\'re here to make technology work for you.',
     avatar: 'MT',
-    experience: '10+ years',
-    projects: 150,
+    experience: '5+ years',
+    projects: 22,
     social: {
-      linkedin: 'https://linkedin.com/in/michael-thompson-chicago',
-      twitter: 'https://twitter.com/michael_super25',
-      email: 'michael@analyzify360.com'
+      // linkedin: 'https://linkedin.com/in/michael-thompson-chicago',
+      // twitter: 'https://twitter.com/michael_super25',
+      // email: 'michael@analyzify360.com'
     }
   },
   {
@@ -121,17 +121,17 @@ export const teamMembers: TeamMember[] = [
     bio: 'Ensuring every client relationship thrives through clear communication and exceptional service.',
     quote: 'Building lasting partnerships through trust and transparency.',
     avatar: 'JC',
-    experience: '8+ years',
-    projects: 120,
+    experience: '4+ years',
+    projects: 18,
     social: {
-      linkedin: 'https://linkedin.com/in/jessica-carter-austin',
-      twitter: 'https://twitter.com/jessica_success',
-      email: 'jessica@analyzify360.com'
+      // linkedin: 'https://linkedin.com/in/jessica-carter-austin',
+      // twitter: 'https://twitter.com/jessica_success',
+      // email: 'jessica@analyzify360.com'
     }
   },
   {
-    id: 'brandon-lee',
-    name: 'Brandon Lee',
+    id: 'brandon-thompson',
+    name: 'Brandon Thompson',
     title: 'US Partner',
     role: 'client',
     location: 'San Francisco',
@@ -140,50 +140,50 @@ export const teamMembers: TeamMember[] = [
     bio: 'Strategic partner focused on scaling innovative solutions for US market growth.',
     quote: 'Innovation meets execution - that\'s where we excel.',
     avatar: 'BL',
-    experience: '12+ years',
-    projects: 200,
+    experience: '1+ years',
+    projects: 4,
     social: {
-      linkedin: 'https://linkedin.com/in/brandon-lee-sf',
-      twitter: 'https://twitter.com/brandon_partner',
-      email: 'brandon@analyzify360.com'
+      // linkedin: 'https://linkedin.com/in/brandon-lee-sf',
+      // twitter: 'https://twitter.com/brandon_partner',
+      // email: 'brandon@analyzify360.com'
     }
   },
   {
     id: 'david-wright',
     name: 'David Wright',
-    title: 'UK Account Manager',
+    title: 'US Partner',
     role: 'client',
-    location: 'London',
-    country: 'UK',
-    flag: '🇬🇧',
-    bio: 'Bridging global expertise with local understanding for UK businesses.',
-    quote: 'Bringing world-class tech solutions to the UK market.',
+    location: 'New York',
+    country: 'US',
+    flag: 'US',
+    bio: 'Bridging global expertise with local understanding for US businesses.',
+    quote: 'Bringing world-class tech solutions to the US market.',
     avatar: 'DW',
-    experience: '9+ years',
-    projects: 130,
+    experience: '3+ years',
+    projects: 13,
     social: {
-      linkedin: 'https://linkedin.com/in/david-wright-london',
-      twitter: 'https://twitter.com/david_uk_tech',
-      email: 'david@analyzify360.com'
+      // linkedin: 'https://linkedin.com/in/david-wright-london',
+      // twitter: 'https://twitter.com/david_uk_tech',
+      // email: 'david@analyzify360.com'
     }
   },
   {
     id: 'rachel-evans',
     name: 'Rachel Evans',
-    title: 'UK Partner',
+    title: 'US Partner',
     role: 'client',
-    location: 'Manchester',
-    country: 'UK',
-    flag: '🇬🇧',
+    location: 'Miami',
+    country: 'US',
+    flag: 'US',
     bio: 'Partnering with UK businesses to drive digital transformation and growth.',
     quote: 'Your vision, our expertise - together we build the future.',
     avatar: 'RE',
-    experience: '11+ years',
-    projects: 180,
+    experience: '3+ years',
+    projects: 18,
     social: {
-      linkedin: 'https://linkedin.com/in/rachel-evans-manchester',
-      twitter: 'https://twitter.com/rachel_uk_partner',
-      email: 'rachel@analyzify360.com'
+      // linkedin: 'https://linkedin.com/in/rachel-evans-manchester',
+      // twitter: 'https://twitter.com/rachel_uk_partner',
+      // email: 'rachel@analyzify360.com'
     }
   }
 ];
