@@ -112,7 +112,7 @@ export const timeline: TimelineItem[] = [
   {
     year: '2018',
     title: 'Company Founded',
-    description: 'Super2025 was established with a vision to bridge global tech expertise with local trust, starting as a boutique development agency'
+    description: 'Analyzify360 was established with a vision to bridge global tech expertise with local trust, starting as a boutique development agency'
   },
   {
     year: '2019',
@@ -440,21 +440,21 @@ export const careerPositions: CareerPosition[] = [
 ];
 
 export const companyInfo = {
-  name: 'Super2025',
-  tagline: 'Where GLOBAL TECH EXPERTISE meets LOCAL TRUST',
-  description: 'Super2025 unites top engineers and US/UK partners to deliver secure, seamless digital solutions.',
+  name: 'Analyzify360',
+  tagline: 'Stronger Together, Further Forever',
+  description: 'Analyzify360 unites top engineers and US partners to deliver secure, seamless digital solutions.',
   mission: 'To bridge the gap between global technical excellence and local business understanding, creating technology solutions that drive real business value.',
   announcement: 'Now serving US & UK clients—ask about our launch offer.',
   email: 'jam.joyce320@gmail.com',
   phone: '+1 (555) 123-4567',
   address: 'Global Remote Team with Local Presence',
   social: {
-    twitter: 'https://twitter.com/super2025',
-    linkedin: 'https://linkedin.com/company/super2025',
-    github: 'https://github.com/super2025',
-    discord: 'https://discord.gg/super2025',
-    instagram: 'https://instagram.com/super2025',
-    youtube: 'https://youtube.com/@super2025',
-    facebook: 'https://facebook.com/super2025'
+    twitter: 'https://twitter.com/analyzify360',
+    linkedin: 'https://linkedin.com/company/analyzify360',
+    github: 'https://github.com/analyzify360',
+    discord: 'https://discord.gg/analyzify360',
+    instagram: 'https://instagram.com/analyzify360',
+    youtube: 'https://youtube.com/@analyzify360',
+    facebook: 'https://facebook.com/analyzify360'
   }
 }; 

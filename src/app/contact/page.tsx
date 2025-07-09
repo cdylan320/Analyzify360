@@ -51,7 +51,7 @@ export default function Contact() {
       value: companyInfo.email,
       description: "Get a response within 2 hours",
       color: "from-blue-500 to-cyan-600",
-      action: `https://mail.google.com/mail/?view=cm&fs=1&to=${companyInfo.email}&su=New Project Inquiry&body=Hi Super2025 Team,%0D%0A%0D%0AI'm interested in discussing a project with you.%0D%0A%0D%0AProject details:%0D%0A-%0D%0A-%0D%0A-%0D%0A%0D%0ABest regards`,
+      action: `https://mail.google.com/mail/?view=cm&fs=1&to=${companyInfo.email}&su=New Project Inquiry&body=Hi Analyzify360 Team,%0D%0A%0D%0AI'm interested in discussing a project with you.%0D%0A%0D%0AProject details:%0D%0A-%0D%0A-%0D%0A-%0D%0A%0D%0ABest regards`,
     },
     {
       icon: "phone",
@@ -1007,109 +1007,6 @@ export default function Contact() {
         </div>
       </SmoothSection>
 
-      {/* Final CTA Section */}
-      <SmoothSection className="relative py-24 bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950">
-        {/* Background Effects */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.3),transparent_70%)]"></div>
-        </div>
-
-        <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
-            <h2 className="text-5xl lg:text-7xl font-black mb-8 leading-tight">
-              <span className="text-white">Ready to</span>
-              <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Get Started?
-              </span>
-            </h2>
-
-            <p className="text-xl lg:text-2xl text-white/80 leading-relaxed mb-12 font-medium">
-              Join 150+ companies that trust us with their most important
-              projects. Let's build something amazing together.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <motion.button
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() =>
-                  document
-                    .getElementById("contact-form")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="group relative px-12 py-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl font-bold text-white overflow-hidden shadow-2xl"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-                <span className="relative flex items-center justify-center space-x-3">
-                  <span>Start Your Project</span>
-                  <Icon name="arrow-right" size="md" />
-                </span>
-              </motion.button>
-
-              <motion.button
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() =>
-                  window.open(
-                    `mailto:${companyInfo.email}?subject=Quick Question`,
-                    "_self"
-                  )
-                }
-                className="group relative px-12 py-6 bg-white/10 backdrop-blur-xl rounded-2xl font-bold text-white border border-white/20 hover:bg-white/20 transition-all duration-300 shadow-2xl"
-              >
-                <span className="flex items-center justify-center space-x-3">
-                  <span>Ask a Question</span>
-                  <Icon name="support" size="md" />
-                </span>
-              </motion.button>
-            </div>
-
-            {/* Contact Summary */}
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <Icon name="clock" size="lg" className="text-white" />
-                </div>
-                <h3 className="text-white font-bold text-lg mb-2">
-                  2-Hour Response
-                </h3>
-                <p className="text-white/60 text-sm">
-                  Fast, professional responses to all inquiries
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <Icon name="shield-check" size="lg" className="text-white" />
-                </div>
-                <h3 className="text-white font-bold text-lg mb-2">
-                  100% Secure
-                </h3>
-                <p className="text-white/60 text-sm">
-                  Enterprise-grade security and confidentiality
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <Icon name="users" size="lg" className="text-white" />
-                </div>
-                <h3 className="text-white font-bold text-lg mb-2">
-                  Local Support
-                </h3>
-                <p className="text-white/60 text-sm">
-                  US & UK account managers ready to help
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </SmoothSection>
     </div>
   );
 }

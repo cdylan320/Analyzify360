@@ -155,13 +155,13 @@ const ServicesSection: React.FC = () => {
                       className="text-white"
                     />
                   </div>
-                  <div className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center group-hover:bg-slate-200 transition-colors">
+                  {/* <div className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center group-hover:bg-slate-200 transition-colors">
                     <Icon
                       name="arrow-right"
                       size="sm"
                       className="text-slate-600"
                     />
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* Title */}

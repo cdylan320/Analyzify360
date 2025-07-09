@@ -18,30 +18,30 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Super2025 - Global Tech Expertise Meets Local Trust",
+  title: "Analyzify360 - Stronger Together, Further Forever",
   description:
-    "Super2025 unites top engineers and US/UK partners to deliver secure, seamless digital solutions. AI, Blockchain, Full-Stack Development, and Product Design services.",
+    "Analyzify360 unites top engineers and US/UK partners to deliver secure, seamless digital solutions. AI, Blockchain, Full-Stack Development, and Product Design services.",
   keywords:
     "AI, Machine Learning, Blockchain, DeFi, Full-Stack Development, Product Design, UX, Software Development, Tech Agency",
-  authors: [{ name: "Super2025 Team" }],
-  creator: "Super2025",
-  publisher: "Super2025",
+  authors: [{ name: "Analyzify360 Team" }],
+  creator: "Analyzify360",
+  publisher: "Analyzify360",
   robots: "index, follow",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://super2025.com",
-    title: "Super2025 - Global Tech Expertise Meets Local Trust",
+    url: "https://analyzify360.com",
+    title: "Analyzify360 - Stronger Together, Further Forever",
     description:
-      "Super2025 unites top engineers and US/UK partners to deliver secure, seamless digital solutions.",
-    siteName: "Super2025",
+      "Analyzify360 unites top engineers and US/UK partners to deliver secure, seamless digital solutions.",
+    siteName: "Analyzify360",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Super2025 - Global Tech Expertise Meets Local Trust",
+    title: "Analyzify360 - Stronger Together, Further Forever",
     description:
-      "Super2025 unites top engineers and US/UK partners to deliver secure, seamless digital solutions.",
-    creator: "@super2025",
+      "Analyzify360 unites top engineers and US/UK partners to deliver secure, seamless digital solutions.",
+    creator: "@analyzify360",
   },
 };
 

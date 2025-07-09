@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Button, Icon } from "../ui";
 import { companyInfo } from "@/data/content";
@@ -8,9 +8,14 @@ import { professionalMotions, ParallaxText } from "../animations";
 
 const Hero: React.FC = () => {
   const particlesRef = useRef<SVGSVGElement>(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    if (!particlesRef.current) return;
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!particlesRef.current || !isClient) return;
 
     const svg = particlesRef.current;
     const width = window.innerWidth;
@@ -103,11 +108,13 @@ const Hero: React.FC = () => {
       ></div>
 
       {/* Floating Particles Background */}
-      <svg
-        ref={particlesRef}
-        className="absolute inset-0 w-full h-full pointer-events-none z-10"
-        style={{ opacity: 0.6 }}
-      />
+      {isClient && (
+        <svg
+          ref={particlesRef}
+          className="absolute inset-0 w-full h-full pointer-events-none z-10"
+          style={{ opacity: 0.6 }}
+        />
+      )}
 
       {/* Main Content */}
       <div className="relative z-20 w-[95%] max-w-7xl mx-auto px-4 lg:px-8 py-20">
@@ -125,7 +132,7 @@ const Hero: React.FC = () => {
                   transition={{ duration: 1, delay: 0.2 }}
                 >
                   <motion.span
-                    className="text-white block mt-10 mb-3"
+                    className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white block mt-30 mb-7"
                     style={{
                       textShadow:
                         "0 4px 20px rgba(0, 0, 0, 0.8), 0 8px 40px rgba(0, 0, 0, 0.6)",
@@ -151,7 +158,7 @@ const Hero: React.FC = () => {
                       },
                     }}
                   >
-                    Building
+                    Stronger Together
                   </motion.span>
                   <motion.span
                     className="bg-gradient-to-r from-cyan-300 via-blue-300 to-indigo-300 bg-clip-text text-transparent block"
@@ -176,7 +183,7 @@ const Hero: React.FC = () => {
                       },
                     }}
                   >
-                    Digital Excellence
+                    Further &nbsp; Forever
                   </motion.span>
                 </motion.h1>
               </ParallaxText>
@@ -235,6 +242,9 @@ const Hero: React.FC = () => {
                     size="xl"
                     className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold px-12 py-6 text-lg rounded-2xl shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 border border-cyan-400/30"
                     rightIcon={<Icon name="arrow-right" size="md" />}
+                    onClick={() => {
+                      window.location.href = "/careers#jobs";
+                    }}
                   >
                     Start Your Project
                   </Button>
@@ -255,6 +265,9 @@ const Hero: React.FC = () => {
                     size="xl"
                     className="border-2 border-white/60 text-white hover:bg-white/10 hover:border-white/80 hover:text-white font-bold px-12 py-6 text-lg rounded-2xl backdrop-blur-md shadow-2xl transition-all duration-300"
                     rightIcon={<Icon name="users" size="md" />}
+                    onClick={() => {
+                      window.location.href = "/team";
+                    }}
                   >
                     Meet Our Team
                   </Button>

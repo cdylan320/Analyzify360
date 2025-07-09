@@ -39,40 +39,32 @@ const Navbar: React.FC = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed w-full top-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-lg border-b border-slate-200/50"
-          : "bg-white/90 backdrop-blur-sm"
-      }`}
+      className={`fixed w-full top-0 z-50 transition-all duration-500 ${scrolled
+        ? "bg-white/95 backdrop-blur-xl shadow-lg border-b border-slate-200/50"
+        : "bg-white/90 backdrop-blur-sm"
+        }`}
     >
       <div className="w-[95%] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
+          <Link href="/" className="flex items-center group">
             <motion.div
-              whileHover={{ scale: 1.05, rotate: 5 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="relative"
             >
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 rounded-xl flex items-center justify-center shadow-lg border border-blue-200">
-                <Icon
-                  name="zap"
-                  size="md"
-                  className="text-white"
-                  strokeWidth={2.5}
-                />
-              </div>
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center">
-                <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-              </div>
+              <img
+                src="/logo2.png"
+                alt="Analyzify360 Logo"
+                className="h-13 object-contain"
+              />
             </motion.div>
-            <div className="flex flex-col">
-              <span className="text-xl font-black text-slate-900 tracking-tight">
-                {companyInfo.name}
-              </span>
-              <span className="text-xs text-slate-500 font-medium -mt-1">
-                Tech Solutions
-              </span>
+            <div className="flex items-center mb-3">
+              <img
+                src="/logo.png"
+                alt="Analyzify360"
+                className="h-30 object-contain"
+              />
             </div>
           </Link>
 
@@ -82,11 +74,10 @@ const Navbar: React.FC = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`relative px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 group ${
-                  pathname === item.href
-                    ? "text-blue-600 bg-blue-50"
-                    : "text-slate-700 hover:text-blue-600 hover:bg-slate-50"
-                }`}
+                className={`relative px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 group ${pathname === item.href
+                  ? "text-blue-600 bg-blue-50"
+                  : "text-slate-700 hover:text-blue-600 hover:bg-slate-50"
+                  }`}
               >
                 {item.name}
                 {pathname === item.href && (
@@ -157,11 +148,10 @@ const Navbar: React.FC = () => {
                   >
                     <Link
                       href={item.href}
-                      className={`block px-4 py-3 rounded-lg text-base font-semibold transition-all duration-300 ${
-                        pathname === item.href
-                          ? "text-blue-600 bg-blue-50 border-l-4 border-blue-600"
-                          : "text-slate-700 hover:text-blue-600 hover:bg-slate-50"
-                      }`}
+                      className={`block px-4 py-3 rounded-lg text-base font-semibold transition-all duration-300 ${pathname === item.href
+                        ? "text-blue-600 bg-blue-50 border-l-4 border-blue-600"
+                        : "text-slate-700 hover:text-blue-600 hover:bg-slate-50"
+                        }`}
                       onClick={() => setIsOpen(false)}
                     >
                       {item.name}

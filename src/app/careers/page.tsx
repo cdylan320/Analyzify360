@@ -29,7 +29,14 @@ export default function Careers() {
     coverLetter: "",
     resume: null as File | null,
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const { scrollYProgress } = useScroll();
+
+  // Fix hydration by only rendering random elements on client
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Filter positions
   const filteredPositions = careerPositions.filter(
@@ -199,10 +206,45 @@ export default function Careers() {
     }));
   };
 
-  const handleSubmitApplication = (e: React.FormEvent) => {
+  const handleSubmitApplication = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Application submitted:", applicationData);
-    closeApplicationModal();
+    setIsSubmitting(true);
+
+    try {
+      const formData = new FormData();
+      // formData.append('position_id', selectedPosition.id);
+      formData.append('name', applicationData.name);
+      formData.append('email', applicationData.email);
+      formData.append('phone', applicationData.phone);
+      formData.append('coverLetter', applicationData.coverLetter);
+
+      if (applicationData.resume) {
+        formData.append('resume', applicationData.resume);
+      }
+
+      const response = await fetch('http://localhost:8080/api/v1/applications', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Application submitted successfully:', result);
+
+        // Show success message
+        alert('Application submitted successfully! You will receive a confirmation email shortly.');
+        closeApplicationModal();
+      } else {
+        const error = await response.json();
+        console.error('Application failed:', error);
+        alert('Failed to submit application: ' + (error.message || 'Unknown error'));
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+      alert('Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -223,90 +265,94 @@ export default function Careers() {
         </div>
 
         {/* Career Network Background */}
-        <div className="absolute inset-0 opacity-20">
-          <svg className="w-full h-full" viewBox="0 0 1000 1000">
-            <defs>
-              <linearGradient
-                id="careerGradient"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
-              >
-                <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.2" />
-              </linearGradient>
-            </defs>
-            {[...Array(15)].map((_, i) => (
-              <g key={i}>
-                <motion.line
-                  x1={Math.random() * 1000}
-                  y1={Math.random() * 1000}
-                  x2={Math.random() * 1000}
-                  y2={Math.random() * 1000}
-                  stroke="url(#careerGradient)"
-                  strokeWidth="2"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    delay: i * 0.2,
-                  }}
-                />
-                <motion.circle
-                  cx={Math.random() * 1000}
-                  cy={Math.random() * 1000}
-                  r="4"
-                  fill="#8b5cf6"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: [0, 1, 0] }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    delay: i * 0.15,
-                  }}
-                />
-              </g>
-            ))}
-          </svg>
-        </div>
+        {isClient && (
+          <div className="absolute inset-0 opacity-20">
+            <svg className="w-full h-full" viewBox="0 0 1000 1000">
+              <defs>
+                <linearGradient
+                  id="careerGradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.6" />
+                  <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.2" />
+                </linearGradient>
+              </defs>
+              {[...Array(15)].map((_, i) => (
+                <g key={i}>
+                  <motion.line
+                    x1={Math.random() * 1000}
+                    y1={Math.random() * 1000}
+                    x2={Math.random() * 1000}
+                    y2={Math.random() * 1000}
+                    stroke="url(#careerGradient)"
+                    strokeWidth="2"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                      delay: i * 0.2,
+                    }}
+                  />
+                  <motion.circle
+                    cx={Math.random() * 1000}
+                    cy={Math.random() * 1000}
+                    r="4"
+                    fill="#8b5cf6"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: [0, 1, 0] }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      delay: i * 0.15,
+                    }}
+                  />
+                </g>
+              ))}
+            </svg>
+          </div>
+        )}
 
         {/* Floating Tech Icons */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {["code", "cpu", "lightbulb", "globe", "shield", "users"].map(
-            (iconName, i) => (
-              <motion.div
-                key={i}
-                className="absolute"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-                animate={{
-                  y: [0, -50, 0],
-                  x: [0, Math.random() * 50 - 25, 0],
-                  opacity: [0.3, 0.7, 0.3],
-                  rotate: [0, 360],
-                }}
-                transition={{
-                  duration: Math.random() * 15 + 10,
-                  repeat: Infinity,
-                  delay: Math.random() * 5,
-                }}
-              >
-                <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
-                  <Icon
-                    name={iconName as any}
-                    size="sm"
-                    className="text-white/70"
-                  />
-                </div>
-              </motion.div>
-            )
-          )}
-        </div>
+        {isClient && (
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {["code", "cpu", "lightbulb", "globe", "shield", "users"].map(
+              (iconName, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                  }}
+                  animate={{
+                    y: [0, -50, 0],
+                    x: [0, Math.random() * 50 - 25, 0],
+                    opacity: [0.3, 0.7, 0.3],
+                    rotate: [0, 360],
+                  }}
+                  transition={{
+                    duration: Math.random() * 15 + 10,
+                    repeat: Infinity,
+                    delay: Math.random() * 5,
+                  }}
+                >
+                  <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
+                    <Icon
+                      name={iconName as any}
+                      size="sm"
+                      className="text-white/70"
+                    />
+                  </div>
+                </motion.div>
+              )
+            )}
+          </div>
+        )}
 
         <div className="relative z-20 w-[95%] mx-auto px-4 lg:px-8 py-20">
           <div className="text-center max-w-7xl mx-auto">
@@ -618,7 +664,7 @@ export default function Careers() {
       {/* Open Positions - Ultra Visual Design */}
       <SmoothSection
         className="relative py-32 bg-slate-700 overflow-hidden"
-        id="open-positions"
+        id="jobs"
       >
         {/* Balanced Background Effects */}
         <div className="absolute inset-0">
@@ -1020,22 +1066,27 @@ export default function Careers() {
                 </div>
 
                 {/* Apply Button */}
-                <div className="pt-8 border-t border-section">
+                <div className="pt-8 border-t border-slate-200">
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button
-                      variant="primary"
-                      size="lg"
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                       onClick={() => openApplicationModal(selectedPosition)}
+                      className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-xl font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300"
                     >
-                      Apply Now
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="lg"
+                      <div className="flex items-center justify-center space-x-2">
+                        <Icon name="briefcase" size="md" />
+                        <span>Apply Now</span>
+                      </div>
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                       onClick={closePositionModal}
+                      className="px-8 py-4 bg-white border-2 border-slate-300 hover:bg-slate-50 rounded-xl font-bold text-slate-700 shadow-lg hover:shadow-xl transition-all duration-300"
                     >
                       Close
-                    </Button>
+                    </motion.button>
                   </div>
                 </div>
               </div>
@@ -1144,23 +1195,38 @@ export default function Careers() {
 
                 {/* Submit */}
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button
+                  <motion.button
                     type="submit"
-                    variant="primary"
-                    size="lg"
-                    className="flex-1"
+                    disabled={isSubmitting}
+                    whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+                    whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+                    className={`flex-1 px-8 py-4 rounded-xl font-bold text-white shadow-lg transition-all duration-300 ${isSubmitting
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 hover:shadow-xl"
+                      }`}
                   >
-                    Submit Application
-                  </Button>
-                  <Button
+                    {isSubmitting ? (
+                      <div className="flex items-center justify-center space-x-2">
+                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                        <span>Submitting...</span>
+                      </div>
+                    ) : (
+                      <span>Submit Application</span>
+                    )}
+                  </motion.button>
+                  <motion.button
                     type="button"
-                    variant="outline"
-                    size="lg"
                     onClick={closeApplicationModal}
-                    className="flex-1"
+                    disabled={isSubmitting}
+                    whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+                    whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+                    className={`flex-1 px-8 py-4 rounded-xl font-bold shadow-lg transition-all duration-300 ${isSubmitting
+                      ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                      : "bg-white border-2 border-slate-300 text-slate-700 hover:bg-slate-50 hover:shadow-xl"
+                      }`}
                   >
                     Cancel
-                  </Button>
+                  </motion.button>
                 </div>
               </form>
             </div>
