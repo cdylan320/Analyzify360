@@ -1,0 +1,338 @@
+@import "tailwindcss";
+
+/* Import professional animations */
+@import '../styles/professional-animations.css';
+
+:root {
+  --color-primary: #15304b;
+  --color-accent: #1976d2;
+  --color-background: #f6faff;
+  --color-section: #e6eaf1;
+  --color-error: #d32f2f;
+  --font-sans: Inter, system-ui, sans-serif;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-primary);
+  font-family: var(--font-sans);
+  line-height: 1.625;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-section);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1565c0;
+}
+
+/* Focus styles */
+*:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Smooth animations */
+* {
+  transition: all 0.3s ease;
+}
+
+/* Button hover effects */
+.btn-hover {
+  transform: translateY(0);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Card hover effects */
+.card-hover {
+  transform: translateY(0);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* 3D Transform Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.rotate-x-12 {
+  transform: rotateX(12deg);
+}
+
+.rotate-x-6 {
+  transform: rotateX(6deg);
+}
+
+/* Enhanced 3D Timeline Effects */
+.timeline-3d-road {
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #6366f1 100%);
+  box-shadow: 
+    0 8px 32px rgba(59, 130, 246, 0.3),
+    0 4px 16px rgba(6, 182, 212, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2);
+  transform: rotateX(12deg) scale(1, 0.75);
+}
+
+.timeline-3d-marker {
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.timeline-card-3d {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-card-3d:hover {
+  transform: translateY(-8px) rotateY(2deg) rotateX(2deg);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 12px 24px rgba(59, 130, 246, 0.1);
+}
+
+/* Glass morphism effects */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Professional glow effects */
+.professional-glow {
+  box-shadow: 
+    0 0 20px rgba(59, 130, 246, 0.1),
+    0 0 40px rgba(6, 182, 212, 0.05);
+}
+
+.professional-glow:hover {
+  box-shadow: 
+    0 0 30px rgba(59, 130, 246, 0.2),
+    0 0 60px rgba(6, 182, 212, 0.1);
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Pulse glow animation */
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Modern gradient animation */
+@keyframes gradient-x {
+  0%, 100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 15s ease infinite;
+}
+
+/* Advanced 3D perspective utilities */
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+.perspective-3000 {
+  perspective: 3000px;
+}
+
+/* Modern blur effects */
+.backdrop-blur-3xl {
+  backdrop-filter: blur(64px);
+  -webkit-backdrop-filter: blur(64px);
+}
+
+/* Advanced shadow effects */
+.shadow-3xl {
+  box-shadow: 
+    0 35px 60px -12px rgba(0, 0, 0, 0.25),
+    0 0 50px rgba(59, 130, 246, 0.1);
+}
+
+.shadow-4xl {
+  box-shadow: 
+    0 50px 100px -20px rgba(0, 0, 0, 0.25),
+    0 0 80px rgba(59, 130, 246, 0.15);
+}
+
+/* Particle animation */
+@keyframes particle-float {
+  0%, 100% { 
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { 
+    transform: translate3d(0, -100vh, 0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.particle-animation {
+  animation: particle-float 20s linear infinite;
+}
+
+/* Neural network line animation */
+@keyframes neural-pulse {
+  0%, 100% { 
+    stroke-dasharray: 5 10;
+    opacity: 0.3;
+  }
+  50% { 
+    stroke-dasharray: 15 5;
+    opacity: 0.8;
+  }
+}
+
+.neural-line {
+  animation: neural-pulse 3s ease-in-out infinite;
+}
+
+/* 3D Timeline specific animations */
+@keyframes road-appear {
+  0% {
+    stroke-dasharray: 0 1000;
+    opacity: 0;
+  }
+  100% {
+    stroke-dasharray: 1000 0;
+    opacity: 1;
+  }
+}
+
+.road-animation {
+  animation: road-appear 3s ease-out forwards;
+}
+
+/* Milestone glow effect */
+@keyframes milestone-glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(59, 130, 246, 0.3),
+      0 0 40px rgba(59, 130, 246, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 40px rgba(59, 130, 246, 0.6),
+      0 0 80px rgba(59, 130, 246, 0.3);
+  }
+}
+
+.milestone-glow {
+  animation: milestone-glow 2s ease-in-out infinite;
+}
+
+/* Interactive timeline effects */
+.timeline-interactive:hover .timeline-milestone {
+  transform: scale(1.1) translateZ(10px);
+}
+
+.timeline-milestone {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+/* Modern button effects */
+.modern-button {
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.modern-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.modern-button:hover::before {
+  left: 100%;
+}
+
+/* Responsive 3D adjustments */
+@media (max-width: 768px) {
+  .perspective-2000 {
+    perspective: 1000px;
+  }
+  
+  .timeline-3d-road {
+    transform: rotateX(30deg) scale(1, 0.8);
+  }
+}
+
+/* High performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
