@@ -11,5 +11,4 @@ if ! pg_isready -q; then
 fi
 
 # Start the server
-echo "Starting server on port 8080..."
 go run cmd/server/main.go
