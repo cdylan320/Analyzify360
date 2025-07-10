@@ -450,7 +450,7 @@ export const companyInfo = {
   address: 'São Paulo, Brazil - Global Remote Team',
   social: {
     twitter: 'https://twitter.com/analyzify360',
-    // linkedin: 'https://linkedin.com/company/analyzify360',
+    linkedin: 'https://linkedin.com/company/analyzify360',
     github: 'https://github.com/analyzify360',
     discord: 'https://discord.gg/analyzify360',
     instagram: 'https://instagram.com/analyzify360',

@@ -50,13 +50,12 @@ export const LoadingSkeleton: React.FC<{
   className?: string;
 }> = ({ lines = 3, className = "" }) => {
   return (
-    <div className={`animate-pulse space-y-4 ${className}`}>
+    <div className={`animate-pulse space-y-3 ${className}`}>
       {Array.from({ length: lines }).map((_, i) => (
         <div
           key={i}
-          className={`h-4 bg-slate-200 rounded ${
-            i === lines - 1 ? "w-3/4" : "w-full"
-          }`}
+          className={`h-4 bg-slate-200 rounded ${i === lines - 1 ? "w-3/4" : "w-full"
+            }`}
         />
       ))}
     </div>
@@ -231,14 +230,14 @@ export class ErrorBoundary extends React.Component<
 export const usePerformanceMonitor = () => {
   useEffect(() => {
     // Monitor Core Web Vitals
-    if (typeof window !== "undefined" && "web-vital" in window) {
+    if (typeof window !== "undefined") {
       import("web-vitals").then(
-        ({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-          getCLS(console.log);
-          getFID(console.log);
-          getFCP(console.log);
-          getLCP(console.log);
-          getTTFB(console.log);
+        ({ onCLS, onFCP, onLCP, onTTFB, onINP }) => {
+          onCLS(console.log);
+          onFCP(console.log);
+          onLCP(console.log);
+          onTTFB(console.log);
+          onINP(console.log);
         }
       );
     }
