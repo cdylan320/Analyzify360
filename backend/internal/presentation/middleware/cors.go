@@ -11,11 +11,14 @@ import (
 func SetupCORS(cfg *config.Config) gin.HandlerFunc {
 	corsConfig := cors.DefaultConfig()
 	
-	// Allow frontend origin
+	// Allow frontend origins - include both local and deployed
 	corsConfig.AllowOrigins = []string{
 		cfg.Application.FrontendURL,
 		"http://localhost:3000", // Development frontend
 		"http://127.0.0.1:3000",
+		"https://analyzify360.vercel.app", // Your Vercel deployment
+		"https://analyzify360.com", // Your custom domain (if using)
+		"https://www.analyzify360.com", // WWW version
 	}
 	
 	corsConfig.AllowMethods = []string{
