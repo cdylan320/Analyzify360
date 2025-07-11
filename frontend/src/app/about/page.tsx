@@ -51,9 +51,7 @@ export default function About() {
   }, []);
 
   const leadership = teamMembers.filter(
-    (member) =>
-      member.role === "client" &&
-      (member.title.includes("Partner") || member.title.includes("Lead"))
+    (member) => member.role === "leadership"
   );
 
   const stats = [
@@ -81,7 +79,7 @@ export default function About() {
     {
       icon: "chart-bar",
       title: "Proven Results",
-      description: "98% client retention rate with measurable business impact",
+      description: "99% client retention rate with measurable business impact",
       color: "from-violet-500 to-purple-600",
     },
     {
@@ -251,9 +249,9 @@ export default function About() {
                 <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-x">
                   Tomorrow
                 </span>
-                <span className="block text-4xl lg:text-6xl font-light text-white/70 mt-4">
+                {/* <span className="block text-4xl lg:text-6xl font-light text-white/70 mt-4">
                   Today
-                </span>
+                </span> */}
               </h1>
             </motion.div>
 
@@ -878,51 +876,150 @@ export default function About() {
 
           <StaggeredContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {leadership.map((leader, index) => (
-              <ProfessionalCard
+              <motion.div
                 key={leader.id}
-                delay={index * 0.1}
-                hoverEffect="lift"
-                className="group bg-white rounded-3xl border border-slate-200/80 shadow-xl hover:shadow-2xl transition-all duration-500 p-8 text-center min-h-[420px] flex flex-col"
+                variants={{
+                  initial: { opacity: 0, y: 20 },
+                  animate: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ y: -2, scale: 1.005 }}
+                className="group"
               >
-                {/* Avatar */}
-                <div className="relative mb-6">
-                  <div className="w-28 h-28 mx-auto bg-gradient-to-br from-blue-600 to-cyan-600 rounded-3xl flex items-center justify-center text-white font-bold text-3xl shadow-xl group-hover:scale-110 transition-transform duration-300">
-                    {leader.avatar}
+                <div className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-slate-200/80 hover:border-emerald-300 min-h-[500px] flex flex-col overflow-hidden">
+                  {/* Leadership Badge */}
+                  <div className="absolute top-4 right-4 bg-gradient-to-br from-emerald-500 to-teal-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                    Leadership
                   </div>
-                  <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center shadow-lg text-white text-sm font-bold">
-                    {leader.flag}
+
+                  {/* Avatar Section with Photo */}
+                  <div className="relative mb-10 mt-6 flex-shrink-0">
+                    <div className="w-full h-60 mx-auto rounded-3xl overflow-hidden shadow-xl ring-4 ring-white group-hover:scale-105 transition-transform duration-300">
+                      <img
+                        src={leader.photo}
+                        alt={`${leader.name} profile photo`}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                        onError={(e) => {
+                          console.log(`Image failed to load: ${leader.photo}`);
+                          // Fallback to avatar if image fails
+                          e.currentTarget.style.display = 'none';
+                        }}
+                      />
+                    </div>
+                    {/* Country Flag */}
+                    <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center shadow-lg text-white text-lg">
+                      {leader.flag}
+                    </div>
                   </div>
-                </div>
 
-                {/* Content */}
-                <div className="flex-1 flex flex-col">
-                  <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-700 transition-colors">
-                    {leader.name}
-                  </h3>
-                  <p className="text-blue-700 font-semibold mb-2">
-                    {leader.title}
-                  </p>
-                  <p className="text-sm text-slate-500 mb-4 flex items-center justify-center space-x-1 font-medium">
-                    <span>{leader.location}</span>
-                  </p>
+                  {/* Content */}
+                  <div className="text-center mb-6 flex-grow min-h-0">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-emerald-700 transition-colors">
+                      {leader.name}
+                    </h3>
+                    <p className="text-emerald-700 font-bold text-lg mb-3">
+                      {leader.title}
+                    </p>
+                    <p className="text-slate-500 text-sm mb-4 flex items-center justify-center space-x-2 font-medium">
+                      <span>{leader.location}</span>
+                      <span>•</span>
+                      <span>{leader.country}</span>
+                    </p>
 
-                  <p className="text-slate-600 leading-relaxed mb-4 flex-1 font-medium">
+                    {/* Bio */}
+                    {/* <p className="text-slate-600 leading-relaxed mb-6 text-sm">
                     {leader.bio}
-                  </p>
+                    </p> */}
+
+                    {/* Quote */}
+                    {leader.quote && (
+                      <div className="mb-6 p-4 bg-emerald-50 rounded-2xl border border-emerald-200">
+                        <p className="text-emerald-800 italic text-sm font-medium">
+                          "{leader.quote}"
+                        </p>
+                      </div>
+                    )}
+                  </div>
 
                   {/* Skills */}
+                  {/* <div className="mb-6 flex-shrink-0">
                   <div className="flex flex-wrap gap-2 justify-center">
-                    {leader.skills?.slice(0, 3).map((skill, skillIndex) => (
+                      {leader.skills?.slice(0, 4).map((skill, skillIndex) => (
                       <span
                         key={skillIndex}
-                        className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-semibold border border-blue-200"
+                          className="px-3 py-1.5 bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 text-emerald-700 rounded-full text-xs font-semibold hover:from-emerald-100 hover:to-teal-100 transition-all duration-300"
                       >
                         {skill}
                       </span>
                     )) || null}
                   </div>
+                  </div> */}
+
+                  {/* Stats */}
+                  {/* <div className="flex justify-center space-x-8 mb-6 flex-shrink-0">
+                    <div className="text-center">
+                      <div className="font-bold text-slate-900 text-lg">
+                        {leader.experience}
                 </div>
-              </ProfessionalCard>
+                      <div className="text-slate-500 text-sm">Experience</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="font-bold text-slate-900 text-lg">
+                        {leader.projects}+
+                      </div>
+                      <div className="text-slate-500 text-sm">Projects</div>
+                    </div>
+                  </div> */}
+
+                  {/* Social Links */}
+                  <div className="flex justify-center space-x-3 mt-auto flex-shrink-0">
+                    {leader.social?.linkedin && (
+                      <a
+                        href={leader.social.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 bg-blue-600 hover:bg-blue-700 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
+                        title="LinkedIn"
+                      >
+                        <Icon name="linkedin" size="sm" />
+                      </a>
+                    )}
+                    {leader.social?.github && (
+                      <a
+                        href={leader.social.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 bg-gray-800 hover:bg-gray-900 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
+                        title="GitHub"
+                      >
+                        <Icon name="github" size="sm" />
+                      </a>
+                    )}
+                    {leader.social?.twitter && (
+                      <a
+                        href={leader.social.twitter}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 bg-sky-500 hover:bg-sky-600 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
+                        title="Twitter"
+                      >
+                        <Icon name="twitter" size="sm" />
+                      </a>
+                    )}
+                    {leader.social?.email && (
+                      <a
+                        href={`https://mail.google.com/mail/?view=cm&fs=1&to=${leader.social.email}&su=New Project Inquiry&body=Hi Analyzify360 Team,%0D%0A%0D%0AI'm interested in discussing a project with you.%0D%0A%0D%0AProject details:%0D%0A-%0D%0A-%0D%0A-%0D%0A%0D%0ABest regards`}
+                        className="w-8 h-8 bg-emerald-600 hover:bg-emerald-700 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg"
+                        title="Email"
+                        target="_blank"
+                      >
+                        <Icon name="mail" size="sm" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </StaggeredContainer>
         </div>

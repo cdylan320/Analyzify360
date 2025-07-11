@@ -21,12 +21,13 @@ import {
   teamMembers,
   getTechTeam,
   getClientTeam,
+  getLeadershipTeam,
   TeamMember,
 } from "@/data/team";
 
 export default function Team() {
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
-  const [activeFilter, setActiveFilter] = useState<"all" | "tech" | "client">(
+  const [activeFilter, setActiveFilter] = useState<"all" | "tech" | "client" | "leadership">(
     "all"
   );
   const [hoveredMember, setHoveredMember] = useState<string | null>(null);
@@ -47,6 +48,8 @@ export default function Team() {
         return getTechTeam();
       case "client":
         return getClientTeam();
+      case "leadership":
+        return getLeadershipTeam();
       default:
         return teamMembers;
     }
@@ -91,6 +94,7 @@ export default function Team() {
   const memberColors = {
     tech: "from-blue-600 to-indigo-600",
     client: "from-emerald-600 to-teal-600",
+    leadership: "from-purple-600 to-pink-600",
   };
 
   const memberIcons = {
@@ -258,6 +262,9 @@ export default function Team() {
               </motion.button>
 
               <motion.button
+                onClick={() => {
+                  window.location.href = "/contact"
+                }}
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
                 className="group relative px-12 py-6 bg-white/10 backdrop-blur-xl rounded-2xl font-bold text-white border border-white/20 hover:bg-white/20 transition-all duration-300 shadow-2xl"
@@ -292,17 +299,21 @@ export default function Team() {
                   label: "Client Team",
                   count: getClientTeam().length,
                 },
+                {
+                  id: "leadership",
+                  label: "Leadership",
+                  count: getLeadershipTeam().length,
+                },
               ].map((filter) => (
                 <motion.button
                   key={filter.id}
                   onClick={() => setActiveFilter(filter.id as any)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`px-8 py-4 rounded-2xl font-bold transition-all duration-300 ${
-                    activeFilter === filter.id
-                      ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-xl"
-                      : "bg-slate-100 text-slate-700 hover:bg-slate-200 shadow-lg"
-                  }`}
+                  className={`px-8 py-4 rounded-2xl font-bold transition-all duration-300 ${activeFilter === filter.id
+                    ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-xl"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200 shadow-lg"
+                    }`}
                 >
                   {filter.label}
                   <span className="ml-2 text-sm opacity-75">
@@ -338,29 +349,33 @@ export default function Team() {
                     <ProfessionalCard
                       delay={index * 0.1}
                       hoverEffect="lift"
-                      className="group bg-white rounded-3xl border border-slate-200/80 shadow-xl hover:shadow-2xl transition-all duration-500 p-8 cursor-pointer relative overflow-hidden min-h-[500px]"
+                      className="group bg-white rounded-3xl border border-slate-200/80 shadow-xl hover:shadow-2xl transition-all duration-500 p-6 cursor-pointer relative overflow-hidden h-[580px]"
                     >
                       {/* Background Gradient Overlay */}
                       <div
-                        className={`absolute inset-0 bg-gradient-to-br ${
-                          memberColors[member.role as keyof typeof memberColors]
-                        } opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
+                        className={`absolute inset-0 bg-gradient-to-br ${memberColors[member.role as keyof typeof memberColors]
+                          } opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
                       ></div>
 
                       {/* Content */}
                       <div className="relative z-10 h-full flex flex-col">
-                        {/* Header */}
-                        <div className="flex items-start justify-between mb-8">
-                          <div
-                            className={`w-20 h-20 bg-gradient-to-br ${
-                              memberColors[
-                                member.role as keyof typeof memberColors
-                              ]
-                            } rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
-                          >
-                            <span className="text-white font-bold text-2xl">
-                              {member.avatar}
-                            </span>
+                        {/* Photo Header */}
+                        <div className="flex items-start justify-between mb-6">
+                          <div className="w-20 h-20 rounded-3xl overflow-hidden shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <img
+                              src={member.photo}
+                              alt={`${member.name} profile photo`}
+                              className="w-full h-full object-cover"
+                              loading="lazy"
+                              onError={(e) => {
+                                // Fallback to avatar initials if image fails
+                                const target = e.currentTarget;
+                                const parent = target.parentElement;
+                                if (parent) {
+                                  parent.innerHTML = `<div class="w-full h-full bg-gradient-to-br ${memberColors[member.role as keyof typeof memberColors]} rounded-3xl flex items-center justify-center"><span class="text-white font-bold text-xl">${member.avatar}</span></div>`;
+                                }
+                              }}
+                            />
                           </div>
                           <motion.div
                             className="text-slate-400 group-hover:text-blue-600 transition-colors duration-300"
@@ -371,44 +386,45 @@ export default function Team() {
                         </div>
 
                         {/* Member Info */}
-                        <div className="mb-6 text-center">
-                          <h3 className="text-2xl font-black text-slate-900 mb-2 group-hover:text-blue-700 transition-colors duration-300">
+                        <div className="mb-4 text-center">
+                          <h3 className="text-xl font-black text-slate-900 mb-2 group-hover:text-blue-700 transition-colors duration-300 line-clamp-2">
                             {member.name}
                           </h3>
                           <p
-                            className={`font-bold text-lg mb-2 ${
-                              member.role === "tech"
-                                ? "text-blue-600"
-                                : "text-emerald-600"
-                            }`}
+                            className={`font-bold text-base mb-2 line-clamp-2 ${member.role === "tech"
+                              ? "text-blue-600"
+                              : member.role === "client"
+                                ? "text-emerald-600"
+                                : "text-purple-600"
+                              }`}
                           >
                             {member.title}
                           </p>
                           {member.location && (
-                            <p className="text-slate-500 flex items-center justify-center gap-1">
-                              <Icon name="map" size="sm" />
-                              {member.location}
+                            <p className="text-slate-500 flex items-center justify-center gap-1 text-sm">
+                              <Icon name="map-pin" size="sm" />
+                              <span className="line-clamp-1">{member.location}</span>
                             </p>
                           )}
                         </div>
 
                         {/* Bio */}
-                        <div className="mb-6 flex-1">
-                          <p className="text-slate-600 leading-relaxed line-clamp-2">
+                        <div className="mb-4 flex-1">
+                          <p className="text-slate-600 leading-relaxed line-clamp-3 text-sm">
                             {member.bio}
                           </p>
                         </div>
 
                         {/* Skills or Quote */}
                         {member.skills ? (
-                          <div className="mb-6">
-                            <div className="flex flex-wrap gap-2 justify-center mb-3">
+                          <div className="mb-4">
+                            <div className="flex flex-wrap gap-1.5 justify-center mb-2">
                               {member.skills
                                 .slice(0, 3)
                                 .map((skill, skillIndex) => (
                                   <span
                                     key={skillIndex}
-                                    className="px-3 py-1 bg-blue-50 text-blue-700 text-xs rounded-full border border-blue-200 hover:bg-blue-100 transition-colors"
+                                    className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-full border border-blue-200 hover:bg-blue-100 transition-colors"
                                   >
                                     {skill}
                                   </span>
@@ -421,9 +437,9 @@ export default function Team() {
                             )}
                           </div>
                         ) : (
-                          <div className="mb-6">
-                            <div className="p-4 bg-slate-50 rounded-2xl">
-                              <p className="text-slate-700 italic text-center">
+                          <div className="mb-4">
+                            <div className="p-3 bg-slate-50 rounded-2xl">
+                              <p className="text-slate-700 italic text-center text-sm line-clamp-2">
                                 "{member.quote}"
                               </p>
                             </div>
@@ -431,18 +447,24 @@ export default function Team() {
                         )}
 
                         {/* Stats */}
-                        <div className="flex justify-center gap-6 mb-6">
+                        <div className="flex justify-center gap-6 mb-4">
                           <div className="text-center">
-                            <div className="font-black text-slate-900 text-lg">
-                              {member.experience}
+                            <div className="flex items-center justify-center gap-1 mb-1">
+                              <Icon name="clock" size="sm" className="text-slate-400" />
+                              <div className="font-black text-slate-900 text-base">
+                                {member.experience}
+                              </div>
                             </div>
                             <div className="text-slate-500 text-xs">
                               Experience
                             </div>
                           </div>
                           <div className="text-center">
-                            <div className="font-black text-slate-900 text-lg">
-                              {member.projects}+
+                            <div className="flex items-center justify-center gap-1 mb-1">
+                              <Icon name="briefcase" size="sm" className="text-slate-400" />
+                              <div className="font-black text-slate-900 text-base">
+                                {member.projects}+
+                              </div>
                             </div>
                             <div className="text-slate-500 text-xs">
                               Projects
@@ -451,16 +473,16 @@ export default function Team() {
                         </div>
 
                         {/* Social Links */}
-                        <div className="flex justify-center gap-3 mt-auto">
+                        <div className="flex justify-center gap-2 mb-3">
                           {member.social?.linkedin && (
                             <a
                               href={member.social.linkedin}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="w-10 h-10 bg-blue-600 hover:bg-blue-700 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
+                              className="w-8 h-8 bg-blue-600 hover:bg-blue-700 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
                               onClick={(e) => e.stopPropagation()}
                             >
-                              <Icon name="linkedin" size="md" />
+                              <Icon name="linkedin" size="sm" />
                             </a>
                           )}
                           {member.social?.github && (
@@ -468,27 +490,27 @@ export default function Team() {
                               href={member.social.github}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="w-10 h-10 bg-gray-800 hover:bg-gray-900 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
+                              className="w-8 h-8 bg-gray-800 hover:bg-gray-900 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
                               onClick={(e) => e.stopPropagation()}
                             >
-                              <Icon name="github" size="md" />
+                              <Icon name="github" size="sm" />
                             </a>
                           )}
                           {member.social?.email && (
                             <a
                               href={`mailto:${member.social.email}`}
-                              className="w-10 h-10 bg-emerald-600 hover:bg-emerald-700 rounded-xl flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
+                              className="w-8 h-8 bg-emerald-600 hover:bg-emerald-700 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
                               onClick={(e) => e.stopPropagation()}
                             >
-                              <Icon name="mail" size="md" />
+                              <Icon name="mail" size="sm" />
                             </a>
                           )}
                         </div>
 
                         {/* CTA */}
-                        <div className="pt-6 mt-4 border-t border-slate-100">
+                        <div className="pt-3 mt-auto border-t border-slate-100">
                           <div className="flex items-center justify-between">
-                            <span className="text-blue-600 font-bold group-hover:text-blue-700 transition-colors">
+                            <span className="text-blue-600 font-bold group-hover:text-blue-700 transition-colors text-sm">
                               View Profile
                             </span>
                             <motion.div
@@ -498,7 +520,7 @@ export default function Team() {
                               }}
                               transition={{ duration: 0.2 }}
                             >
-                              <Icon name="arrow-right" size="md" />
+                              <Icon name="arrow-right" size="sm" />
                             </motion.div>
                           </div>
                         </div>
@@ -533,16 +555,20 @@ export default function Team() {
               {/* Modal Header */}
               <div className="flex justify-between items-start mb-10">
                 <div className="flex items-center space-x-6">
-                  <div
-                    className={`w-24 h-24 bg-gradient-to-br ${
-                      memberColors[
-                        selectedMember.role as keyof typeof memberColors
-                      ]
-                    } rounded-3xl flex items-center justify-center shadow-xl`}
-                  >
-                    <span className="text-white font-bold text-3xl">
-                      {selectedMember.avatar}
-                    </span>
+                  <div className="w-24 h-24 rounded-3xl overflow-hidden shadow-xl">
+                    <img
+                      src={selectedMember.photo}
+                      alt={`${selectedMember.name} profile photo`}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        // Fallback to avatar initials if image fails
+                        const target = e.currentTarget;
+                        const parent = target.parentElement;
+                        if (parent) {
+                          parent.innerHTML = `<div class="w-full h-full bg-gradient-to-br ${memberColors[selectedMember.role as keyof typeof memberColors]} rounded-3xl flex items-center justify-center shadow-xl"><span class="text-white font-bold text-3xl">${selectedMember.avatar}</span></div>`;
+                        }
+                      }}
+                    />
                   </div>
                   <div>
                     <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-2">
@@ -574,11 +600,10 @@ export default function Team() {
                 <div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
                     <div
-                      className={`w-3 h-3 bg-gradient-to-r ${
-                        memberColors[
-                          selectedMember.role as keyof typeof memberColors
-                        ]
-                      } rounded-full mr-3`}
+                      className={`w-3 h-3 bg-gradient-to-r ${memberColors[
+                        selectedMember.role as keyof typeof memberColors
+                      ]
+                        } rounded-full mr-3`}
                     ></div>
                     About
                   </h3>
@@ -609,11 +634,10 @@ export default function Team() {
                     <>
                       <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
                         <div
-                          className={`w-3 h-3 bg-gradient-to-r ${
-                            memberColors[
-                              selectedMember.role as keyof typeof memberColors
-                            ]
-                          } rounded-full mr-3`}
+                          className={`w-3 h-3 bg-gradient-to-r ${memberColors[
+                            selectedMember.role as keyof typeof memberColors
+                          ]
+                            } rounded-full mr-3`}
                         ></div>
                         Skills & Expertise
                       </h3>
@@ -627,11 +651,10 @@ export default function Team() {
                             className="flex items-center space-x-4 group"
                           >
                             <div
-                              className={`w-8 h-8 bg-gradient-to-br ${
-                                memberColors[
-                                  selectedMember.role as keyof typeof memberColors
-                                ]
-                              } rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200`}
+                              className={`w-8 h-8 bg-gradient-to-br ${memberColors[
+                                selectedMember.role as keyof typeof memberColors
+                              ]
+                                } rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200`}
                             >
                               <Icon
                                 name="check"
@@ -650,11 +673,10 @@ export default function Team() {
                     <>
                       <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
                         <div
-                          className={`w-3 h-3 bg-gradient-to-r ${
-                            memberColors[
-                              selectedMember.role as keyof typeof memberColors
-                            ]
-                          } rounded-full mr-3`}
+                          className={`w-3 h-3 bg-gradient-to-r ${memberColors[
+                            selectedMember.role as keyof typeof memberColors
+                          ]
+                            } rounded-full mr-3`}
                         ></div>
                         Philosophy
                       </h3>
@@ -698,7 +720,7 @@ export default function Team() {
                   )}
                   {selectedMember.social?.email && (
                     <a
-                      href={`mailto:${selectedMember.social.email}`}
+                      href={`https://mail.google.com/mail/?view=cm&fs=1&to=${selectedMemeber.social.email}&su=New Project Inquiry&body=Hi Analyzify360 Team,%0D%0A%0D%0AI'm interested in discussing a project with you.%0D%0A%0D%0AProject details:%0D%0A-%0D%0A-%0D%0A-%0D%0A%0D%0ABest regards`}
                       className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition-all duration-300 hover:scale-105"
                     >
                       <Icon name="mail" size="md" />

@@ -343,9 +343,7 @@ export default function Contact() {
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() =>
-                  document
-                    .getElementById("team-section")
-                    ?.scrollIntoView({ behavior: "smooth" })
+                  window.location.href = "/team"
                 }
                 className="group relative px-12 py-6 bg-white/10 backdrop-blur-xl rounded-2xl font-bold text-white border border-white/20 hover:bg-white/20 transition-all duration-300 shadow-2xl"
               >
@@ -825,136 +823,6 @@ export default function Contact() {
         </div>
       </SmoothSection>
 
-      {/* Account Managers Section */}
-      <SmoothSection
-        className="relative py-24 bg-gradient-to-b from-slate-50 to-white"
-        id="team-section"
-      >
-        {/* Professional Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, rgb(59 130 246) 1px, transparent 0)`,
-            backgroundSize: '40px 40px'
-          }}></div>
-        </div>
-
-        <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
-          <AnimatedSection className="text-center mb-20">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center justify-center px-8 py-4 mb-8 text-sm font-bold text-blue-700 bg-blue-50 rounded-full border border-blue-200 shadow-lg"
-            >
-              <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
-              <span>Your Dedicated Account Managers</span>
-            </motion.div>
-
-            <h2 className="text-5xl lg:text-7xl font-black mb-8 leading-tight">
-              <span className="text-slate-900">Meet Your</span>
-              <span className="block bg-gradient-to-r from-blue-700 via-cyan-700 to-indigo-700 bg-clip-text text-transparent">
-                Success Team
-              </span>
-            </h2>
-
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full mx-auto mb-8"></div>
-
-            <p className="text-xl text-slate-600 leading-relaxed max-w-4xl mx-auto font-medium">
-              Local account managers who understand your market, speak your
-              language, and are committed to your success.
-            </p>
-          </AnimatedSection>
-
-          <StaggeredContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {clientTeam.map((member, index) => (
-              <ProfessionalCard
-                key={member.id}
-                delay={index * 0.1}
-                hoverEffect="lift"
-                className="group bg-white rounded-3xl border border-slate-200/80 shadow-xl hover:shadow-2xl transition-all duration-500 p-8 text-center min-h-[420px] flex flex-col"
-              >
-                {/* Avatar */}
-                <div className="relative mb-6">
-                  <div className="w-28 h-28 mx-auto bg-gradient-to-br from-blue-600 to-cyan-600 rounded-3xl flex items-center justify-center text-white font-bold text-3xl shadow-xl group-hover:scale-110 transition-transform duration-300">
-                    {member.avatar}
-                  </div>
-                  {member.flag && (
-                    <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg text-2xl border-2 border-slate-100">
-                      {member.flag}
-                    </div>
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 flex flex-col">
-                  <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-700 transition-colors">
-                    {member.name}
-                  </h3>
-                  <p className="text-blue-700 font-semibold mb-2">
-                    {member.title}
-                  </p>
-                  {member.location && (
-                    <p className="text-sm text-slate-500 mb-4 flex items-center justify-center space-x-1 font-medium">
-                      <Icon name="map-pin" size="sm" className="text-slate-400" />
-                      <span>{member.location}</span>
-                    </p>
-                  )}
-
-                  <p className="text-slate-600 leading-relaxed mb-6 flex-1 font-medium">
-                    {member.bio}
-                  </p>
-
-                  {member.quote && (
-                    <div className="mb-6 p-4 bg-blue-50 rounded-xl border border-blue-100">
-                      <p className="text-slate-700 italic text-sm leading-relaxed">
-                        "{member.quote}"
-                      </p>
-                    </div>
-                  )}
-
-                  {/* Experience & Projects */}
-                  <div className="grid grid-cols-2 gap-4 mb-6">
-                    <div className="text-center p-3 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl border border-blue-100">
-                      <div className="text-2xl font-bold text-blue-700">
-                        {member.experience}
-                      </div>
-                      <div className="text-xs text-slate-600 font-semibold">
-                        Experience
-                      </div>
-                    </div>
-                    <div className="text-center p-3 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl border border-purple-100">
-                      <div className="text-2xl font-bold text-purple-700">
-                        {member.projects}+
-                      </div>
-                      <div className="text-xs text-slate-600 font-semibold">
-                        Projects
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Contact Button */}
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() =>
-                      window.open(
-                        `mailto:${member.social?.email}?subject=Project Inquiry`,
-                        "_self"
-                      )
-                    }
-                    className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-xl font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300"
-                  >
-                    <div className="flex items-center justify-center space-x-2">
-                      <Icon name="mail" size="sm" />
-                      <span>Contact {member.name.split(" ")[0]}</span>
-                    </div>
-                  </motion.button>
-                </div>
-              </ProfessionalCard>
-            ))}
-          </StaggeredContainer>
-        </div>
-      </SmoothSection>
 
       {/* Trust Indicators Section */}
       <SmoothSection className="relative py-20 bg-gradient-to-b from-slate-50 to-white">

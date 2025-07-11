@@ -2,7 +2,7 @@ export interface TeamMember {
   id: string;
   name: string;
   title: string;
-  role: 'tech' | 'client';
+  role: 'tech' | 'client' | 'leadership';
   location?: string;
   country?: string;
   flag?: string;
@@ -22,6 +22,72 @@ export interface TeamMember {
 }
 
 export const teamMembers: TeamMember[] = [
+  // Leadership Team
+  {
+    id: 'carlos-silva',
+    name: 'Carlos Silva',
+    title: 'Co-Founder & CEO',
+    role: 'leadership',
+          location: 'São Paulo',
+      country: 'Brazil',
+      flag: '🇧🇷',
+    skills: ['Strategic Planning', 'Business Development', 'Product Vision', 'Team Leadership', 'Innovation'],
+    bio: 'Visionary entrepreneur with 12+ years building transformative technology companies. Expert in scaling global teams and driving innovation across AI, blockchain, and cloud technologies.',
+    avatar: 'CS',
+    photo: '/images/team/carlos-silva.jpg',
+    experience: '12+ years',
+    projects: 45,
+    quote: 'Innovation is not just about technology—it\'s about creating solutions that change lives.',
+    social: {
+      linkedin: 'https://www.linkedin.com/company/analyzify360-global',
+      // twitter: 'https://twitter.com/carlos_innovate',
+      email: 'trevor@analyzify360.com'
+    }
+  },
+  {
+    id: 'fernanda-santos',
+    name: 'Fernanda Santos',
+    title: 'Co-Founder & CTO',
+    role: 'leadership',
+    location: 'Belo Horizonte',
+    country: 'Brazil',
+    flag: '🇧🇷',
+    skills: ['Technical Architecture', 'AI/ML Strategy', 'Full-Stack Development', 'DevOps', 'Team Mentoring'],
+    bio: 'Technology visionary with 10+ years architecting scalable systems for global enterprises. Passionate about AI innovation, sustainable tech, and building world-class engineering teams.',
+    avatar: 'FS',
+    photo: '/images/team/fernanda-santos.jpg',
+    experience: '10+ years',
+    projects: 38,
+    quote: 'Great technology should be invisible, intuitive, and improve human potential.',
+    social: {
+      linkedin: 'https://www.linkedin.com/company/analyzify360-global',
+      // github: 'https://github.com/fernanda-tech',
+      // twitter: 'https://twitter.com/fernanda_dev',
+      email: 'support@analyzify360.com'
+    }
+  },
+  {
+    id: 'akash-dutta',
+    name: 'Akash Dutta',
+    title: 'HR Manager & Culture Lead',
+    role: 'leadership',
+    location: 'Paikgacha, Khulna',
+    country: 'Bangladesh',
+    flag: '🇧🇩',
+    skills: ['Talent Management', 'Organizational Development', 'Remote Team Culture', 'Performance Coaching', 'Diversity & Inclusion'],
+    bio: 'People-first HR leader with 8+ years building inclusive, high-performance teams across diverse cultures. Expert in remote work optimization and creating environments where talent thrives.',
+    avatar: 'AD',
+    photo: '/images/team/akash-dutta.jpg',
+    experience: '8+ years',
+    projects: 25,
+    quote: 'Our people are our greatest innovation—when they flourish, extraordinary things happen.',
+    social: {
+      linkedin: 'https://www.linkedin.com/in/akash-dutta-302460362/',
+      // twitter: 'https://twitter.com/fernanda_people',
+      email: 'akash@analyzify360.com'
+    }
+  },
+
   // Tech Team
   {
     id: 'priya-sharma',
@@ -276,5 +342,6 @@ export const teamMembers: TeamMember[] = [
 
 export const getTechTeam = () => teamMembers.filter(member => member.role === 'tech');
 export const getClientTeam = () => teamMembers.filter(member => member.role === 'client');
+export const getLeadershipTeam = () => teamMembers.filter(member => member.role === 'leadership');
 export const getUSTeam = () => teamMembers.filter(member => member.country === 'US');
 export const getUKTeam = () => teamMembers.filter(member => member.country === 'UK'); 

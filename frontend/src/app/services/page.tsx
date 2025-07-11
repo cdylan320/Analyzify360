@@ -278,7 +278,7 @@ export default function Services() {
             >
               {[
                 { value: "4", label: "Core Services", icon: "briefcase" },
-                { value: "50+", label: "Projects", icon: "chart-bar" },
+                { value: "150+", label: "Projects", icon: "chart-bar" },
                 { value: "24/7", label: "Support", icon: "shield" },
                 { value: "100%", label: "Satisfaction", icon: "heart" },
               ].map((stat, index) => (
@@ -306,36 +306,7 @@ export default function Services() {
               ))}
             </motion.div>
 
-            {/* Modern CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1.2 }}
-              className="flex flex-col sm:flex-row gap-6 justify-center"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative px-12 py-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl font-bold text-white overflow-hidden shadow-2xl"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-                <span className="relative flex items-center justify-center space-x-3">
-                  <span>Explore Services</span>
-                  <Icon name="arrow-right" size="md" className="rotate-90" />
-                </span>
-              </motion.button>
 
-              <motion.button
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative px-12 py-6 bg-white/10 backdrop-blur-xl rounded-2xl font-bold text-white border border-white/20 hover:bg-white/20 transition-all duration-300 shadow-2xl"
-              >
-                <span className="flex items-center justify-center space-x-3">
-                  <span>Get Started</span>
-                  <Icon name="external-link" size="md" />
-                </span>
-              </motion.button>
-            </motion.div>
           </div>
         </div>
 
@@ -819,7 +790,7 @@ export default function Services() {
               </div>
 
               {/* Modal CTA */}
-              <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col sm:flex-row gap-4 justify-center">
+              {/* <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col sm:flex-row gap-4 justify-center">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -844,7 +815,7 @@ export default function Services() {
                     <Icon name="calendar" size="md" />
                   </span>
                 </motion.button>
-              </div>
+              </div> */}
             </div>
           </motion.div>
         </motion.div>
@@ -928,29 +899,16 @@ export default function Services() {
               className="flex flex-col lg:flex-row gap-6 justify-center items-center mb-16"
             >
               <motion.button
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative px-12 py-6 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 rounded-3xl font-bold text-white overflow-hidden shadow-2xl hover:shadow-blue-500/25 transition-all duration-300"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-700 via-purple-700 to-blue-800 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
-                <span className="relative flex items-center justify-center space-x-3 text-lg">
-                  <Icon name="rocket" size="lg" />
-                  <span>Start Your Project</span>
-                  <Icon name="arrow-right" size="md" />
-                </span>
-
-                {/* Glow Effect */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
-              </motion.button>
-
-              <motion.button
+                onClick={() => {
+                  window.location.href = "/contact";
+                }}
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
                 className="group relative px-12 py-6 bg-white/80 backdrop-blur-xl rounded-3xl font-bold text-slate-800 border-2 border-slate-200 hover:border-purple-300 hover:bg-white transition-all duration-300 shadow-xl hover:shadow-2xl"
               >
                 <span className="flex items-center justify-center space-x-3 text-lg group-hover:text-purple-700 transition-colors">
-                  <Icon name="calendar" size="lg" />
-                  <span>Schedule Consultation</span>
+                  <Icon name="users" size="lg" />
+                  <span>Contact to Us</span>
                   <Icon name="external-link" size="md" />
                 </span>
               </motion.button>
