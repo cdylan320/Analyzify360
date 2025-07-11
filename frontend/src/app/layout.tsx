@@ -27,6 +27,18 @@ export const metadata: Metadata = {
   creator: "Analyzify360",
   publisher: "Analyzify360",
   robots: "index, follow",
+  icons: {
+    icon: [
+      { url: '/logo2.png' },
+      { url: '/logo2.png', type: 'image/png', sizes: '192x192' },
+      { url: '/logo2.png', type: 'image/png', sizes: '512x512' },
+      { url: '/logo2.png', type: 'image/png', sizes: '32x32' },
+    ],
+    apple: [
+      { url: '/logo2.png', sizes: '180x180' },
+    ],
+  },
+  manifest: '/manifest.json',
   openGraph: {
     type: "website",
     locale: "en_US",
