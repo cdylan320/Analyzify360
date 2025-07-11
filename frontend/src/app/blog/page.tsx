@@ -28,7 +28,7 @@ export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [hoveredPost, setHoveredPost] = useState<string | null>(null);
-  const [isClient, setIsClient] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [showNewsletter, setShowNewsletter] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -37,7 +37,7 @@ export default function Blog() {
 
   // Ensure client-side only rendering for animations
   useEffect(() => {
-    setIsClient(true);
+    setMounted(true);
   }, []);
 
   // Filter and search logic
@@ -130,7 +130,7 @@ export default function Blog() {
         </div>
 
         {/* Floating Blog Icons - Client-side only */}
-        {isClient && (
+        {mounted && (
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {floatingIconPositions.map((pos, i) => (
               <motion.div
@@ -259,7 +259,7 @@ export default function Blog() {
             </motion.div>
 
             {/* Modern CTA */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.2 }}
@@ -288,7 +288,7 @@ export default function Blog() {
                   <Icon name="arrow" size="md" />
                 </span>
               </motion.button>
-            </motion.div>
+            </motion.div> */}
           </div>
         </div>
       </motion.section>
@@ -354,10 +354,10 @@ export default function Blog() {
                               post.category.includes("AI")
                                 ? "cpu"
                                 : post.category.includes("Blockchain")
-                                ? "shield-check"
-                                : post.category.includes("Design")
-                                ? "lightbulb"
-                                : "code"
+                                  ? "shield-check"
+                                  : post.category.includes("Design")
+                                    ? "lightbulb"
+                                    : "code"
                             }
                             size="md"
                             className="text-slate-700"
@@ -461,11 +461,10 @@ export default function Blog() {
               onClick={() => setSelectedCategory("all")}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`px-6 py-1 rounded-xl font-bold transition-all duration-300 ${
-                selectedCategory === "all"
-                  ? "bg-gradient-to-r from-slate-700 to-slate-900 text-white shadow-xl"
-                  : "bg-white text-slate-700 hover:bg-slate-100 shadow-lg border border-slate-200"
-              }`}
+              className={`px-6 py-1 rounded-xl font-bold transition-all duration-300 ${selectedCategory === "all"
+                ? "bg-gradient-to-r from-slate-700 to-slate-900 text-white shadow-xl"
+                : "bg-white text-slate-700 hover:bg-slate-100 shadow-lg border border-slate-200"
+                }`}
             >
               All Articles
               <span className="ml-2 text-sm opacity-75">
@@ -479,11 +478,10 @@ export default function Blog() {
                 onClick={() => setSelectedCategory(category.id)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${
-                  selectedCategory === category.id
-                    ? `bg-gradient-to-r ${category.color} text-white shadow-xl`
-                    : "bg-white text-slate-700 hover:bg-slate-100 shadow-lg border border-slate-200"
-                }`}
+                className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${selectedCategory === category.id
+                  ? `bg-gradient-to-r ${category.color} text-white shadow-xl`
+                  : "bg-white text-slate-700 hover:bg-slate-100 shadow-lg border border-slate-200"
+                  }`}
               >
                 {category.name}
                 <span className="ml-2 text-sm opacity-75">
@@ -519,9 +517,8 @@ export default function Blog() {
                     {searchQuery && `Searching for "${searchQuery}"`}
                     {searchQuery && selectedCategory !== "all" && " in "}
                     {selectedCategory !== "all" &&
-                      `${
-                        blogCategories.find((c) => c.id === selectedCategory)
-                          ?.name
+                      `${blogCategories.find((c) => c.id === selectedCategory)
+                        ?.name
                       }`}
                   </p>
                 )}
@@ -573,10 +570,10 @@ export default function Blog() {
                                   post.category.includes("AI")
                                     ? "cpu"
                                     : post.category.includes("Blockchain")
-                                    ? "shield-check"
-                                    : post.category.includes("Design")
-                                    ? "lightbulb"
-                                    : "code"
+                                      ? "shield-check"
+                                      : post.category.includes("Design")
+                                        ? "lightbulb"
+                                        : "code"
                                 }
                                 size="sm"
                                 className="text-slate-700"
@@ -718,11 +715,10 @@ export default function Blog() {
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={`px-4 py-2 rounded-lg transition-colors ${
-                      currentPage === page
-                        ? "bg-blue-600 text-white"
-                        : "bg-white border border-slate-200 hover:bg-slate-50"
-                    }`}
+                    className={`px-4 py-2 rounded-lg transition-colors ${currentPage === page
+                      ? "bg-blue-600 text-white"
+                      : "bg-white border border-slate-200 hover:bg-slate-50"
+                      }`}
                   >
                     {page}
                   </button>
@@ -795,96 +791,7 @@ export default function Blog() {
         )}
       </AnimatePresence>
 
-      {/* Premium CTA Section */}
-      <SmoothSection className="relative py-32 bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30">
-        <GridBackground className="opacity-10" />
 
-        <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-5xl mx-auto text-center"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center justify-center px-6 py-3 mb-8 text-sm font-bold text-purple-700 bg-purple-50 rounded-full border border-purple-200/80 shadow-lg"
-            >
-              <Icon
-                name="lightbulb"
-                size="sm"
-                className="mr-2 text-purple-600"
-              />
-              <span className="text-purple-800">Join Our Community</span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="mb-12"
-            >
-              <h2 className="text-5xl lg:text-8xl font-black mb-6 leading-tight">
-                <span className="text-slate-900">Ready to</span>
-                <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-emerald-600 bg-clip-text text-transparent">
-                  Build Together?
-                </span>
-              </h2>
-              <div className="w-32 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500 rounded-full mx-auto mb-8"></div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="mb-12"
-            >
-              <div className="bg-white/70 backdrop-blur-xl rounded-3xl border border-white/50 p-8 shadow-xl max-w-4xl mx-auto">
-                <p className="text-xl lg:text-2xl text-slate-700 leading-relaxed font-medium">
-                  Have a project in mind? Let's discuss how our expertise can
-                  help bring your vision to life with cutting-edge technology.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6 }}
-              className="flex flex-col lg:flex-row gap-6 justify-center"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative px-12 py-6 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 rounded-3xl font-bold text-white overflow-hidden shadow-2xl hover:shadow-blue-500/25 transition-all duration-300"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-700 via-purple-700 to-blue-800 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
-                <span className="relative flex items-center justify-center space-x-3 text-lg">
-                  <Icon name="rocket" size="lg" />
-                  <span>Start Your Project</span>
-                  <Icon name="arrow-right" size="md" />
-                </span>
-              </motion.button>
-
-              <motion.button
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative px-12 py-6 bg-white/80 backdrop-blur-xl rounded-3xl font-bold text-slate-800 border-2 border-slate-200 hover:border-purple-300 hover:bg-white transition-all duration-300 shadow-xl hover:shadow-2xl"
-              >
-                <span className="flex items-center justify-center space-x-3 text-lg group-hover:text-purple-700 transition-colors">
-                  <Icon name="calendar" size="lg" />
-                  <span>Schedule a Call</span>
-                </span>
-              </motion.button>
-            </motion.div>
-          </motion.div>
-        </div>
-      </SmoothSection>
     </div>
   );
 }

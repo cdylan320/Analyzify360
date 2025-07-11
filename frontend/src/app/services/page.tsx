@@ -19,14 +19,14 @@ export default function Services() {
   const [selectedService, setSelectedService] = useState<any>(null);
   const [activeWorkflowStep, setActiveWorkflowStep] = useState(0);
   const [hoveredService, setHoveredService] = useState<string | null>(null);
-  const [isClient, setIsClient] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { scrollYProgress } = useScroll();
   const workflowRef = useRef<HTMLDivElement>(null);
   const workflowInView = useInView(workflowRef, { once: true });
 
   // Ensure client-side only rendering for animations
   useEffect(() => {
-    setIsClient(true);
+    setMounted(true);
   }, []);
 
   // Predefined positions to avoid Math.random() hydration issues
@@ -129,7 +129,7 @@ export default function Services() {
         </div>
 
         {/* Floating Tech Icons - Client-side only */}
-        {isClient && (
+        {mounted && (
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {floatingIconPositions.map((pos, i) => (
               <motion.div
@@ -166,7 +166,7 @@ export default function Services() {
         )}
 
         {/* Neural Network Background - Client-side only */}
-        {isClient && (
+        {mounted && (
           <div className="absolute inset-0 opacity-20">
             <svg className="w-full h-full" viewBox="0 0 1000 1000">
               <defs>
@@ -900,7 +900,7 @@ export default function Services() {
             >
               <motion.button
                 onClick={() => {
-                  window.location.href = "/contact";
+                  window.location.href = "/careers#contact";
                 }}
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}

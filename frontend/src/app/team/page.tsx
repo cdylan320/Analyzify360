@@ -252,7 +252,7 @@ export default function Team() {
 
               <motion.button
                 onClick={() => {
-                  window.location.href = "/contact"
+                  window.location.href = "/careers#contact"
                 }}
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
@@ -725,7 +725,7 @@ export default function Team() {
       )}
 
       {/* Premium CTA Section */}
-      <SmoothSection className="relative py-32 bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30">
+      {/* <SmoothSection className="relative py-32 bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30">
         <GridBackground className="opacity-10" />
 
         <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
@@ -809,7 +809,7 @@ export default function Team() {
             </motion.div>
           </motion.div>
         </div>
-      </SmoothSection>
+      </SmoothSection> */}
     </div>
   );
 }

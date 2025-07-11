@@ -19,35 +19,42 @@ import { teamMembers } from "@/data/team";
 export default function About() {
   const [currentTimelineIndex, setCurrentTimelineIndex] = useState(-1);
   const [isDragging, setIsDragging] = useState(false);
-  const [isClient, setIsClient] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const timelineRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
 
-  // Pre-computed values for consistent SSR/CSR
-  const particlePositions = useRef<Array<{ left: number, top: number, x: number, duration: number, delay: number }>>([]);
-  const networkElements = useRef<Array<{ x1: number, y1: number, x2: number, y2: number, cx: number, cy: number }>>([]);
+  // Pre-computed static values for consistent SSR/CSR
+  const particlePositions = useRef<Array<{ left: number, top: number, x: number, duration: number, delay: number }>>([
+    { left: 10, top: 20, x: 25, duration: 15, delay: 0 },
+    { left: 80, top: 15, x: -30, duration: 12, delay: 1 },
+    { left: 15, top: 70, x: 40, duration: 18, delay: 2 },
+    { left: 90, top: 60, x: -25, duration: 14, delay: 3 },
+    { left: 25, top: 45, x: 35, duration: 16, delay: 4 },
+    { left: 70, top: 80, x: -40, duration: 13, delay: 0.5 },
+    { left: 45, top: 25, x: 20, duration: 17, delay: 1.5 },
+    { left: 60, top: 55, x: -35, duration: 15, delay: 2.5 },
+    { left: 30, top: 85, x: 30, duration: 14, delay: 3.5 },
+    { left: 85, top: 35, x: -20, duration: 16, delay: 4.5 },
+    { left: 5, top: 50, x: 45, duration: 12, delay: 0.8 },
+    { left: 95, top: 75, x: -45, duration: 18, delay: 1.8 },
+    { left: 40, top: 10, x: 25, duration: 13, delay: 2.8 },
+    { left: 75, top: 30, x: -30, duration: 17, delay: 3.8 },
+    { left: 20, top: 90, x: 35, duration: 15, delay: 4.8 },
+  ]);
+
+  const networkElements = useRef<Array<{ x1: number, y1: number, x2: number, y2: number, cx: number, cy: number }>>([
+    { x1: 100, y1: 200, x2: 300, y2: 400, cx: 150, cy: 250 },
+    { x1: 500, y1: 100, x2: 700, y2: 300, cx: 600, cy: 200 },
+    { x1: 200, y1: 600, x2: 400, y2: 800, cx: 300, cy: 700 },
+    { x1: 800, y1: 500, x2: 900, y2: 700, cx: 850, cy: 600 },
+    { x1: 300, y1: 300, x2: 600, y2: 600, cx: 450, cy: 450 },
+    { x1: 700, y1: 200, x2: 800, y2: 500, cx: 750, cy: 350 },
+    { x1: 150, y1: 800, x2: 350, y2: 900, cx: 250, cy: 850 },
+    { x1: 900, y1: 100, x2: 950, y2: 400, cx: 925, cy: 250 },
+  ]);
 
   useEffect(() => {
-    setIsClient(true);
-
-    // Generate particle positions once on client side
-    particlePositions.current = Array.from({ length: 15 }, () => ({
-      left: Math.random() * 100,
-      top: Math.random() * 100,
-      x: Math.random() * 100 - 50,
-      duration: Math.random() * 10 + 10,
-      delay: Math.random() * 5,
-    }));
-
-    // Generate network element positions once on client side
-    networkElements.current = Array.from({ length: 8 }, () => ({
-      x1: Math.random() * 1000,
-      y1: Math.random() * 1000,
-      x2: Math.random() * 1000,
-      y2: Math.random() * 1000,
-      cx: Math.random() * 1000,
-      cy: Math.random() * 1000,
-    }));
+    setMounted(true);
   }, []);
 
   const leadership = teamMembers.filter(
@@ -151,7 +158,7 @@ export default function About() {
 
         {/* Floating Particles */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {isClient && particlePositions.current.map((position, index) => (
+          {mounted && particlePositions.current.map((position, index) => (
             <motion.div
               key={index}
               className="absolute w-2 h-2 bg-blue-400/30 rounded-full"
@@ -188,7 +195,7 @@ export default function About() {
                 <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.2" />
               </linearGradient>
             </defs>
-            {isClient && networkElements.current.map((element, index) => (
+            {mounted && networkElements.current.map((element, index) => (
               <g key={index}>
                 <motion.line
                   x1={element.x1}

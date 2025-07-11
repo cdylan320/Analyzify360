@@ -153,7 +153,7 @@ export const blogCategories: BlogCategory[] = [
     description: 'Latest trends in artificial intelligence and machine learning',
     color: 'from-purple-500 to-blue-600',
     icon: 'cpu',
-    count: 5
+    count: 2
   },
   {
     id: 'blockchain',
@@ -161,7 +161,7 @@ export const blogCategories: BlogCategory[] = [
     description: 'Blockchain technology, DeFi, and smart contracts',
     color: 'from-orange-500 to-red-600',
     icon: 'shield-check',
-    count: 4
+    count: 2
   },
   {
     id: 'design',
@@ -169,7 +169,7 @@ export const blogCategories: BlogCategory[] = [
     description: 'UX/UI design principles and best practices',
     color: 'from-pink-500 to-purple-600',
     icon: 'lightbulb',
-    count: 3
+    count: 2
   },
   {
     id: 'development',
@@ -177,7 +177,7 @@ export const blogCategories: BlogCategory[] = [
     description: 'Full-stack development and programming tutorials',
     color: 'from-emerald-500 to-teal-600',
     icon: 'code',
-    count: 6
+    count: 3
   },
   {
     id: 'industry',
@@ -185,7 +185,7 @@ export const blogCategories: BlogCategory[] = [
     description: 'Market trends and industry analysis',
     color: 'from-blue-500 to-cyan-600',
     icon: 'briefcase',
-    count: 3
+    count: 1
   }
 ];
 
