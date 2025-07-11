@@ -103,7 +103,7 @@ const Navbar: React.FC = () => {
                 Careers
               </motion.button>
             </Link>
-            <Link href="/contact">
+            <Link href="/careers#contact">
               <motion.button
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
@@ -176,7 +176,7 @@ const Navbar: React.FC = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.7 }}
                   >
-                    <Link href="/contact" onClick={() => setIsOpen(false)}>
+                    <Link href="/careers#contact" onClick={() => setIsOpen(false)}>
                       <button className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-base font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:from-blue-700 hover:to-indigo-700 flex items-center justify-center space-x-2">
                         <span>Get Started</span>
                         <Icon

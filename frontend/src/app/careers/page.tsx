@@ -1143,7 +1143,7 @@ export default function Careers() {
       )}
 
       {/* Join Our Team */}
-      <SmoothSection className="relative py-24 bg-white">
+      <SmoothSection id="contact" className="relative py-24 bg-white">
         <GridBackground className="opacity-5" />
 
         <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">

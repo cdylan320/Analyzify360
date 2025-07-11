@@ -243,7 +243,7 @@ const Hero: React.FC = () => {
                     className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold px-12 py-6 text-lg rounded-2xl shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 border border-cyan-400/30"
                     rightIcon={<Icon name="arrow-right" size="md" />}
                     onClick={() => {
-                      window.location.href = "/careers#jobs";
+                      window.location.href = "/careers#contact";
                     }}
                   >
                     Start Your Project
