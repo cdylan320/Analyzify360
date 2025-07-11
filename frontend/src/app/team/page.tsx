@@ -214,7 +214,7 @@ export default function Team() {
                   label: "Team Members",
                   icon: "users",
                 },
-                { value: "8+", label: "Years Experience", icon: "star" },
+                { value: "7+", label: "Years Experience", icon: "star" },
                 { value: "150+", label: "Projects", icon: "briefcase" },
                 { value: "24/7", label: "Support", icon: "clock" },
               ].map((stat, index) => (
@@ -249,17 +249,6 @@ export default function Team() {
               transition={{ duration: 1, delay: 1.2 }}
               className="flex flex-col sm:flex-row gap-6 justify-center"
             >
-              <motion.button
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative px-12 py-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl font-bold text-white overflow-hidden shadow-2xl"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-                <span className="relative flex items-center justify-center space-x-3">
-                  <span>Meet Our Team</span>
-                  <Icon name="arrow" size="md" />
-                </span>
-              </motion.button>
 
               <motion.button
                 onClick={() => {
@@ -720,7 +709,8 @@ export default function Team() {
                   )}
                   {selectedMember.social?.email && (
                     <a
-                      href={`https://mail.google.com/mail/?view=cm&fs=1&to=${selectedMemeber.social.email}&su=New Project Inquiry&body=Hi Analyzify360 Team,%0D%0A%0D%0AI'm interested in discussing a project with you.%0D%0A%0D%0AProject details:%0D%0A-%0D%0A-%0D%0A-%0D%0A%0D%0ABest regards`}
+                      target="_blank"
+                      href={`https://mail.google.com/mail/?view=cm&fs=1&to=${selectedMember.social.email}&su=New Project Inquiry&body=Hi Analyzify360 Team,%0D%0A%0D%0AI'm interested in discussing a project with you.%0D%0A%0D%0AProject details:%0D%0A-%0D%0A-%0D%0A-%0D%0A%0D%0ABest regards`}
                       className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition-all duration-300 hover:scale-105"
                     >
                       <Icon name="mail" size="md" />

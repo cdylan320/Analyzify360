@@ -13,7 +13,7 @@ import {
   Icon,
   Button,
 } from "@/components";
-import { careerPositions } from "@/data/content";
+import { careerPositions, companyInfo } from "@/data/content";
 import { teamMembers } from "@/data/team";
 import { FILE_CONFIG } from "@/lib/config";
 import { ApiService, ApiError } from "@/lib/api";
@@ -123,42 +123,34 @@ export default function Careers() {
     },
   ];
 
-  // Application process steps
-  const applicationSteps = [
+  // Direct contact methods - matching contact page structure
+  const contactMethods = [
     {
+      icon: "mail",
+      title: "Email Us",
+      value: companyInfo.email,
+      description: "Send us your resume and tell us about your interests",
+      color: "from-blue-500 to-cyan-600",
+      action: `https://mail.google.com/mail/?view=cm&fs=1&to=${companyInfo.email}&su=Career Opportunity Inquiry&body=Hi Analyzify360 Team,%0D%0A%0D%0AI am interested in joining your team.%0D%0A%0D%0ABackground:%0D%0A-%0D%0A-%0D%0A%0D%0ABest regards`,
       step: 1,
-      title: "Apply Online",
-      description: "Submit your application with resume and cover letter",
-      icon: "envelope",
-      duration: "5 minutes",
     },
     {
+      icon: "phone",
+      title: "Call Us",
+      value: companyInfo.phone,
+      description: "Call us directly to discuss opportunities and your background",
+      color: "from-emerald-500 to-teal-600",
+      action: `tel:${companyInfo.phone}`,
       step: 2,
-      title: "Initial Review",
-      description: "Our team reviews your application and experience",
-      icon: "search",
-      duration: "2-3 days",
     },
     {
+      icon: "calendar",
+      title: "Book Meeting",
+      value: "Schedule Call",
+      description: "Book a convenient time for a casual conversation about joining our team",
+      color: "from-orange-500 to-red-600",
+      action: "https://calendly.com/brian-logan94727/30min",
       step: 3,
-      title: "Technical Interview",
-      description: "Technical discussion and problem-solving session",
-      icon: "code",
-      duration: "1 hour",
-    },
-    {
-      step: 4,
-      title: "Team Interview",
-      description: "Meet your potential teammates and discuss culture fit",
-      icon: "users",
-      duration: "45 minutes",
-    },
-    {
-      step: 5,
-      title: "Final Decision",
-      description: "We'll make our decision and extend an offer",
-      icon: "check",
-      duration: "1-2 days",
     },
   ];
 
@@ -359,7 +351,7 @@ export default function Careers() {
             >
               <div className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse"></div>
               <span className="bg-gradient-to-r from-purple-200 to-blue-200 bg-clip-text text-transparent">
-                Remote-First • Global Team • 15+ Open Positions
+                Remote-First • Global Team
               </span>
             </motion.div>
 
@@ -400,46 +392,6 @@ export default function Careers() {
               </div>
             </motion.div>
 
-            {/* Modern CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.9 }}
-              className="flex flex-col sm:flex-row gap-6 justify-center"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() =>
-                  document
-                    .getElementById("open-positions")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="group relative px-12 py-6 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl font-bold text-white overflow-hidden shadow-2xl"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-700 to-blue-700 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-                <span className="relative flex items-center justify-center space-x-3">
-                  <span>View Open Positions</span>
-                  <Icon name="briefcase" size="md" />
-                </span>
-              </motion.button>
-
-              <motion.button
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() =>
-                  document
-                    .getElementById("company-culture")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="group relative px-12 py-6 bg-white/10 backdrop-blur-xl rounded-2xl font-bold text-white border border-white/20 hover:bg-white/20 transition-all duration-300 shadow-2xl"
-              >
-                <span className="flex items-center justify-center space-x-3">
-                  <span>Our Culture</span>
-                  <Icon name="heart" size="md" />
-                </span>
-              </motion.button>
-            </motion.div>
 
             {/* Quick Stats */}
             <motion.div
@@ -609,58 +561,20 @@ export default function Careers() {
                   </p>
                 </div>
 
-                {/* Hover Effect */}
-                <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="flex items-center space-x-2 text-emerald-700 font-semibold">
-                    <span>Learn More</span>
-                    <Icon name="arrow-right" size="sm" />
-                  </div>
-                </div>
+
               </ProfessionalCard>
             ))}
           </StaggeredContainer>
 
-          {/* Call to Action */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mt-16"
-          >
-            <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl border border-emerald-200 p-8 lg:p-12">
-              <h3 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-4">
-                Ready to Join Our Team?
-              </h3>
-              <p className="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
-                Discover opportunities to grow, learn, and make an impact with
-                like-minded professionals.
-              </p>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() =>
-                  document
-                    .getElementById("open-positions")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <div className="flex items-center space-x-2">
-                  <span>Browse Open Positions</span>
-                  <Icon name="arrow-right" size="sm" />
-                </div>
-              </motion.button>
-            </div>
-          </motion.div>
         </div>
       </SmoothSection>
 
       {/* Open Positions - Ultra Visual Design */}
-      <SmoothSection
+      {/* <SmoothSection
         className="relative py-32 bg-slate-700 overflow-hidden"
         id="jobs"
       >
-        {/* Balanced Background Effects */}
+        
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-slate-600 to-slate-700"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(99,102,241,0.2),transparent_70%)]"></div>
@@ -697,7 +611,7 @@ export default function Careers() {
             </p>
           </AnimatedSection>
 
-          {/* Enhanced Job Filters */}
+          
           <div className="flex justify-center mb-16">
             <div className="bg-slate-600 rounded-2xl border border-slate-500 p-2 shadow-xl">
               <div className="flex flex-wrap gap-2 justify-center">
@@ -751,7 +665,7 @@ export default function Careers() {
             </div>
           </div>
 
-          {/* Revolutionary Job Cards Grid */}
+          
           <StaggeredContainer className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
             {filteredPositions.map((position, index) => (
               <motion.div
@@ -768,12 +682,12 @@ export default function Careers() {
                 onClick={() => openPositionModal(position)}
               >
                 <div className="relative">
-                  {/* Main Card */}
+                  
                   <div className="bg-white backdrop-blur-xl rounded-3xl border border-slate-200 shadow-lg hover:shadow-xl transition-all duration-500 p-8 min-h-[520px] flex flex-col overflow-hidden group-hover:border-slate-300">
-                    {/* Clean Top Bar */}
+                    
                     <div className="absolute top-0 left-0 right-0 h-1 bg-slate-700 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
 
-                    {/* Position Header */}
+                    
                     <div className="flex items-center justify-between mb-8">
                       <div
                         className={`px-4 py-2 rounded-lg text-sm font-semibold ${position.type === "tech"
@@ -807,7 +721,7 @@ export default function Careers() {
                       </div>
                     </div>
 
-                    {/* Position Details */}
+                    
                     <div className="flex-1 space-y-6">
                       <div>
                         <h3 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-4 group-hover:text-slate-700 transition-colors leading-tight">
@@ -828,7 +742,7 @@ export default function Careers() {
                         </p>
                       </div>
 
-                      {/* Skills & Requirements */}
+                      
                       <div className="space-y-4">
                         <div className="flex items-center space-x-2">
                           <Icon
@@ -858,7 +772,7 @@ export default function Careers() {
                         )}
                       </div>
 
-                      {/* Benefits Highlights */}
+                      
                       <div className="space-y-3">
                         <div className="flex items-center space-x-2">
                           <Icon
@@ -892,7 +806,7 @@ export default function Careers() {
                       </div>
                     </div>
 
-                    {/* Professional Apply Button */}
+                    
                     <div className="mt-8 space-y-4">
                       <motion.div
                         whileHover={{ scale: 1.02 }}
@@ -914,7 +828,7 @@ export default function Careers() {
                         </button>
                       </motion.div>
 
-                      {/* Quick Stats */}
+                      
                       <div className="grid grid-cols-3 gap-4 text-center pt-4 border-t border-slate-200">
                         <div className="space-y-1">
                           <div className="text-slate-800 font-semibold text-sm">
@@ -946,7 +860,7 @@ export default function Careers() {
             ))}
           </StaggeredContainer>
 
-          {/* Enhanced No Positions Message */}
+          
           {filteredPositions.length === 0 && (
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -980,7 +894,7 @@ export default function Careers() {
             </motion.div>
           )}
         </div>
-      </SmoothSection>
+      </SmoothSection> */}
 
       {/* Position Details Modal */}
       {selectedPosition && !showApplicationModal && (
@@ -1228,7 +1142,7 @@ export default function Careers() {
         </div>
       )}
 
-      {/* Application Process */}
+      {/* Join Our Team */}
       <SmoothSection className="relative py-24 bg-white">
         <GridBackground className="opacity-5" />
 
@@ -1238,37 +1152,37 @@ export default function Careers() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center justify-center px-6 py-3 mb-6 text-sm font-semibold text-blue-700 bg-blue-50 rounded-full border border-blue-200/80 shadow-lg"
+              className="inline-flex items-center justify-center px-6 py-3 mb-6 text-sm font-semibold text-emerald-700 bg-emerald-50 rounded-full border border-emerald-200/80 shadow-lg"
             >
-              <Icon name="map" size="sm" className="mr-2 text-blue-600" />
-              <span className="text-blue-800">Application Process</span>
+              <Icon name="users" size="sm" className="mr-2 text-emerald-600" />
+              <span className="text-emerald-800">Join Our Team</span>
             </motion.div>
 
             <h2 className="text-4xl lg:text-6xl font-black mb-6 leading-tight">
-              <span className="text-slate-900">Your Journey</span>
-              <span className="block bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-700 bg-clip-text text-transparent">
-                To Success
+              <span className="text-slate-900">Ready to</span>
+              <span className="block bg-gradient-to-r from-emerald-700 via-blue-700 to-purple-700 bg-clip-text text-transparent">
+                Connect?
               </span>
             </h2>
 
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mx-auto mb-6"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-blue-600 rounded-full mx-auto mb-6"></div>
 
             <p className="text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto font-medium">
-              Our streamlined application process is designed to be transparent,
-              efficient, and focused on finding the right fit for both you and
-              our team.
+              Skip the formal application process. We believe in direct, personal
+              connections. Reach out to us through any of these methods and let's
+              start a conversation about your future with our team.
             </p>
           </AnimatedSection>
 
-          {/* Process Steps */}
+          {/* Contact Methods */}
           <div className="relative">
             {/* Connection Line */}
-            <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-200 via-indigo-200 to-purple-200 rounded-full hidden lg:block"></div>
+            <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-emerald-200 via-blue-200 to-purple-200 rounded-full hidden lg:block"></div>
 
             <div className="space-y-8 lg:space-y-16">
-              {applicationSteps.map((step, index) => (
+              {contactMethods.map((method, index) => (
                 <motion.div
-                  key={step.step}
+                  key={method.step}
                   initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -1276,7 +1190,7 @@ export default function Careers() {
                   className={`flex flex-col lg:flex-row items-center gap-8 ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                     }`}
                 >
-                  {/* Step Content */}
+                  {/* Method Content */}
                   <div className="flex-1 max-w-md">
                     <ProfessionalCard
                       delay={0}
@@ -1285,53 +1199,58 @@ export default function Careers() {
                     >
                       <div className="flex items-center space-x-4 mb-4">
                         <div
-                          className={`w-12 h-12 rounded-2xl flex items-center justify-center ${index === 0
-                            ? "bg-gradient-to-br from-blue-500 to-blue-600"
-                            : index === 1
-                              ? "bg-gradient-to-br from-indigo-500 to-indigo-600"
-                              : index === 2
-                                ? "bg-gradient-to-br from-purple-500 to-purple-600"
-                                : index === 3
-                                  ? "bg-gradient-to-br from-pink-500 to-pink-600"
-                                  : "bg-gradient-to-br from-emerald-500 to-emerald-600"
-                            }`}
+                          className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${method.color}`}
                         >
                           <Icon
-                            name={step.icon as any}
+                            name={method.icon as any}
                             size="md"
                             className="text-white"
                           />
                         </div>
                         <div className="flex-1">
                           <h3 className="text-xl font-bold text-slate-900">
-                            {step.title}
+                            {method.title}
                           </h3>
                           <p className="text-slate-500 font-medium">
-                            {step.duration}
+                            {method.value}
                           </p>
                         </div>
                       </div>
-                      <p className="text-slate-600 leading-relaxed font-medium">
-                        {step.description}
+                      <p className="text-slate-600 leading-relaxed font-medium mb-6">
+                        {method.description}
                       </p>
+
+                      {/* Contact Action Button */}
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => {
+                          if (method.action.startsWith('tel:')) {
+                            window.location.href = method.action;
+                          } else {
+                            window.open(method.action, '_blank');
+                          }
+                        }}
+                        className={`w-full py-3 px-6 rounded-xl font-bold text-white transition-all duration-300 bg-gradient-to-r ${method.color} hover:opacity-90`}
+                      >
+                        <span className="flex items-center justify-center space-x-2">
+                          <Icon
+                            name={method.icon as any}
+                            size="sm"
+                            className="text-white"
+                          />
+                          <span>{method.title}</span>
+                        </span>
+                      </motion.button>
                     </ProfessionalCard>
                   </div>
 
-                  {/* Step Number */}
+                  {/* Method Number */}
                   <div className="relative z-10">
                     <div
-                      className={`w-20 h-20 rounded-full flex items-center justify-center text-2xl font-black text-white shadow-2xl ${index === 0
-                        ? "bg-gradient-to-br from-blue-500 to-blue-600"
-                        : index === 1
-                          ? "bg-gradient-to-br from-indigo-500 to-indigo-600"
-                          : index === 2
-                            ? "bg-gradient-to-br from-purple-500 to-purple-600"
-                            : index === 3
-                              ? "bg-gradient-to-br from-pink-500 to-pink-600"
-                              : "bg-gradient-to-br from-emerald-500 to-emerald-600"
-                        }`}
+                      className={`w-20 h-20 rounded-full flex items-center justify-center text-2xl font-black text-white shadow-2xl bg-gradient-to-br ${method.color}`}
                     >
-                      {step.step}
+                      {method.step}
                     </div>
                   </div>
 
@@ -1342,45 +1261,45 @@ export default function Careers() {
             </div>
           </div>
 
-          {/* Process Summary */}
+          {/* Contact Summary */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mt-20"
           >
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl border border-blue-200 p-8 lg:p-12">
+            <div className="bg-gradient-to-br from-emerald-50 to-blue-50 rounded-3xl border border-emerald-200 p-8 lg:p-12">
               <h3 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-4">
-                Total Process Time: 1-2 Weeks
+                Personal Connection First
               </h3>
               <p className="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
-                We value your time and aim to provide feedback at every step.
-                Our goal is to make the process as smooth and transparent as
-                possible.
+                We value authentic conversations over formal processes. Reach out
+                through your preferred method and let's discuss how you can contribute
+                to our growing team.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-700 mb-2">
-                    24h
+                  <div className="text-3xl font-bold text-emerald-700 mb-2">
+                    Same Day
                   </div>
                   <div className="text-slate-600 font-medium">
-                    Initial Response
+                    Response Time
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-indigo-700 mb-2">
-                    95%
+                  <div className="text-3xl font-bold text-blue-700 mb-2">
+                    100%
                   </div>
                   <div className="text-slate-600 font-medium">
-                    Satisfaction Rate
+                    Personal Touch
                   </div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-purple-700 mb-2">
-                    3.5/5
+                    Direct
                   </div>
                   <div className="text-slate-600 font-medium">
-                    Average Steps
+                    Communication
                   </div>
                 </div>
               </div>

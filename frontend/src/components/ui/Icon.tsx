@@ -60,6 +60,7 @@ import {
   Lightbulb,
   Cpu,
   Monitor,
+  Star,
 } from "lucide-react";
 
 const iconMap = {
@@ -131,6 +132,7 @@ const iconMap = {
   rocket: Zap, // Using Zap as rocket alternative
   support: Shield, // Using Shield as support alternative
   chat: MessageCircle, // Chat/messaging icon
+  star: Star, // Star icon
 };
 
 export interface IconProps {
@@ -196,6 +198,7 @@ const Icon: React.FC<IconProps> = ({
     Lightbulb,
     Cpu,
     Monitor,
+    Star,
   ].includes(IconComponent as any);
 
   if (isLucideIcon) {
