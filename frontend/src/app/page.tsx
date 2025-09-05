@@ -32,9 +32,9 @@ export default function Home() {
       <SmoothSection id="trust" backgroundType="pattern" overlayOpacity={0.05}>
         <TrustBadges />
       </SmoothSection>
-      <SmoothSection id="team" backgroundType="mesh" overlayOpacity={0.08}>
+      {/* <SmoothSection id="team" backgroundType="mesh" overlayOpacity={0.08}>
         <TeamPreview />
-      </SmoothSection>
+      </SmoothSection> */}
       <SmoothSection
         id="projects"
         backgroundType="gradient"
