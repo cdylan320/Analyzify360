@@ -62,8 +62,8 @@ export default function About() {
   );
 
   const stats = [
-    { value: "150+", label: "Projects Delivered", icon: "briefcase" },
-    { value: "50+", label: "Happy Clients", icon: "users" },
+    { value: "12+", label: "Projects Delivered", icon: "briefcase" },
+    { value: "3+", label: "Happy Clients", icon: "users" },
     { value: "7+", label: "Years Experience", icon: "calendar" },
     { value: "24/7", label: "Support Available", icon: "shield" },
   ];
@@ -238,7 +238,7 @@ export default function About() {
             >
               <div className="w-2 h-2 bg-blue-400 rounded-full mr-3 animate-pulse"></div>
               <span className="bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
-                Shaping Digital Excellence Since 2018
+                Shaping Digital Excellence Since 2024
               </span>
             </motion.div>
 
@@ -311,7 +311,7 @@ export default function About() {
 
       </motion.section>
 
-      {/* Statistics Section */}
+      {/* Statistics Section
       <SmoothSection className="relative py-20 bg-gradient-to-b from-white to-slate-50">
         <div className="w-[95%] mx-auto px-4 lg:px-8">
           <StaggeredContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -339,7 +339,7 @@ export default function About() {
             ))}
           </StaggeredContainer>
         </div>
-      </SmoothSection>
+      </SmoothSection> */}
 
       {/* Company Values */}
       <SmoothSection className="relative py-24 bg-white">
@@ -425,7 +425,7 @@ export default function About() {
               className="inline-flex items-center justify-center px-8 py-4 mt-8 mb-6 text-sm font-bold text-white bg-slate-800/80 rounded-full border border-white/60 backdrop-blur-2xl shadow-2xl"
             >
               <div className="w-2 h-2 bg-purple-400 rounded-full mr-3 animate-pulse drop-shadow-sm"></div>
-              <span style={{ textShadow: "1px 1px 4px rgba(0,0,0,0.8)" }}>Our Evolution • 2018-2024</span>
+              <span style={{ textShadow: "1px 1px 4px rgba(0,0,0,0.8)" }}>Our Evolution • 2024-2026</span>
             </motion.div>
 
             <h2 className="text-5xl lg:text-8xl font-black mb-8 leading-tight">
@@ -436,8 +436,8 @@ export default function About() {
             </h2>
 
             <p className="text-white text-xl leading-relaxed max-w-4xl mx-auto font-semibold" style={{ textShadow: "2px 2px 6px rgba(0,0,0,0.8), 0 0 15px rgba(0,0,0,0.6)" }}>
-              Navigate through our 7-year serpentine journey of innovation and
-              growth
+              Navigate through our strategic roadmap of innovation and
+              ambitious growth
             </p>
           </AnimatedSection>
 
@@ -531,13 +531,13 @@ export default function About() {
             {timeline.map((item, index) => {
               // Calculate positions ABOVE the serpentine road curve (following red arrows)
               const roadPoints = [
-                { x: 10, y: 78 }, // 2018 - ABOVE start of road
-                { x: 22, y: 68 }, // 2019 - ABOVE first curve  
-                { x: 31, y: 60 }, // 2020 - ABOVE continuing curve
-                { x: 30, y: 45 }, // 2021 - ABOVE curve back
-                { x: 47, y: 30 }, // 2022 - ABOVE middle curve
-                { x: 60, y: 13 }, // 2023 - ABOVE upper curve
-                { x: 75, y: 11 },  // 2024 - ABOVE end of road
+                { x: 10, y: 78 }, // 2024 Q1 - ABOVE start of road
+                { x: 22, y: 68 }, // 2024 Q2 - ABOVE first curve  
+                { x: 31, y: 60 }, // 2024 Q3 - ABOVE continuing curve
+                { x: 30, y: 45 }, // 2025 Q1 - ABOVE curve back
+                { x: 47, y: 30 }, // 2025 Q2 - ABOVE middle curve
+                { x: 60, y: 13 }, // 2026 Q1 - ABOVE upper curve
+                { x: 75, y: 11 },  // 2026 Q2 - ABOVE end of road
               ];
 
               const position = roadPoints[index];
@@ -796,7 +796,7 @@ export default function About() {
       </SmoothSection>
 
       {/* Achievements Section */}
-      <SmoothSection className="relative py-24 bg-gradient-to-br from-slate-50 to-white">
+      {/* <SmoothSection className="relative py-24 bg-gradient-to-br from-slate-50 to-white">
         <GridBackground className="opacity-5" />
 
         <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
@@ -824,7 +824,7 @@ export default function About() {
                 hoverEffect="glow"
                 className="group bg-white rounded-3xl border border-slate-200/80 shadow-xl hover:shadow-2xl transition-all duration-500 p-8 text-center min-h-[300px] flex flex-col"
               >
-                {/* Icon */}
+                
                 <div
                   className={`w-20 h-20 bg-gradient-to-br ${achievement.color} rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
                 >
@@ -835,7 +835,6 @@ export default function About() {
                   />
                 </div>
 
-                {/* Content */}
                 <div className="flex-1">
                   <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-blue-700 transition-colors">
                     {achievement.title}
@@ -848,7 +847,7 @@ export default function About() {
             ))}
           </StaggeredContainer>
         </div>
-      </SmoothSection>
+      </SmoothSection> */}
 
       {/* Leadership Section */}
       <SmoothSection className="relative py-24 bg-white">

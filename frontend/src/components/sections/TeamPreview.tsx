@@ -138,7 +138,7 @@ const TeamPreview: React.FC = () => {
               </div>
               <div className="text-center">
                 <div className="text-3xl md:text-4xl font-black text-teal-400 mb-2">
-                  150+
+                  15+
                 </div>
                 <div className="text-slate-300 font-medium">
                   Projects Delivered

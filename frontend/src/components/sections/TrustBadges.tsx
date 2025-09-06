@@ -72,7 +72,7 @@ const TrustBadges: React.FC = () => {
       color: "from-green-500 to-teal-500",
     },
     {
-      value: "150+",
+      value: "12+",
       label: "Projects Delivered",
       description:
         "Successfully completed projects across various industries and scales",
@@ -93,7 +93,7 @@ const TrustBadges: React.FC = () => {
 
       <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
         {/* Section Header */}
-        <AnimatedSection className="text-center mb-20">
+        {/* <AnimatedSection className="text-center mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -117,10 +117,10 @@ const TrustBadges: React.FC = () => {
             We've earned the trust of businesses worldwide through our
             commitment to excellence, innovation, and results.
           </p>
-        </AnimatedSection>
+        </AnimatedSection> */}
 
         {/* Trust Badges Grid */}
-        <StaggeredContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+        {/* <StaggeredContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           {badges.map((badge, index) => (
             <motion.div
               key={index}
@@ -131,14 +131,14 @@ const TrustBadges: React.FC = () => {
               whileHover={{ y: -8, scale: 1.02 }}
               className={`group relative bg-white rounded-2xl border ${badge.borderColor} shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden min-h-[320px] flex flex-col`}
             >
-              {/* Card Background */}
+              
               <div
                 className={`absolute inset-0 ${badge.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
               ></div>
 
-              {/* Card Content */}
+              
               <div className="relative z-10 p-6 text-center flex-1 flex flex-col">
-                {/* Icon */}
+                
                 <div className="flex justify-center mb-4">
                   <div
                     className={`w-16 h-16 bg-gradient-to-br ${badge.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
@@ -151,17 +151,17 @@ const TrustBadges: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Title */}
+                
                 <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-slate-800 transition-colors">
                   {badge.title}
                 </h3>
 
-                {/* Description */}
+                
                 <p className="text-slate-600 leading-relaxed mb-8 text-sm flex-1">
                   {badge.description}
                 </p>
 
-                {/* Metric */}
+                
                 <div className="pt-4 border-t border-slate-200 mt-auto">
                   <div
                     className={`text-2xl font-black bg-gradient-to-r ${badge.color} bg-clip-text text-transparent mb-1`}
@@ -174,11 +174,11 @@ const TrustBadges: React.FC = () => {
                 </div>
               </div>
 
-              {/* Hover Effect Border */}
+              
               <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-slate-200 transition-colors duration-300"></div>
             </motion.div>
           ))}
-        </StaggeredContainer>
+        </StaggeredContainer> */}
 
         {/* Statistics Section */}
         <AnimatedSection>

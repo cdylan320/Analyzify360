@@ -110,39 +110,39 @@ export const companyValues: CompanyValue[] = [
 
 export const timeline: TimelineItem[] = [
   {
-    year: '2018',
+    year: '2024',
     title: 'Company Founded',
-    description: 'Analyzify360 was established with a vision to bridge global tech expertise with local trust, starting as a boutique development agency'
-  },
-  {
-    year: '2019',
-    title: 'Team Expansion',
-    description: 'Grew from 3 to 15 talented developers and established our core development methodologies and quality standards'
-  },
-  {
-    year: '2020',
-    title: 'Remote-First Transition',
-    description: 'Successfully transitioned to a fully remote-first culture, enabling us to tap into global talent while maintaining exceptional quality'
-  },
-  {
-    year: '2021',
-    title: 'First Major Enterprise Client',
-    description: 'Secured our first Fortune 500 client and launched our enterprise-grade security protocols and compliance standards'
-  },
-  {
-    year: '2022',
-    title: 'International Expansion',
-    description: 'Opened operations in the UK and established dedicated account management teams for better client communication'
-  },
-  {
-    year: '2023',
-    title: 'US Market Entry',
-    description: 'Launched US operations with local account managers in Chicago, Austin, and San Francisco to serve the American market'
+    description: 'Analyzify360 was established with a vision to bridge global tech expertise with local trust, launching as a modern software development agency'
   },
   {
     year: '2024',
-    title: 'AI & Innovation Hub',
-    description: 'Established our specialized AI and machine learning division with custom LLM capabilities and cutting-edge blockchain solutions'
+    title: 'Core Team Formation',
+    description: 'Assembled our founding team of experienced developers and established our development methodologies and quality standards'
+  },
+  {
+    year: '2024',
+    title: 'First Client Success',
+    description: 'Delivered our first major project and established our reputation for quality, innovation, and reliable project delivery'
+  },
+  {
+    year: '2025',
+    title: 'Team Expansion & Specialization',
+    description: 'Growing to 5+ specialists across full-stack development, AI/ML, and blockchain technologies with enhanced service offerings'
+  },
+  {
+    year: '2025',
+    title: 'Global Market Expansion',
+    description: 'Scaling operations internationally with dedicated account management and localized support teams across key markets'
+  },
+  {
+    year: '2026',
+    title: 'Enterprise Solutions Division',
+    description: 'Launching enterprise-grade security protocols, compliance standards, and Fortune 500 client acquisition strategies'
+  },
+  {
+    year: '2026',
+    title: 'AI Innovation Hub',
+    description: 'Establishing specialized AI and machine learning division with custom LLM capabilities and cutting-edge technology solutions'
   }
 ];
 
@@ -442,7 +442,7 @@ export const careerPositions: CareerPosition[] = [
 export const companyInfo = {
   name: 'Analyzify360',
   tagline: 'Stronger Together, Further Forever',
-  description: 'Analyzify360 unites top engineers and US partners to deliver secure, seamless digital solutions.',
+  description: 'Analyzify360 is a next-generation software development agency founded by a team of experienced co-founders.',
   mission: 'To bridge the gap between global technical excellence and local business understanding, creating technology solutions that drive real business value.',
   announcement: 'Now serving US & UK clients—ask about our launch offer.',
   email: 'support@analyzify360.com',

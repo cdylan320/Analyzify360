@@ -275,7 +275,7 @@ const ProjectShowcase: React.FC = () => {
         </div>
 
         {/* Portfolio Statistics */}
-        <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-12 lg:p-16 shadow-2xl mb-12">
+        {/* <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-12 lg:p-16 shadow-2xl mb-12">
           <div className="text-center mb-12">
             <h3 className="text-3xl lg:text-4xl font-black text-white mb-4">
               Our Track Record
@@ -307,7 +307,7 @@ const ProjectShowcase: React.FC = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
       </div>
     </section>

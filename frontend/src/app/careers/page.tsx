@@ -105,14 +105,14 @@ export default function Careers() {
       title: "Innovation",
       description:
         "We embrace cutting-edge technologies and encourage creative problem-solving",
-      stats: "50+ Innovation Projects",
+      stats: "12+ Innovation Projects",
     },
     {
       icon: "globe",
       title: "Global Impact",
       description:
         "Our work affects millions of users across 40+ countries worldwide",
-      stats: "40+ Countries Served",
+      stats: "20+ Countries Served",
     },
     {
       icon: "shield",
@@ -394,15 +394,15 @@ export default function Careers() {
 
 
             {/* Quick Stats */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.2 }}
               className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8"
             >
               {[
-                { number: "50+", label: "Team Members", icon: "users" },
-                { number: "40+", label: "Countries", icon: "globe" },
+                { number: "5+", label: "Team Members", icon: "users" },
+                { number: "3+", label: "Countries", icon: "globe" },
                 { number: "98%", label: "Satisfaction", icon: "heart" },
               ].map((stat, index) => (
                 <div key={index} className="text-center">
@@ -419,7 +419,7 @@ export default function Careers() {
                   <div className="text-white/60 font-medium">{stat.label}</div>
                 </div>
               ))}
-            </motion.div>
+            </motion.div> */}
           </div>
         </div>
 
@@ -1309,7 +1309,7 @@ export default function Careers() {
       </SmoothSection>
 
       {/* Team Testimonials */}
-      <SmoothSection className="relative py-24 bg-gradient-to-b from-slate-50 to-white">
+      {/* <SmoothSection className="relative py-24 bg-gradient-to-b from-slate-50 to-white">
         <div className="w-[95%] mx-auto px-4 lg:px-8">
           <AnimatedSection className="text-center mb-20">
             <motion.div
@@ -1338,70 +1338,70 @@ export default function Careers() {
           </AnimatedSection>
 
           <StaggeredContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teamMembers.slice(0, 6).map((member, index) => (
+            {teamMembers.slice(0, 3).map((member, index) => (
               <ProfessionalCard
                 key={member.id}
                 delay={index * 0.1}
                 hoverEffect="glow"
                 className="group bg-white rounded-3xl border border-slate-200/80 shadow-xl hover:shadow-2xl transition-all duration-500 p-8 min-h-[320px] flex flex-col"
               >
-                {/* Member Avatar */}
-                <div className="flex items-center space-x-4 mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
-                    {member.avatar}
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-slate-900">
-                      {member.name}
-                    </h3>
-                    <p className="text-green-700 font-semibold">
-                      {member.title}
-                    </p>
-                    {member.location && (
-                      <p className="text-slate-500 text-sm">
-                        {member.location}
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                {/* Quote */}
-                <div className="flex-1">
-                  {member.quote && (
-                    <blockquote className="text-slate-600 italic leading-relaxed font-medium mb-4">
-                      "{member.quote}"
-                    </blockquote>
-                  )}
-                  <p className="text-slate-600 leading-relaxed font-medium">
-                    {member.bio.length > 120
-                      ? member.bio.substring(0, 120) + "..."
-                      : member.bio}
-                  </p>
-                </div>
-
-                {/* Skills */}
-                {member.skills && (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {member.skills.slice(0, 3).map((skill, skillIndex) => (
-                      <span
-                        key={skillIndex}
-                        className="px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-semibold border border-green-200"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                    {member.skills.length > 3 && (
-                      <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-semibold">
-                        +{member.skills.length - 3}
-                      </span>
-                    )}
-                  </div>
-                )}
-              </ProfessionalCard>
-            ))}
-          </StaggeredContainer>
+              
+      <div className="flex items-center space-x-4 mb-6">
+        <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+          {member.avatar}
         </div>
-      </SmoothSection>
-    </div>
+        <div>
+          <h3 className="text-lg font-bold text-slate-900">
+            {member.name}
+          </h3>
+          <p className="text-green-700 font-semibold">
+            {member.title}
+          </p>
+          {member.location && (
+            <p className="text-slate-500 text-sm">
+              {member.location}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div className="flex-1">
+        {member.quote && (
+          <blockquote className="text-slate-600 italic leading-relaxed font-medium mb-4">
+            "{member.quote}"
+          </blockquote>
+        )}
+        <p className="text-slate-600 leading-relaxed font-medium">
+          {member.bio.length > 120
+            ? member.bio.substring(0, 120) + "..."
+            : member.bio}
+        </p>
+      </div>
+
+
+      {member.skills && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {member.skills.slice(0, 3).map((skill, skillIndex) => (
+            <span
+              key={skillIndex}
+              className="px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-semibold border border-green-200"
+            >
+              {skill}
+            </span>
+          ))}
+          {member.skills.length > 3 && (
+            <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-semibold">
+              +{member.skills.length - 3}
+            </span>
+          )}
+        </div>
+      )}
+    </ProfessionalCard>
+  ))
+}
+          </StaggeredContainer >
+        </div >
+      </SmoothSection > */}
+    </div >
   );
 }

@@ -194,15 +194,13 @@ export default function Team() {
             >
               <div className="bg-white/5 backdrop-blur-2xl rounded-3xl border border-white/10 p-8 shadow-2xl">
                 <p className="text-xl lg:text-2xl leading-relaxed text-white/80 font-medium">
-                  Meet the brilliant minds behind our success. A perfect blend
-                  of global technical expertise and local partnership, dedicated
-                  to transforming your vision into reality.
+                  Meet the brilliant minds behind our success. Our team brings together deep technical expertise and a shared passion for excellence
                 </p>
               </div>
             </motion.div>
 
             {/* Team Quick Stats */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.9 }}
@@ -240,7 +238,7 @@ export default function Team() {
                   </div>
                 </motion.div>
               ))}
-            </motion.div>
+            </motion.div> */}
 
             {/* Modern CTA */}
             <motion.div

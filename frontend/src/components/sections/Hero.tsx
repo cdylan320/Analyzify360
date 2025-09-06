@@ -249,7 +249,7 @@ const Hero: React.FC = () => {
                     Start Your Project
                   </Button>
                 </motion.div>
-                <motion.div
+                {/* <motion.div
                   initial={{ opacity: 0, x: 50, rotateY: 15 }}
                   animate={{ opacity: 1, x: 0, rotateY: 0 }}
                   transition={{ duration: 0.8, delay: 1.6 }}
@@ -271,7 +271,7 @@ const Hero: React.FC = () => {
                   >
                     Meet Our Team
                   </Button>
-                </motion.div>
+                </motion.div> */}
               </motion.div>
             </div>
 
@@ -410,7 +410,7 @@ const Hero: React.FC = () => {
             >
               {[
                 {
-                  number: "150+",
+                  number: "12+",
                   label: "Projects Delivered",
                   color: "text-cyan-300",
                 },

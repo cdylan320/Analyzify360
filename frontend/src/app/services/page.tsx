@@ -278,7 +278,7 @@ export default function Services() {
             >
               {[
                 { value: "4", label: "Core Services", icon: "briefcase" },
-                { value: "150+", label: "Projects", icon: "chart-bar" },
+                { value: "12+", label: "Projects", icon: "chart-bar" },
                 { value: "24/7", label: "Support", icon: "shield" },
                 { value: "100%", label: "Satisfaction", icon: "heart" },
               ].map((stat, index) => (

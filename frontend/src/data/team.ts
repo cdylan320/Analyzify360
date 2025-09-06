@@ -24,17 +24,17 @@ export interface TeamMember {
 export const teamMembers: TeamMember[] = [
   // Leadership Team
   {
-    id: 'carlos-silva',
-    name: 'Carlos Silva',
+    id: 'joiner-david',
+    name: 'Joiner David',
     title: 'Co-Founder & CEO',
     role: 'leadership',
-          location: 'São Paulo',
-      country: 'Brazil',
-      flag: '🇧🇷',
+          location: 'Bogotá',
+      country: 'Colombia',
+      flag: 'co',
     skills: ['Strategic Planning', 'Business Development', 'Product Vision', 'Team Leadership', 'Innovation'],
     bio: 'Visionary entrepreneur with 12+ years building transformative technology companies. Expert in scaling global teams and driving innovation across AI, blockchain, and cloud technologies.',
     avatar: 'CS',
-    photo: '/images/team/carlos-silva.jpg',
+    photo: '/images/team/joiner-david.jpg',
     experience: '12+ years',
     projects: 45,
     quote: 'Innovation is not just about technology—it\'s about creating solutions that change lives.',

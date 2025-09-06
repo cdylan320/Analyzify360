@@ -270,7 +270,7 @@ export default function Contact() {
         <div className="relative z-20 w-[95%] mx-auto px-4 lg:px-8 py-20">
           <div className="text-center max-w-7xl mx-auto">
             {/* Floating Badge */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 30, scale: 0.8 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 1, type: "spring", stiffness: 100 }}
@@ -280,7 +280,7 @@ export default function Contact() {
               <span className="bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
                 US & UK Account Managers • 2-Hour Response Time
               </span>
-            </motion.div>
+            </motion.div> */}
 
             {/* Ultra Modern Typography */}
             <motion.div
@@ -316,7 +316,7 @@ export default function Contact() {
             </motion.div>
 
             {/* Modern CTA Buttons */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.9 }}
@@ -352,7 +352,7 @@ export default function Contact() {
                   <Icon name="users" size="md" />
                 </span>
               </motion.button>
-            </motion.div>
+            </motion.div> */}
           </div>
         </div>
 
@@ -443,9 +443,9 @@ export default function Contact() {
         <GridBackground className="opacity-5" />
 
         <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="max-w-4xl mx-auto">
             {/* Enhanced Contact Form */}
-            <div className="order-2 lg:order-1">
+            <div>
               <AnimatedSection>
                 <div className="bg-white rounded-3xl border border-slate-200/80 shadow-2xl p-8 lg:p-12">
                   <div className="mb-8">
@@ -717,115 +717,13 @@ export default function Contact() {
               </AnimatedSection>
             </div>
 
-            {/* Office Locations */}
-            <div className="order-1 lg:order-2">
-              <AnimatedSection>
-                <div className="mb-8">
-                  <h2 className="text-3xl lg:text-4xl font-black text-slate-900 mb-4">
-                    Global Offices
-                    <span className="block bg-gradient-to-r from-emerald-700 to-teal-700 bg-clip-text text-transparent">
-                      Local Support
-                    </span>
-                  </h2>
-                  <p className="text-lg text-slate-600 leading-relaxed font-medium">
-                    Meet with our account managers in person or connect
-                    remotely. We're strategically located to serve you better.
-                  </p>
-                </div>
-
-                <div className="space-y-6">
-                  {offices.map((office, index) => (
-                    <ProfessionalCard
-                      key={index}
-                      delay={index * 0.1}
-                      hoverEffect="glow"
-                      className="group bg-white rounded-2xl border border-slate-200/80 shadow-lg hover:shadow-xl transition-all duration-300 p-6"
-                    >
-                      <div className="flex items-start space-x-4">
-                        {/* Flag & Icon */}
-                        <div className="flex flex-col items-center space-y-2">
-                          <div className="text-3xl">{office.flag}</div>
-                          <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-xl flex items-center justify-center">
-                            <Icon
-                              name="map-pin"
-                              size="sm"
-                              className="text-white"
-                            />
-                          </div>
-                        </div>
-
-                        {/* Office Details */}
-                        <div className="flex-1">
-                          <div className="flex items-center space-x-2 mb-2">
-                            <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-700 transition-colors">
-                              {office.city}
-                            </h3>
-                            <span className="text-sm font-semibold text-slate-500">
-                              {office.timezone}
-                            </span>
-                          </div>
-
-                          <p className="text-slate-600 font-medium mb-3">
-                            {office.address}
-                          </p>
-
-                          <div className="space-y-2">
-                            <div className="flex items-center space-x-2 text-slate-600">
-                              <Icon name="phone" size="sm" />
-                              <span className="font-medium">
-                                {office.phone}
-                              </span>
-                            </div>
-
-                            <div className="flex items-center space-x-2 text-blue-700">
-                              <Icon name="user" size="sm" />
-                              <span className="font-semibold">
-                                {office.manager}
-                              </span>
-                              <span className="text-slate-500 text-sm">
-                                • {office.managerRole}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Quick Contact */}
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center text-white shadow-lg"
-                          >
-                            <Icon name="phone" size="sm" />
-                          </motion.button>
-                        </div>
-                      </div>
-                    </ProfessionalCard>
-                  ))}
-                </div>
-
-                {/* World Map Visual */}
-                <div className="mt-8 p-6 bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl border border-slate-200">
-                  <div className="text-center">
-                    <div className="text-4xl mb-4">🌍</div>
-                    <h3 className="text-lg font-bold text-slate-900 mb-2">
-                      Global Reach, Local Touch
-                    </h3>
-                    <p className="text-slate-600 text-sm leading-relaxed">
-                      5 Strategic locations • 15+ Time zones covered • 24/7
-                      Support availability
-                    </p>
-                  </div>
-                </div>
-              </AnimatedSection>
-            </div>
           </div>
         </div>
       </SmoothSection>
 
 
       {/* Trust Indicators Section */}
-      <SmoothSection className="relative py-20 bg-gradient-to-b from-slate-50 to-white">
+      {/* <SmoothSection className="relative py-20 bg-gradient-to-b from-slate-50 to-white">
         <div className="w-[95%] mx-auto px-4 lg:px-8">
           <AnimatedSection className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-black mb-6 leading-tight">
@@ -851,7 +749,7 @@ export default function Contact() {
                 hoverEffect="glow"
                 className="group bg-white rounded-3xl border border-slate-200/80 shadow-xl hover:shadow-2xl transition-all duration-500 p-8 text-center min-h-[280px] flex flex-col"
               >
-                {/* Icon */}
+
                 <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <Icon
                     name={badge.icon as any}
@@ -860,7 +758,7 @@ export default function Contact() {
                   />
                 </div>
 
-                {/* Content */}
+
                 <div className="flex-1">
                   <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-green-700 transition-colors">
                     {badge.title}
@@ -873,7 +771,7 @@ export default function Contact() {
             ))}
           </StaggeredContainer>
         </div>
-      </SmoothSection>
+      </SmoothSection> */}
 
     </div>
   );
