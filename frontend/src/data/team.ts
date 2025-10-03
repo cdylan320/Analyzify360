@@ -45,8 +45,8 @@ export const teamMembers: TeamMember[] = [
     }
   },
   {
-    id: 'fernanda-santos',
-    name: 'Fernanda Santos',
+    id: 'felipe-targino',
+    name: 'Felipe Targino',
     title: 'Co-Founder & CTO',
     role: 'leadership',
     location: 'Belo Horizonte',
@@ -54,13 +54,13 @@ export const teamMembers: TeamMember[] = [
     flag: '🇧🇷',
     skills: ['Technical Architecture', 'AI/ML Strategy', 'Full-Stack Development', 'DevOps', 'Team Mentoring'],
     bio: 'Technology visionary with 10+ years architecting scalable systems for global enterprises. Passionate about AI innovation, sustainable tech, and building world-class engineering teams.',
-    avatar: 'FS',
-    photo: '/images/team/fernanda-santos.jpg',
+    avatar: 'BR',
+    photo: '/images/team/felipe-targino.jpg',
     experience: '10+ years',
     projects: 38,
     quote: 'Great technology should be invisible, intuitive, and improve human potential.',
     social: {
-      linkedin: 'https://www.linkedin.com/company/analyzify360-global',
+      linkedin: 'https://www.linkedin.com/in/felipe-targino-365167388/',
       // github: 'https://github.com/fernanda-tech',
       // twitter: 'https://twitter.com/fernanda_dev',
       email: 'support@analyzify360.com'
