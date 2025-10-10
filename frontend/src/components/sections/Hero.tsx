@@ -190,7 +190,7 @@ const Hero: React.FC = () => {
 
               {/* Animated Subtitle */}
               <motion.p
-                className="text-xl md:text-2xl lg:text-3xl text-slate-200 leading-relaxed font-medium max-w-4xl mx-auto"
+                className="text-xl md:text-2xl lg:text-3xl text-slate-200 leading-relaxed font-medium max-w-5xl mx-auto"
                 variants={professionalMotions.fadeInUp}
                 initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
                 animate={{
@@ -216,7 +216,9 @@ const Hero: React.FC = () => {
                   textShadow: "0 2px 10px rgba(0, 0, 0, 0.8)",
                 }}
               >
-                {companyInfo.description}
+                <span className="text-4xl font-bold">Analyzify360 Global</span>
+                <br />
+                <span>{companyInfo.description}</span>
               </motion.p>
 
               {/* Animated Action Buttons */}
@@ -277,7 +279,7 @@ const Hero: React.FC = () => {
 
             {/* Animated Key Features Grid */}
             <motion.div
-              className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-16 max-w-5xl mx-auto"
+              className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-16 max-w-8xl mx-auto"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.8 }}
@@ -285,32 +287,32 @@ const Hero: React.FC = () => {
               {[
                 {
                   icon: "globe",
-                  text: "Global Reach",
-                  desc: "Worldwide presence",
+                  text: "Global Network",
+                  desc: "Local talent connected with engineers across 10+ countries",
                   color: "from-cyan-400 to-blue-500",
                 },
                 {
                   icon: "shield",
-                  text: "Secure Solutions",
-                  desc: "Enterprise-grade security",
+                  text: "Trusted Collaboration",
+                  desc: "Transparent TaaS workflow with enterprise-grade security",
                   color: "from-emerald-400 to-teal-500",
                 },
                 {
                   icon: "zap",
-                  text: "Fast Delivery",
-                  desc: "Rapid implementation",
+                  text: "Rapid Delivery",
+                  desc: "Rapid Agile hybrid teams deliver results twice as fast",
                   color: "from-orange-400 to-amber-500",
                 },
                 {
                   icon: "users",
-                  text: "Expert Team",
-                  desc: "Skilled professionals",
+                  text: "Mentored Experts",
+                  desc: "Senior engineers guide every project to success",
                   color: "from-purple-400 to-indigo-500",
                 },
               ].map((feature, index) => (
                 <motion.div
                   key={feature.text}
-                  className="group"
+                  className="group h-full"
                   initial={{
                     opacity: 0,
                     y: 60,
@@ -338,7 +340,7 @@ const Hero: React.FC = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <motion.div
-                    className="flex flex-col items-center space-y-4 p-6 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl hover:shadow-cyan-500/10 hover:bg-white/15 transition-all duration-300"
+                    className="flex flex-col items-center space-y-4 p-6 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl hover:shadow-cyan-500/10 hover:bg-white/15 transition-all duration-300 h-full"
                     animate={{
                       y: [0, -5, 0],
                     }}

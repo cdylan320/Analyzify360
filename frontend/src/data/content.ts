@@ -442,7 +442,7 @@ export const careerPositions: CareerPosition[] = [
 export const companyInfo = {
   name: 'Analyzify360',
   tagline: 'Stronger Together, Further Forever',
-  description: 'Analyzify360 is a next-generation software development agency founded by a team of experienced co-founders.',
+  description: 'A Next-Generation Team-as-a-Service (TaaS) Software Agency',
   mission: 'To bridge the gap between global technical excellence and local business understanding, creating technology solutions that drive real business value.',
   announcement: 'Now serving US & UK clients—ask about our launch offer.',
   email: 'support@analyzify360.com',

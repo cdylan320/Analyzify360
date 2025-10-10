@@ -111,17 +111,18 @@ const ServicesSection: React.FC = () => {
           </div>
 
           <h2 className="text-4xl lg:text-6xl font-black text-slate-900 mb-6 leading-tight">
-            Comprehensive
+            Powering Growth
             <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text text-transparent">
-              Digital Solutions
+              with Next-Generation Tech & TaaS Delivery
             </span>
           </h2>
 
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-6"></div>
 
           <p className="text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto">
-            We deliver cutting-edge technology solutions that drive business
-            growth and digital transformation.
+            We build scalable, secure, and intelligent systems by combining
+            local leadership with global engineering expertise, accelerating
+            your digital transformation with precision.
           </p>
         </div>
 
@@ -211,8 +212,6 @@ const ServicesSection: React.FC = () => {
             </ProfessionalCard>
           ))}
         </motion.div>
-
-
       </div>
     </div>
   );
