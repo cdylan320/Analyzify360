@@ -85,25 +85,25 @@ export const companyValues: CompanyValue[] = [
   {
     id: 'unity',
     title: 'Unity',
-    description: 'Bringing together global talent and local expertise to serve our clients better',
+    description: 'Bringing together global talent and local expertise to build solutions that make a difference.',
     icon: 'users'
   },
   {
     id: 'innovation',
     title: 'Innovation',
-    description: 'Pushing the boundaries of technology to create solutions that matter',
+    description: 'Constantly pushing boundaries — from AI integration to distributed system design.',
     icon: 'light-bulb'
   },
   {
     id: 'transparency',
     title: 'Transparency',
-    description: 'Open communication, honest pricing, and clear project timelines',
+    description: 'Operating with honesty, clarity, and open communication at every stage.',
     icon: 'eye'
   },
   {
     id: 'security',
     title: 'Security',
-    description: 'Enterprise-grade security in every line of code and every deployment',
+    description: 'Engineering with enterprise-grade security and reliability — every line, every layer.',
     icon: 'lock-closed'
   }
 ];
@@ -111,38 +111,23 @@ export const companyValues: CompanyValue[] = [
 export const timeline: TimelineItem[] = [
   {
     year: '2024',
-    title: 'Company Founded',
-    description: 'Analyzify360 was established with a vision to bridge global tech expertise with local trust, launching as a modern software development agency'
-  },
-  {
-    year: '2024',
-    title: 'Core Team Formation',
-    description: 'Assembled our founding team of experienced developers and established our development methodologies and quality standards'
-  },
-  {
-    year: '2024',
-    title: 'First Client Success',
-    description: 'Delivered our first major project and established our reputation for quality, innovation, and reliable project delivery'
+    title: 'Foundation & Training Launch',
+    description: 'Established hybrid TaaS operations and infrastructure. Launched the Paid Training-to-Employment Program for emerging developers. Built our internal TalentOS Platform to connect mentors, trainees, and clients. Delivered full-stack and AI-driven solutions for early enterprise clients.'
   },
   {
     year: '2025',
-    title: 'Team Expansion & Specialization',
-    description: 'Growing to 5+ specialists across full-stack development, AI/ML, and blockchain technologies with enhanced service offerings'
-  },
-  {
-    year: '2025',
-    title: 'Global Market Expansion',
-    description: 'Scaling operations internationally with dedicated account management and localized support teams across key markets'
+    title: 'Growth & Integration',
+    description: 'Scaled operations into FinTech, AI, and Cloud Infrastructure projects. Expanded training modules with AI automation, DevOps, and ML engineering. Initiated R&D in Healthcare Distributed AI Subnets (federated learning + blockchain). Built partnerships with universities and innovation hubs globally.'
   },
   {
     year: '2026',
-    title: 'Enterprise Solutions Division',
-    description: 'Launching enterprise-grade security protocols, compliance standards, and Fortune 500 client acquisition strategies'
+    title: 'Innovation & MVP Launch',
+    description: 'Release of Healthcare AI Subnet MVP — enabling secure, distributed AI model training. Introduced blockchain-based validation for transparency and compliance. Integrated trainees into R&D testing pipelines. Developed SmartOps — AI-driven team and resource allocation engine.'
   },
   {
-    year: '2026',
-    title: 'AI Innovation Hub',
-    description: 'Establishing specialized AI and machine learning division with custom LLM capabilities and cutting-edge technology solutions'
+    year: '2027',
+    title: 'Scale & Globalization',
+    description: 'Launch Analyzify360 Cloud Hub — a platform to manage hybrid global teams. Monetize Healthcare Subnet and expand into FinTech & EdTech. Create Innovation Fellowship Program — graduates lead internal R&D labs. Open regional innovation hubs and secure Series A investment.'
   }
 ];
 
@@ -354,6 +339,26 @@ export const blogPosts: BlogPost[] = [
 
 export const careerPositions: CareerPosition[] = [
   {
+    id: 'junior-developer-us',
+    title: 'Junior Developer / Intern / Graduate',
+    location: 'Remote (U.S.)',
+    type: 'tech',
+    description: 'We pay you to learn software development while building real products for U.S. clients. No degree required.',
+    requirements: [
+      'U.S.-based and work authorized',
+      'Clear communication and growth mindset',
+      'Willingness to complete a short paid practical task (45–60 mins)',
+      'Basic understanding of programming concepts preferred'
+    ],
+    benefits: [
+      'Paid hands-on mentorship and real impact',
+      'Path to Junior Developer with promotion tracks',
+      'Work-life balance and remote flexibility',
+      'Learn modern stacks (React/Node/Python/TypeScript)',
+      'Contribute to code reviews, sprints, and updates'
+    ]
+  },
+  {
     id: 'senior-ai-engineer',
     title: 'Senior AI Engineer',
     location: 'Remote',
@@ -443,16 +448,16 @@ export const companyInfo = {
   name: 'Analyzify360',
   tagline: 'Stronger Together, Further Forever',
   description: 'A Next-Generation Team-as-a-Service (TaaS) Software Agency',
-  mission: 'To bridge the gap between global technical excellence and local business understanding, creating technology solutions that drive real business value.',
+  mission: 'To accelerate digital transformation by combining world-class technical expertise with locally empowered teams and continuous learning.',
   announcement: 'Now serving US & UK clients—ask about our launch offer.',
-  email: 'support@analyzify360.com',
-  phone: '+1 (619) 537-8448',
+  email: 'contact@analyzify360.com',
+  phone: '+55 84 92153‑5781',
   address: 'São Paulo, Brazil - Global Remote Team',
   social: {
     twitter: 'https://twitter.com/analyzify360',
-    linkedin: 'https://linkedin.com/company/analyzify360',
-    github: 'https://github.com/analyzify360',
-    discord: 'https://discord.gg/analyzify360',
+    linkedin: 'https://linkedin.com/company/analyzify360-global',
+    github: 'https://github.com/analyzify360-global',
+    discord: 'https://discord.gg/pehAjnKj',
     instagram: 'https://instagram.com/analyzify360',
     youtube: 'https://youtube.com/@analyzify360',
     facebook: 'https://facebook.com/analyzify360'

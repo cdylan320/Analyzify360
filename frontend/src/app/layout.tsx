@@ -20,7 +20,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Analyzify360 - Stronger Together, Further Forever",
   description:
-    "Analyzify360 unites top engineers and US/UK partners to deliver secure, seamless digital solutions. AI, Blockchain, Full-Stack Development, and Product Design services.",
+    "A Next-Generation Team-as-a-Service (TaaS) Software Agency",
   keywords:
     "AI, Machine Learning, Blockchain, DeFi, Full-Stack Development, Product Design, UX, Software Development, Tech Agency",
   authors: [{ name: "Analyzify360 Team" }],
@@ -45,14 +45,14 @@ export const metadata: Metadata = {
     url: "https://analyzify360.com",
     title: "Analyzify360 - Stronger Together, Further Forever",
     description:
-      "Analyzify360 unites top engineers and US/UK partners to deliver secure, seamless digital solutions.",
+      "A Next-Generation Team-as-a-Service (TaaS) Software Agency",
     siteName: "Analyzify360",
   },
   twitter: {
     card: "summary_large_image",
     title: "Analyzify360 - Stronger Together, Further Forever",
     description:
-      "Analyzify360 unites top engineers and US/UK partners to deliver secure, seamless digital solutions.",
+      "A Next-Generation Team-as-a-Service (TaaS) Software Agency",
     creator: "@analyzify360",
   },
 };

@@ -152,17 +152,17 @@ export default function Team() {
           </div>
         )}
 
-        <div className="relative z-20 w-[95%] mx-auto px-4 lg:px-8 py-20">
-          <div className="text-center max-w-7xl mx-auto">
+        <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-12 py-20">
+          <div className="text-center">
             {/* Floating Badge */}
             <motion.div
               initial={{ opacity: 0, y: 30, scale: 0.8 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 1, type: "spring", stiffness: 100 }}
-              className="inline-flex items-center justify-center px-8 py-4 mb-12 text-sm font-bold text-white/90 bg-white/5 rounded-full border border-white/10 backdrop-blur-2xl shadow-2xl"
+              className="inline-flex items-center justify-center px-6 py-3 mb-12 text-xs font-semibold text-white/90 bg-white/5 rounded-full border border-white/10 backdrop-blur-2xl shadow-2xl tracking-wide"
             >
               <div className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse"></div>
-              <span className="bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent uppercase tracking-wider">
                 Meet Our Experts • Global Talent • Local Partnership
               </span>
             </motion.div>
@@ -180,7 +180,7 @@ export default function Team() {
                   Team
                 </span>
               </h1>
-              <p className="text-2xl lg:text-3xl font-light text-white/70 mb-8">
+              <p className="text-lg lg:text-xl font-normal text-white/80 mb-6 leading-relaxed max-w-3xl mx-auto">
                 Excellence Through Expertise
               </p>
             </motion.div>
@@ -190,10 +190,10 @@ export default function Team() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6 }}
-              className="max-w-4xl mx-auto mb-16"
+              className="max-w-4xl mx-auto mb-12"
             >
-              <div className="bg-white/5 backdrop-blur-2xl rounded-3xl border border-white/10 p-8 shadow-2xl">
-                <p className="text-xl lg:text-2xl leading-relaxed text-white/80 font-medium">
+              <div className="bg-white/5 backdrop-blur-2xl rounded-2xl border border-white/10 p-6 lg:p-8 shadow-2xl">
+                <p className="text-base lg:text-lg leading-relaxed text-white/75 font-normal">
                   Meet the brilliant minds behind our success. Our team brings together deep technical expertise and a shared passion for excellence
                 </p>
               </div>
@@ -270,7 +270,7 @@ export default function Team() {
       <SmoothSection className="relative py-12 bg-gradient-to-b from-white to-slate-50">
         <GridBackground className="opacity-5" />
 
-        <div className="relative z-10 w-[95%] mx-auto mb-12 px-4 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto mb-12 px-6 lg:px-12">
           <div className="text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -313,7 +313,7 @@ export default function Team() {
         </div>
 
         <div
-          className="relative z-10 w-[95%] mx-auto px-4 lg:px-8"
+          className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12"
           ref={teamRef}
         >
           {/* Team Grid */}
@@ -726,7 +726,7 @@ export default function Team() {
       {/* <SmoothSection className="relative py-32 bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30">
         <GridBackground className="opacity-10" />
 
-        <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -737,7 +737,7 @@ export default function Team() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="inline-flex items-center justify-center px-6 py-3 mb-8 text-sm font-bold text-purple-700 bg-purple-50 rounded-full border border-purple-200/80 shadow-lg"
+              className="inline-flex items-center justify-center px-4 py-2 mb-8 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full border border-blue-200"
             >
               <Icon name="rocket" size="sm" className="mr-2 text-purple-600" />
               <span className="text-purple-800">Ready to Work Together?</span>

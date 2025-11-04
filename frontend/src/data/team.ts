@@ -41,7 +41,7 @@ export const teamMembers: TeamMember[] = [
     social: {
       linkedin: 'https://www.linkedin.com/company/analyzify360-global',
       // twitter: 'https://twitter.com/carlos_innovate',
-      email: 'trevor@analyzify360.com'
+      email: 'joiner@analyzify360.com'
     }
   },
   {
@@ -63,7 +63,7 @@ export const teamMembers: TeamMember[] = [
       linkedin: 'https://www.linkedin.com/in/felipe-targino-365167388/',
       // github: 'https://github.com/fernanda-tech',
       // twitter: 'https://twitter.com/fernanda_dev',
-      email: 'support@analyzify360.com'
+      email: 'felipe@analyzify360.com'
     }
   },
   {
