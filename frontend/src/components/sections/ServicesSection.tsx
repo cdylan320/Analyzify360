@@ -12,89 +12,94 @@ import { Button, Icon } from "../ui";
 const ServicesSection: React.FC = () => {
   const services = [
     {
-      icon: "code",
-      title: "Web Development",
+      icon: "chip",
+      title: "AI & Automation Systems",
       description:
-        "Custom web applications built with modern technologies and best practices for optimal performance and user experience.",
+        "Deliver intelligent, revenue-driving solutions using applied AI and process automation.",
       features: [
-        "React/Next.js",
-        "Node.js/Express",
-        "TypeScript",
-        "API Integration",
+        "Python, LangChain",
+        "TensorFlow, OpenAI API",
+        "Hugging Face, FastAPI",
+        "Predictive Analytics",
       ],
-      color: "from-blue-500 to-blue-600",
-      bgColor: "bg-blue-500/5",
-      borderColor: "border-blue-500/20",
-    },
-    {
-      icon: "phone",
-      title: "Mobile Development",
-      description:
-        "Native and cross-platform mobile applications that deliver seamless user experiences across all devices.",
-      features: [
-        "React Native",
-        "iOS/Android",
-        "Flutter",
-        "Progressive Web Apps",
-      ],
-      color: "from-green-500 to-green-600",
-      bgColor: "bg-green-500/5",
-      borderColor: "border-green-500/20",
-    },
-    {
-      icon: "globe",
-      title: "Cloud Solutions",
-      description:
-        "Scalable cloud infrastructure and deployment solutions that grow with your business needs.",
-      features: ["AWS/Azure", "Docker", "Kubernetes", "CI/CD Pipelines"],
       color: "from-purple-500 to-purple-600",
       bgColor: "bg-purple-500/5",
       borderColor: "border-purple-500/20",
     },
     {
-      icon: "chip",
-      title: "AI Integration",
+      icon: "link",
+      title: "Blockchain & Smart Contract Engineering",
       description:
-        "Intelligent solutions powered by machine learning and artificial intelligence to automate and optimize your processes.",
+        "Build decentralized systems that ensure transparency and trust.",
       features: [
-        "Machine Learning",
-        "Natural Language Processing",
-        "Computer Vision",
-        "Data Analytics",
+        "Solidity, Rust",
+        "Hardhat, Polygon",
+        "Web3.js, IPFS",
+        "Smart Contracts",
       ],
-      color: "from-orange-500 to-orange-600",
-      bgColor: "bg-orange-500/5",
-      borderColor: "border-orange-500/20",
+      color: "from-amber-500 to-orange-600",
+      bgColor: "bg-amber-500/5",
+      borderColor: "border-amber-500/20",
+    },
+    {
+      icon: "globe",
+      title: "Cloud & DevOps Infrastructure",
+      description:
+        "Scale and automate software delivery globally through efficient DevOps pipelines.",
+      features: [
+        "Docker, Kubernetes",
+        "Terraform, AWS Lambda",
+        "GitHub Actions",
+        "Multi-cloud Solutions",
+      ],
+      color: "from-blue-500 to-cyan-600",
+      bgColor: "bg-blue-500/5",
+      borderColor: "border-blue-500/20",
+    },
+    {
+      icon: "chart-bar",
+      title: "Data Engineering & Analytics",
+      description:
+        "Transform data into decision-making power.",
+      features: [
+        "Apache Airflow, dbt",
+        "Snowflake, Power BI",
+        "Kafka, Redshift",
+        "Real-time Analytics",
+      ],
+      color: "from-emerald-500 to-teal-600",
+      bgColor: "bg-emerald-500/5",
+      borderColor: "border-emerald-500/20",
+    },
+    {
+      icon: "code",
+      title: "Fullstack Product Engineering",
+      description:
+        "From MVP to enterprise-scale SaaS — we build fast, stable, and secure web products.",
+      features: [
+        "React, Next.js",
+        "NestJS, Django",
+        "PostgreSQL, GraphQL",
+        "High-performance APIs",
+      ],
+      color: "from-indigo-500 to-blue-600",
+      bgColor: "bg-indigo-500/5",
+      borderColor: "border-indigo-500/20",
     },
     {
       icon: "shield-check",
-      title: "Cybersecurity",
+      title: "Cybersecurity & Compliance",
       description:
-        "Comprehensive security solutions to protect your digital assets and ensure compliance with industry standards.",
+        "Protect your data and systems with military-grade security practices.",
       features: [
-        "Security Audits",
+        "Burp Suite, OWASP ZAP",
+        "Snyk, Vault",
+        "SOC2, ISO, GDPR",
         "Penetration Testing",
-        "Compliance",
-        "Risk Assessment",
       ],
-      color: "from-red-500 to-red-600",
+      color: "from-red-500 to-rose-600",
       bgColor: "bg-red-500/5",
       borderColor: "border-red-500/20",
-    },
-    {
-      icon: "support",
-      title: "Technical Consulting",
-      description:
-        "Expert guidance and strategic planning to help you make informed technology decisions and optimize your systems.",
-      features: [
-        "Architecture Design",
-        "Performance Optimization",
-        "Technology Strategy",
-        "Code Review",
-      ],
-      color: "from-cyan-500 to-cyan-600",
-      bgColor: "bg-cyan-500/5",
-      borderColor: "border-cyan-500/20",
     },
   ];
 

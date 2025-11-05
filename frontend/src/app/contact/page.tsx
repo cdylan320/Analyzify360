@@ -267,21 +267,8 @@ export default function Contact() {
           </div>
         )}
 
-        <div className="relative z-20 w-[95%] mx-auto px-4 lg:px-8 py-20">
-          <div className="text-center max-w-7xl mx-auto">
-            {/* Floating Badge */}
-            {/* <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.8 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 1, type: "spring", stiffness: 100 }}
-              className="inline-flex items-center justify-center px-8 py-4 mb-12 text-sm font-bold text-white/90 bg-white/5 rounded-full border border-white/10 backdrop-blur-2xl shadow-2xl"
-            >
-              <div className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse"></div>
-              <span className="bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
-                US & UK Account Managers • 2-Hour Response Time
-              </span>
-            </motion.div> */}
-
+        <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-12 py-20">
+          <div className="text-center">
             {/* Ultra Modern Typography */}
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -291,7 +278,7 @@ export default function Contact() {
             >
               <h1 className="text-6xl lg:text-9xl font-black mb-6 leading-none tracking-tight">
                 <span className="block text-white drop-shadow-2xl">
-                  Let's Build
+                  Let's Build the Future
                 </span>
                 <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-x">
                   Together
@@ -307,10 +294,11 @@ export default function Contact() {
               className="max-w-4xl mx-auto mb-16"
             >
               <div className="bg-white/5 backdrop-blur-2xl rounded-3xl border border-white/10 p-8 shadow-2xl">
-                <p className="text-xl lg:text-2xl leading-relaxed text-white/80 font-medium">
-                  Ready to transform your ideas into reality? Our global tech
-                  experts and local account managers are here to guide you every
-                  step of the way.
+                <p className="text-xl lg:text-2xl leading-relaxed text-white/80 font-medium mb-4">
+                  Whether you're a business looking to accelerate digital transformation or a talent ready to grow through our training program, we're here to make innovation happen — side by side.
+                </p>
+                <p className="text-lg text-white/60 font-medium">
+                  Global delivery. Local collaboration. Continuous innovation.
                 </p>
               </div>
             </motion.div>
@@ -361,13 +349,13 @@ export default function Contact() {
 
       {/* Contact Methods Section */}
       <SmoothSection className="relative py-20 bg-gradient-to-b from-white to-slate-50">
-        <div className="w-[95%] mx-auto px-4 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <AnimatedSection className="text-center mb-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center justify-center px-6 py-3 mb-6 text-sm font-semibold text-blue-700 bg-blue-50 rounded-full border border-blue-200/80 shadow-lg"
+              className="inline-flex items-center justify-center px-4 py-2 mb-6 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full border border-blue-200"
             >
               <Icon name="support" size="sm" className="mr-2 text-blue-600" />
               <span className="text-blue-800">Get In Touch</span>
@@ -442,7 +430,7 @@ export default function Contact() {
       <SmoothSection className="relative py-24 bg-white" id="contact-form">
         <GridBackground className="opacity-5" />
 
-        <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
           <div className="max-w-4xl mx-auto">
             {/* Enhanced Contact Form */}
             <div>
@@ -724,7 +712,7 @@ export default function Contact() {
 
       {/* Trust Indicators Section */}
       {/* <SmoothSection className="relative py-20 bg-gradient-to-b from-slate-50 to-white">
-        <div className="w-[95%] mx-auto px-4 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <AnimatedSection className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-black mb-6 leading-tight">
               <span className="text-slate-900">Why Businesses</span>

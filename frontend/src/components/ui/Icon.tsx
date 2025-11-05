@@ -61,6 +61,13 @@ import {
   Cpu,
   Monitor,
   Star,
+  Cloud,
+  Settings,
+  Handshake,
+  GraduationCap,
+  HelpCircle,
+  Sparkles,
+  Wallet,
 } from "lucide-react";
 
 const iconMap = {
@@ -128,11 +135,17 @@ const iconMap = {
   calendar: Calendar,
   "clock-alt": Clock,
 
-  // Missing icons
+  // Missing icons - using proper Lucide icons
   rocket: Zap, // Using Zap as rocket alternative
-  support: Shield, // Using Shield as support alternative
+  support: HelpCircle, // Using HelpCircle as support icon
   chat: MessageCircle, // Chat/messaging icon
   star: Star, // Star icon
+  cloud: Cloud, // Cloud icon
+  cog: Settings, // Settings/Cog icon
+  "academic-cap": GraduationCap, // Graduation cap icon
+  handshake: Handshake, // Handshake icon
+  sparkles: Sparkles, // Sparkles icon
+  wallet: Wallet, // Wallet icon
 };
 
 export interface IconProps {
@@ -199,6 +212,13 @@ const Icon: React.FC<IconProps> = ({
     Cpu,
     Monitor,
     Star,
+    Cloud,
+    Settings,
+    Handshake,
+    GraduationCap,
+    HelpCircle,
+    Sparkles,
+    Wallet,
   ].includes(IconComponent as any);
 
   if (isLucideIcon) {

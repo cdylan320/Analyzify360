@@ -340,17 +340,17 @@ export default function Careers() {
           </div>
         )}
 
-        <div className="relative z-20 w-[95%] mx-auto px-4 lg:px-8 py-20">
-          <div className="text-center max-w-7xl mx-auto">
+        <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-12 py-20">
+          <div className="text-center">
             {/* Floating Badge */}
             <motion.div
               initial={{ opacity: 0, y: 30, scale: 0.8 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 1, type: "spring", stiffness: 100 }}
-              className="inline-flex items-center justify-center px-8 py-4 mb-12 text-sm font-bold text-white/90 bg-white/5 rounded-full border border-white/10 backdrop-blur-2xl shadow-2xl"
+              className="inline-flex items-center justify-center px-6 py-3 mb-12 text-xs font-semibold text-white/90 bg-white/5 rounded-full border border-white/10 backdrop-blur-2xl shadow-2xl tracking-wide"
             >
               <div className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse"></div>
-              <span className="bg-gradient-to-r from-purple-200 to-blue-200 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent uppercase tracking-wider">
                 Remote-First • Global Team
               </span>
             </motion.div>
@@ -384,10 +384,7 @@ export default function Careers() {
             >
               <div className="bg-white/5 backdrop-blur-2xl rounded-3xl border border-white/10 p-8 shadow-2xl">
                 <p className="text-xl lg:text-2xl leading-relaxed text-white/80 font-medium">
-                  Join a global team of innovators, creators, and
-                  problem-solvers. Work on cutting-edge projects that impact
-                  millions while enjoying complete flexibility and growth
-                  opportunities.
+                  Join a global team of innovators, engineers, and creators building the next wave of intelligent digital solutions.
                 </p>
               </div>
             </motion.div>
@@ -431,30 +428,29 @@ export default function Careers() {
         className="relative py-24 bg-gradient-to-b from-white to-slate-50"
         id="company-culture"
       >
-        <div className="w-[95%] mx-auto px-4 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <AnimatedSection className="text-center mb-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center justify-center px-6 py-3 mb-6 text-sm font-semibold text-purple-700 bg-purple-50 rounded-full border border-purple-200/80 shadow-lg"
+              className="inline-flex items-center justify-center px-4 py-2 mb-6 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full border border-blue-200"
             >
               <Icon name="heart" size="sm" className="mr-2 text-purple-600" />
               <span className="text-purple-800">Our Culture</span>
             </motion.div>
 
             <h2 className="text-4xl lg:text-6xl font-black mb-6 leading-tight">
-              <span className="text-slate-900">What Makes Us</span>
+              <span className="text-slate-900">Why Join</span>
               <span className="block bg-gradient-to-r from-purple-700 via-blue-700 to-indigo-700 bg-clip-text text-transparent">
-                Different
+                Us
               </span>
             </h2>
 
             <div className="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mx-auto mb-6"></div>
 
             <p className="text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto font-medium">
-              We're not just building software; we're building a community of
-              innovators who care about impact, growth, and each other.
+              Show your values in a concise, data-driven way.
             </p>
           </AnimatedSection>
 
@@ -501,13 +497,13 @@ export default function Careers() {
       <SmoothSection className="relative py-24 bg-white">
         <GridBackground className="opacity-5" />
 
-        <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
           <AnimatedSection className="text-center mb-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center justify-center px-6 py-3 mb-6 text-sm font-semibold text-emerald-700 bg-emerald-50 rounded-full border border-emerald-200/80 shadow-lg"
+              className="inline-flex items-center justify-center px-4 py-2 mb-6 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full border border-blue-200"
             >
               <Icon
                 name="lightbulb"
@@ -1146,13 +1142,13 @@ export default function Careers() {
       <SmoothSection id="contact" className="relative py-24 bg-white">
         <GridBackground className="opacity-5" />
 
-        <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
           <AnimatedSection className="text-center mb-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center justify-center px-6 py-3 mb-6 text-sm font-semibold text-emerald-700 bg-emerald-50 rounded-full border border-emerald-200/80 shadow-lg"
+              className="inline-flex items-center justify-center px-4 py-2 mb-6 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full border border-blue-200"
             >
               <Icon name="users" size="sm" className="mr-2 text-emerald-600" />
               <span className="text-emerald-800">Join Our Team</span>
@@ -1310,13 +1306,13 @@ export default function Careers() {
 
       {/* Team Testimonials */}
       {/* <SmoothSection className="relative py-24 bg-gradient-to-b from-slate-50 to-white">
-        <div className="w-[95%] mx-auto px-4 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <AnimatedSection className="text-center mb-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center justify-center px-6 py-3 mb-6 text-sm font-semibold text-green-700 bg-green-50 rounded-full border border-green-200/80 shadow-lg"
+              className="inline-flex items-center justify-center px-4 py-2 mb-6 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full border border-blue-200"
             >
               <Icon name="heart" size="sm" className="mr-2 text-green-600" />
               <span className="text-green-800">Team Stories</span>

@@ -4,4 +4,5 @@ export { default as ServicesSection } from './ServicesSection';
 export { default as TeamPreview } from './TeamPreview';
 export { default as ProjectShowcase } from './ProjectShowcase';
 export { default as TrustBadges } from './TrustBadges';
-export { default as TeamMemberCard } from './TeamMemberCard'; 
+export { default as TeamMemberCard } from './TeamMemberCard';
+export { default as FutureFocus } from './FutureFocus'; 

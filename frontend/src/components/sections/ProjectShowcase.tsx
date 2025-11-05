@@ -124,7 +124,7 @@ const ProjectShowcase: React.FC = () => {
           </div>
 
           <h2 className="text-4xl lg:text-6xl font-black text-slate-900 mb-6 leading-tight">
-            Featured
+            Our Last
             <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
               Projects
             </span>

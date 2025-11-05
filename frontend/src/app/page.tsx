@@ -10,6 +10,7 @@ import {
   TrustBadges,
   TeamPreview,
   ProjectShowcase,
+  FutureFocus,
 } from "@/components";
 
 export default function Home() {
@@ -41,6 +42,13 @@ export default function Home() {
         overlayOpacity={0.06}
       >
         <ProjectShowcase />
+      </SmoothSection>
+      <SmoothSection
+        id="future"
+        backgroundType="mesh"
+        overlayOpacity={0.08}
+      >
+        <FutureFocus />
       </SmoothSection>
     </motion.div>
   );

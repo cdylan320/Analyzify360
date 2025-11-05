@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useState, useRef, useEffect, type MouseEvent as ReactMouseEvent } from "react";
+import { motion } from "framer-motion";
 import {
   AnimatedSection,
   StaggeredContainer,
@@ -16,15 +16,31 @@ import {
 import { companyInfo, companyValues, timeline } from "@/data/content";
 import { teamMembers } from "@/data/team";
 
+interface ParticlePosition {
+  left: number;
+  top: number;
+  x: number;
+  duration: number;
+  delay: number;
+}
+
+interface NetworkElement {
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+  cx: number;
+  cy: number;
+}
+
 export default function About() {
   const [currentTimelineIndex, setCurrentTimelineIndex] = useState(-1);
   const [isDragging, setIsDragging] = useState(false);
   const [mounted, setMounted] = useState(false);
   const timelineRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll();
 
   // Pre-computed static values for consistent SSR/CSR
-  const particlePositions = useRef<Array<{ left: number, top: number, x: number, duration: number, delay: number }>>([
+  const particlePositions = useRef<ParticlePosition[]>([
     { left: 10, top: 20, x: 25, duration: 15, delay: 0 },
     { left: 80, top: 15, x: -30, duration: 12, delay: 1 },
     { left: 15, top: 70, x: 40, duration: 18, delay: 2 },
@@ -42,7 +58,7 @@ export default function About() {
     { left: 20, top: 90, x: 35, duration: 15, delay: 4.8 },
   ]);
 
-  const networkElements = useRef<Array<{ x1: number, y1: number, x2: number, y2: number, cx: number, cy: number }>>([
+  const networkElements = useRef<NetworkElement[]>([
     { x1: 100, y1: 200, x2: 300, y2: 400, cx: 150, cy: 250 },
     { x1: 500, y1: 100, x2: 700, y2: 300, cx: 600, cy: 200 },
     { x1: 200, y1: 600, x2: 400, y2: 800, cx: 300, cy: 700 },
@@ -117,7 +133,7 @@ export default function About() {
     setIsDragging(true);
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = (e: ReactMouseEvent<HTMLDivElement>) => {
     if (isDragging) {
       const rect = timelineRef.current?.getBoundingClientRect();
       if (rect) {
@@ -135,17 +151,10 @@ export default function About() {
     setIsDragging(false);
   };
 
-  // Parallax effects
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, -500]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
   return (
     <div className="pt-16">
       {/* Ultra Modern Hero Section */}
-      <motion.section
-        style={{ y: heroY, opacity: heroOpacity }}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      >
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Advanced Modern Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950"></div>
 
@@ -238,7 +247,7 @@ export default function About() {
             >
               <div className="w-2 h-2 bg-blue-400 rounded-full mr-3 animate-pulse"></div>
               <span className="bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
-                Shaping Digital Excellence Since 2024
+                Shaping Global Innovation Since 2024
               </span>
             </motion.div>
 
@@ -256,9 +265,9 @@ export default function About() {
                 <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient-x">
                   Tomorrow
                 </span>
-                {/* <span className="block text-4xl lg:text-6xl font-light text-white/70 mt-4">
-                  Today
-                </span> */}
+                <span className="block text-4xl lg:text-6xl font-light text-white/70 mt-4">
+                  Together
+                </span>
               </h1>
             </motion.div>
 
@@ -271,7 +280,7 @@ export default function About() {
             >
               <div className="bg-white/5 backdrop-blur-2xl rounded-3xl border border-white/10 p-8 shadow-2xl">
                 <p className="text-xl lg:text-2xl leading-relaxed text-white/80 font-medium">
-                  {companyInfo.mission}
+                  We bridge global engineering excellence with local innovation — empowering hybrid teams, nurturing future talent, and building next-generation technologies that move industries forward.
                 </p>
               </div>
             </motion.div>
@@ -309,7 +318,234 @@ export default function About() {
           </div>
         </div>
 
-      </motion.section>
+      </section>
+
+      {/* Who We Are Section */}
+      <SmoothSection className="relative py-24 lg:py-32 bg-gradient-to-b from-white via-slate-50/50 to-white">
+        {/* Subtle Background Pattern */}
+        <div className="absolute inset-0 opacity-40">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
+                           radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 50%)`,
+            }}
+          ></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center justify-center px-4 py-2 mb-6 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full border border-blue-200">
+              <Icon name="light-bulb" size="sm" className="mr-2" />
+              Who We Are
+            </div>
+
+            <h2 className="text-4xl lg:text-6xl font-black text-slate-900 mb-6 leading-tight">
+              Next-Generation
+              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Technology-as-a-Service
+              </span>
+            </h2>
+
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-6"></div>
+          </div>
+
+          <div className="max-w-5xl mx-auto">
+            <p className="text-xl text-slate-700 leading-relaxed mb-8 font-medium">
+              Analyzify360 is a next-generation Technology-as-a-Service (TaaS) company that blends local insight with global technical mastery.
+            </p>
+            <p className="text-lg text-slate-600 leading-relaxed mb-10">
+              Our hybrid model connects top-tier engineers, emerging developers, and trusted mentors across borders — enabling rapid, scalable, and human-centered technology delivery.
+            </p>
+            <div className="bg-white rounded-3xl border border-slate-200 p-10 lg:p-12 shadow-lg">
+              <p className="text-2xl text-slate-900 leading-relaxed font-bold mb-4">
+                We go beyond software.
+              </p>
+              <p className="text-lg text-slate-700 leading-relaxed">
+                We build ecosystems: training, deploying, and empowering talent through real projects — creating measurable impact for clients and opportunities for every team member.
+              </p>
+            </div>
+          </div>
+        </div>
+      </SmoothSection>
+
+      {/* Mission & Vision Section */}
+      <SmoothSection className="relative py-24 lg:py-32 bg-white">
+        {/* Light Background Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-transparent to-purple-50/30"></div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center justify-center px-4 py-2 mb-6 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full border border-blue-200">
+              <Icon name="globe" size="sm" className="mr-2" />
+              Our Mission & Vision
+            </div>
+
+            <h2 className="text-4xl lg:text-6xl font-black text-slate-900 mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Mission & Vision
+              </span>
+            </h2>
+
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-6"></div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <ProfessionalCard
+              delay={0}
+              hoverEffect="lift"
+              className="group relative bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-2xl transition-all duration-500 p-8"
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <Icon name="briefcase" size="lg" className="text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900 mb-4">Mission</h3>
+              <p className="text-slate-600 leading-relaxed">
+                To accelerate digital transformation by combining world-class technical expertise with locally empowered teams and continuous learning.
+              </p>
+            </ProfessionalCard>
+
+            <ProfessionalCard
+              delay={0.1}
+              hoverEffect="lift"
+              className="group relative bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-2xl transition-all duration-500 p-8"
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <Icon name="eye" size="lg" className="text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900 mb-4">Vision</h3>
+              <p className="text-slate-600 leading-relaxed">
+                To redefine how technology is built — through a distributed, AI-powered ecosystem where innovation, talent development, and global collaboration coexist seamlessly.
+              </p>
+            </ProfessionalCard>
+          </div>
+        </div>
+      </SmoothSection>
+
+      {/* What We Do Section */}
+      <SmoothSection className="relative py-24 lg:py-32 bg-gradient-to-b from-white via-slate-50/50 to-white">
+        {/* Subtle Background Pattern */}
+        <div className="absolute inset-0 opacity-30">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
+                           radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.04) 0%, transparent 50%)`,
+            }}
+          ></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center justify-center px-4 py-2 mb-6 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full border border-blue-200">
+              <Icon name="code" size="sm" className="mr-2" />
+              What We Do
+            </div>
+
+            <h2 className="text-4xl lg:text-6xl font-black text-slate-900 mb-6 leading-tight">
+              Our Core
+              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Focus Areas
+              </span>
+            </h2>
+
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-6"></div>
+          </div>
+
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-slate-50">
+                    <tr>
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Focus Area</th>
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-200">
+                    <motion.tr
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.1 }}
+                      className="hover:bg-slate-50 transition-colors"
+                    >
+                      <td className="px-6 py-6">
+                        <div className="flex items-center">
+                          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center mr-4 shadow-sm">
+                            <Icon name="users" size="md" className="text-white" />
+                          </div>
+                          <span className="font-bold text-slate-900">Hybrid TaaS Delivery</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-6 text-slate-600 leading-relaxed">
+                        We provide flexible, scalable, and secure engineering teams that integrate directly with client operations — combining speed, quality, and cost efficiency.
+                      </td>
+                    </motion.tr>
+                    <motion.tr
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      className="hover:bg-slate-50 transition-colors"
+                    >
+                      <td className="px-6 py-6">
+                        <div className="flex items-center">
+                          <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center mr-4 shadow-sm">
+                            <Icon name="light-bulb" size="md" className="text-white" />
+                          </div>
+                          <span className="font-bold text-slate-900">Training-to-Employment Program</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-6 text-slate-600 leading-relaxed">
+                        Our unique program empowers aspiring developers through mentorship, real projects, and guaranteed pathways into hybrid teams.
+                      </td>
+                    </motion.tr>
+                    <motion.tr
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.3 }}
+                      className="hover:bg-slate-50 transition-colors"
+                    >
+                      <td className="px-6 py-6">
+                        <div className="flex items-center">
+                          <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center mr-4 shadow-sm">
+                            <Icon name="chip" size="md" className="text-white" />
+                          </div>
+                          <span className="font-bold text-slate-900">AI & Cloud Solutions</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-6 text-slate-600 leading-relaxed">
+                        From full-stack systems to automation, data analytics, and infrastructure, we deliver enterprise-grade software powered by modern AI.
+                      </td>
+                    </motion.tr>
+                    <motion.tr
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.4 }}
+                      className="hover:bg-slate-50 transition-colors"
+                    >
+                      <td className="px-6 py-6">
+                        <div className="flex items-center">
+                          <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center mr-4 shadow-sm">
+                            <Icon name="light-bulb" size="md" className="text-white" />
+                          </div>
+                          <span className="font-bold text-slate-900">R&D & Innovation</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-6 text-slate-600 leading-relaxed">
+                        Our research arm explores frontier domains like Distributed AI Subnets, Blockchain-based automation, and Agentic Infrastructure — shaping the next era of intelligent systems.
+                      </td>
+                    </motion.tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </SmoothSection>
 
       {/* Statistics Section
       <SmoothSection className="relative py-20 bg-gradient-to-b from-white to-slate-50">
@@ -342,35 +578,30 @@ export default function About() {
       </SmoothSection> */}
 
       {/* Company Values */}
-      <SmoothSection className="relative py-24 bg-white">
-        <GridBackground className="opacity-5" />
+      <SmoothSection className="relative py-24 lg:py-32 bg-white">
+        {/* Light Background Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/20 via-transparent to-purple-50/20"></div>
 
-        <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
-          <AnimatedSection className="text-center mb-20">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center justify-center px-6 py-3 mb-6 text-sm font-semibold text-blue-700 bg-blue-50 rounded-full border border-blue-200/80 shadow-lg"
-            >
-              <Icon name="heart" size="sm" className="mr-2 text-blue-600" />
-              <span className="text-blue-800">Our Values</span>
-            </motion.div>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center justify-center px-4 py-2 mb-6 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full border border-blue-200">
+              <Icon name="heart" size="sm" className="mr-2" />
+              Our Values
+            </div>
 
-            <h2 className="text-4xl lg:text-6xl font-black mb-6 leading-tight">
-              <span className="text-slate-900">What Drives</span>
-              <span className="block bg-gradient-to-r from-blue-700 via-cyan-700 to-indigo-700 bg-clip-text text-transparent">
-                Everything We Do
+            <h2 className="text-4xl lg:text-6xl font-black text-slate-900 mb-6 leading-tight">
+              What Drives
+              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Everything We Build
               </span>
             </h2>
 
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full mx-auto mb-6"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-6"></div>
 
-            <p className="text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto font-medium">
-              The principles that guide everything we do and define who we are
-              as a company
+            <p className="text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto">
+              Our principles define how we innovate, collaborate, and deliver measurable impact for our partners and community.
             </p>
-          </AnimatedSection>
+          </div>
 
           <StaggeredContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {companyValues.map((value, index) => (
@@ -415,7 +646,7 @@ export default function About() {
           <div className="absolute inset-0 bg-slate-900/40"></div>
         </div>
 
-        <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
           {/* Section Header */}
           <AnimatedSection className="text-center mb-5">
             <motion.div
@@ -425,20 +656,28 @@ export default function About() {
               className="inline-flex items-center justify-center px-8 py-4 mt-8 mb-6 text-sm font-bold text-white bg-slate-800/80 rounded-full border border-white/60 backdrop-blur-2xl shadow-2xl"
             >
               <div className="w-2 h-2 bg-purple-400 rounded-full mr-3 animate-pulse drop-shadow-sm"></div>
-              <span style={{ textShadow: "1px 1px 4px rgba(0,0,0,0.8)" }}>Our Evolution • 2024-2026</span>
+              <span style={{ textShadow: "1px 1px 4px rgba(0,0,0,0.8)" }}>Navigating the Future • 2024-2027+</span>
             </motion.div>
 
             <h2 className="text-5xl lg:text-8xl font-black mb-8 leading-tight">
-              <span className="text-white" style={{ textShadow: "2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5)" }}>Business</span>
+              <span className="text-white" style={{ textShadow: "2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5)" }}>Navigating the Future</span>
               <span className="block text-white" style={{ textShadow: "2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5)" }}>
-                Roadmap
+                of Hybrid Technology
               </span>
             </h2>
 
-            <p className="text-white text-xl leading-relaxed max-w-4xl mx-auto font-semibold" style={{ textShadow: "2px 2px 6px rgba(0,0,0,0.8), 0 0 15px rgba(0,0,0,0.6)" }}>
-              Navigate through our strategic roadmap of innovation and
-              ambitious growth
+            <p className="text-white text-xl leading-relaxed max-w-4xl mx-auto font-semibold mb-4" style={{ textShadow: "2px 2px 6px rgba(0,0,0,0.8), 0 0 15px rgba(0,0,0,0.6)" }}>
+              Our roadmap combines real growth with R&D-driven vision — expanding from hybrid delivery to frontier innovation.
             </p>
+            
+            {/* Focus indicators for each year */}
+            <div className="flex flex-wrap justify-center gap-4 mt-6">
+              {timeline.map((item, idx) => (
+                <div key={idx} className="text-white/80 text-sm font-medium px-4 py-2 bg-white/5 rounded-full border border-white/10">
+                  {item.year} — {item.title.split('&')[0].trim()}
+                </div>
+              ))}
+            </div>
           </AnimatedSection>
 
           {/* Serpentine Timeline Container */}
@@ -527,17 +766,39 @@ export default function About() {
               </svg>
             </div>
 
-            {/* Year Icons Positioned ABOVE the Serpentine Road Path */}
+            {/* Year Icons Positioned ON the Serpentine Road Path */}
             {timeline.map((item, index) => {
-              // Calculate positions ABOVE the serpentine road curve (following red arrows)
+              // Road path: M 150 850 Q 250 750 350 700 Q 450 650 400 550 Q 350 450 500 400 Q 650 350 600 250 Q 550 150 700 120 Q 850 90 950 100
+              // SVG viewBox: 0 0 1200 1000 (width=1200px, height=1000px)
+              // Container: h-[1200px] w-full max-w-7xl (height=1200px fixed)
+              // SVG uses w-full h-full with default preserveAspectRatio="xMidYMid meet"
+              // This means SVG scales uniformly to fit, maintaining aspect ratio
+              // The SVG will scale to fit the container width, then be centered vertically
+              // Since container height (1200) > viewBox height (1000), there will be vertical padding
+              // Actual rendered SVG height = (container_width / 1200) * 1000
+              // But for positioning icons, we use percentages relative to container
+              // The key: SVG coords map to viewBox, then scale to container
+              // X percentage = (svg_x / viewBox_width) * 100 = (x / 1200) * 100
+              // Y percentage calculation: Since SVG scales by width, we need to account for scaling
+              // If container width = W, scale factor = W/1200
+              // Rendered SVG height = (W/1200) * 1000 = W * (1000/1200) = W * 0.833
+              // Vertical offset = (1200 - rendered_height) / 2 = (1200 - W*0.833) / 2
+              // But this is complex. Let's use a simpler approach:
+              // Since SVG preserves aspect ratio, y positioning should be: (y / viewBox_height) * container_height
+              // But wait, percentages are relative to container, so:
+              // Y% = (svg_y / viewBox_height) * 100, then adjust for scaling
+              // Actually, let's just use the viewBox directly and see:
+              // Calculate positions ON the road path - fine-tuned to sit directly on the road
+              // Road path: M 150 850 Q 250 750 350 700 Q 450 650 400 550 Q 350 450 500 400 Q 650 350 600 250 Q 550 150 700 120 Q 850 90 950 100
+              // SVG viewBox: 0 0 1200 1000
+              // Container: h-[1200px] w-full
+              // Adjusting Y positions to account for icon size and ensure they sit ON the road surface
+              // Icons are 20px radius (w-20 h-20), so center point needs to be on road center
               const roadPoints = [
-                { x: 10, y: 78 }, // 2024 Q1 - ABOVE start of road
-                { x: 22, y: 68 }, // 2024 Q2 - ABOVE first curve  
-                { x: 31, y: 60 }, // 2024 Q3 - ABOVE continuing curve
-                { x: 30, y: 45 }, // 2025 Q1 - ABOVE curve back
-                { x: 47, y: 30 }, // 2025 Q2 - ABOVE middle curve
-                { x: 60, y: 13 }, // 2026 Q1 - ABOVE upper curve
-                { x: 75, y: 11 },  // 2026 Q2 - ABOVE end of road
+                { x: 12.5, y: 82 },       // 2024 - Moved down significantly to sit on road (was 85%)
+                { x: 33.33, y: 54 },      // 2025 - Fine-tuned to sit on road
+                { x: 50, y: 24 },         // 2026 - Fine-tuned to sit on road
+                { x: 79.17, y: 9.5 },     // 2027 - Fine-tuned to sit on road
               ];
 
               const position = roadPoints[index];
@@ -546,7 +807,7 @@ export default function About() {
 
               return (
                 <div key={index}>
-                  {/* Year Icon - Positioned ABOVE the Road */}
+                  {/* Year Icon - Positioned ON the Road */}
                   <motion.div
                     className="absolute cursor-pointer group z-30"
                     style={{
@@ -850,35 +1111,46 @@ export default function About() {
       </SmoothSection> */}
 
       {/* Leadership Section */}
-      <SmoothSection className="relative py-24 bg-white">
-        <GridBackground className="opacity-5" />
+      <SmoothSection className="relative py-24 lg:py-32 bg-gradient-to-b from-white via-slate-50/50 to-white">
+        {/* Subtle Background Pattern */}
+        <div className="absolute inset-0 opacity-30">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
+                           radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.04) 0%, transparent 50%)`,
+            }}
+          ></div>
+        </div>
 
-        <div className="relative z-10 w-[95%] mx-auto px-4 lg:px-8">
-          <AnimatedSection className="text-center mb-20">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center justify-center px-6 py-3 mb-6 text-sm font-semibold text-emerald-700 bg-emerald-50 rounded-full border border-emerald-200/80 shadow-lg"
-            >
-              <Icon name="users" size="sm" className="mr-2 text-emerald-600" />
-              <span className="text-emerald-800">Leadership Team</span>
-            </motion.div>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center justify-center px-4 py-2 mb-6 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full border border-blue-200">
+              <Icon name="users" size="sm" className="mr-2" />
+              Leadership Team
+            </div>
 
-            <h2 className="text-4xl lg:text-6xl font-black mb-6 leading-tight">
-              <span className="text-slate-900">Visionary</span>
-              <span className="block bg-gradient-to-r from-emerald-700 via-cyan-700 to-blue-700 bg-clip-text text-transparent">
+            <h2 className="text-4xl lg:text-6xl font-black text-slate-900 mb-6 leading-tight">
+              Visionary
+              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                 Leadership
               </span>
             </h2>
 
-            <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-cyan-600 rounded-full mx-auto mb-6"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-6"></div>
 
-            <p className="text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto font-medium">
+            <p className="text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto">
               Meet the experienced leaders driving our vision forward with
               passion and expertise
             </p>
-          </AnimatedSection>
+            
+            {/* Leadership Structure Note */}
+            <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 max-w-4xl mx-auto mt-8">
+              <p className="text-sm text-slate-600 leading-relaxed">
+                <strong className="text-slate-900">Leadership Structure:</strong> Our leadership includes Head of Innovation & Strategy, Head of Operations & Partnerships, Training & Development Lead, and an Advisory Council providing strategic oversight.
+              </p>
+            </div>
+          </div>
 
           <StaggeredContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {leadership.map((leader, index) => (
@@ -1028,6 +1300,185 @@ export default function About() {
               </motion.div>
             ))}
           </StaggeredContainer>
+        </div>
+      </SmoothSection>
+
+      {/* Join Our Movement Section */}
+      <SmoothSection className="relative py-24 lg:py-32 bg-white overflow-hidden">
+        {/* Subtle Background Pattern */}
+        <div className="absolute inset-0 opacity-30">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
+                             radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.04) 0%, transparent 50%)`,
+            }}
+          ></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center justify-center px-4 py-2 mb-6 text-sm font-semibold text-blue-600 bg-blue-50 rounded-full border border-blue-200">
+              <Icon name="rocket" size="sm" className="mr-2" />
+              Join Our Movement
+            </div>
+
+            <h2 className="text-4xl lg:text-6xl font-black text-slate-900 mb-6 leading-tight">
+              Let's Build the Future
+              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                of Work and Technology
+              </span>
+            </h2>
+
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-6"></div>
+
+            <p className="text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto mb-4 font-medium">
+              We're not just building software — we're creating a new model for how talent, training, and technology connect across borders.
+            </p>
+            <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto mb-12">
+              Join us as a partner, mentor, or investor in shaping the next era of hybrid tech innovation.
+            </p>
+          </div>
+
+          {/* Professional CTA Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Join Our Network Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative bg-white rounded-2xl border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-500 p-8 overflow-hidden"
+            >
+              {/* Gradient Background on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="relative z-10">
+                {/* Icon */}
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <Icon name="users" size="xl" className="text-white" />
+                </div>
+                
+                {/* Content */}
+                <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">
+                  Join Our Network
+                </h3>
+                <p className="text-slate-600 leading-relaxed mb-6">
+                  Connect with our global community of engineers, developers, and innovators. Build your career with real projects and mentorship.
+                </p>
+                
+                {/* Button */}
+                <motion.button
+                  onClick={() => { window.location.href = "/contact"; }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2"
+                >
+                  <span>Get Started</span>
+                  <Icon name="arrow-right" size="sm" />
+                </motion.button>
+              </div>
+            </motion.div>
+
+            {/* Partner With Us Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative bg-white rounded-2xl border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-500 p-8 overflow-hidden"
+            >
+              {/* Gradient Background on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 to-teal-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="relative z-10">
+                {/* Icon */}
+                <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <Icon name="link" size="xl" className="text-white" />
+                </div>
+                
+                {/* Content */}
+                <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-emerald-700 transition-colors">
+                  Partner With Us
+                </h3>
+                <p className="text-slate-600 leading-relaxed mb-6">
+                  Collaborate with us to deliver cutting-edge solutions. Access our hybrid teams and leverage our expertise for your projects.
+                </p>
+                
+                {/* Button */}
+                <motion.button
+                  onClick={() => { window.location.href = "/contact"; }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2"
+                >
+                  <span>Partner Now</span>
+                  <Icon name="arrow-right" size="sm" />
+                </motion.button>
+              </div>
+            </motion.div>
+
+            {/* Invest in Innovation Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative bg-white rounded-2xl border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-500 p-8 overflow-hidden"
+            >
+              {/* Gradient Background on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-50 to-orange-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="relative z-10">
+                {/* Icon */}
+                <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <Icon name="chart-bar" size="xl" className="text-white" />
+                </div>
+                
+                {/* Content */}
+                <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-amber-700 transition-colors">
+                  Invest in Innovation
+                </h3>
+                <p className="text-slate-600 leading-relaxed mb-6">
+                  Support groundbreaking R&D initiatives. Be part of the next wave of distributed AI, blockchain, and agentic infrastructure.
+                </p>
+                
+                {/* Button */}
+                <motion.button
+                  onClick={() => { window.location.href = "/contact"; }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2"
+                >
+                  <span>Learn More</span>
+                  <Icon name="arrow-right" size="sm" />
+                </motion.button>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </SmoothSection>
+
+      {/* Quote Block */}
+      <SmoothSection className="relative py-24 lg:py-32 bg-white">
+        {/* Light Background Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-transparent to-purple-50/30"></div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="max-w-5xl mx-auto text-center">
+            <div className="bg-white rounded-3xl border border-slate-200 p-12 lg:p-16 shadow-xl">
+              <Icon name="chat" size="xl" className="text-blue-600 mx-auto mb-8" />
+              <blockquote className="text-2xl lg:text-3xl font-bold text-slate-900 leading-relaxed mb-6">
+                "Technology doesn't just connect systems — it connects people.
+              </blockquote>
+              <p className="text-xl text-slate-700 leading-relaxed font-medium">
+                We're building the bridge between potential and progress."
+              </p>
+            </div>
+          </div>
         </div>
       </SmoothSection>
     </div>

@@ -300,7 +300,7 @@ const Hero: React.FC = () => {
                 {
                   icon: "zap",
                   text: "Rapid Delivery",
-                  desc: "Rapid Agile hybrid teams deliver results twice as fast",
+                  desc: "Agile hybrid teams deliver results twice as fast",
                   color: "from-orange-400 to-amber-500",
                 },
                 {
