@@ -143,7 +143,7 @@ const ProjectShowcase: React.FC = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group relative bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden h-[600px] flex flex-col"
+              className="group relative bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden min-h-[500px] md:h-[600px] flex flex-col"
             >
               {/* Card Background */}
               <div
@@ -152,7 +152,7 @@ const ProjectShowcase: React.FC = () => {
 
               {/* Project Image */}
               <div className="relative overflow-hidden">
-                <div className="aspect-[16/10] h-[280px] mx-auto">
+                <div className="aspect-[16/10] h-[200px] md:h-[280px] mx-auto">
                   <img
                     src={project.image}
                     alt={project.title}

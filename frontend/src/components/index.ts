@@ -3,5 +3,4 @@ export * from './ui';
 export * from './layout';
 export * from './sections';
 export * from './animations';
-export * from './providers';
-export * from './web3'; 
+export * from './providers'; 
