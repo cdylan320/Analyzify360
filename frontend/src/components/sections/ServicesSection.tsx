@@ -143,7 +143,7 @@ const ServicesSection: React.FC = () => {
               key={index}
               delay={index * 0.1}
               hoverEffect="lift"
-              className={`group relative bg-white rounded-2xl border ${service.borderColor} shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden h-[420px] flex flex-col`}
+              className={`group relative bg-white rounded-2xl border ${service.borderColor} shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden min-h-[380px] md:h-[420px] flex flex-col`}
             >
               {/* Card Background Gradient */}
               <div

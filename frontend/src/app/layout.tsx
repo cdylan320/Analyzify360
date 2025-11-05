@@ -27,6 +27,12 @@ export const metadata: Metadata = {
   creator: "Analyzify360",
   publisher: "Analyzify360",
   robots: "index, follow",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
   icons: {
     icon: [
       { url: '/logo2.png' },

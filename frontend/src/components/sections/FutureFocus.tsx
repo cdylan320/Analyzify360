@@ -96,7 +96,7 @@ const FutureFocus: React.FC = () => {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
       },
     },
   };
@@ -148,14 +148,14 @@ const FutureFocus: React.FC = () => {
 
           <motion.p
             variants={itemVariants}
-            className="text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto mb-4"
+            className="text-base md:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto mb-4 px-4"
           >
             We're not just building software — we're shaping the future.
           </motion.p>
 
           <motion.p
             variants={itemVariants}
-            className="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto"
+            className="text-sm md:text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto px-4"
           >
             Our R&D teams are developing next-generation MVPs that blend AI,
             blockchain, and distributed computing under our hybrid TaaS model.
@@ -188,7 +188,7 @@ const FutureFocus: React.FC = () => {
               key={index}
               delay={index * 0.1}
               hoverEffect="lift"
-              className={`group relative bg-white rounded-2xl border ${project.borderColor} shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden min-h-[480px] flex flex-col`}
+              className={`group relative bg-white rounded-2xl border ${project.borderColor} shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden min-h-[400px] md:min-h-[480px] flex flex-col`}
             >
               {/* Card Background Gradient */}
               <div
@@ -196,7 +196,7 @@ const FutureFocus: React.FC = () => {
               ></div>
 
               {/* Card Content */}
-              <div className="relative z-10 p-8 flex-1 flex flex-col">
+              <div className="relative z-10 p-4 md:p-8 flex-1 flex flex-col">
                 {/* Icon & Status */}
                 <div className="flex items-center justify-between mb-6">
                   <div
@@ -281,13 +281,15 @@ const FutureFocus: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <Button
-              href="/services"
               variant="primary"
               size="lg"
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+              onClick={() => {
+                window.location.href = "/services";
+              }}
+              rightIcon={<Icon name="arrow-right" size="md" />}
             >
               Explore Our R&D Pipeline
-              <Icon name="arrow-right" size="md" className="ml-2" />
             </Button>
           </motion.div>
         </motion.div>
