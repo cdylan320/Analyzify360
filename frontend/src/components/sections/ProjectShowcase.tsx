@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { Button, Icon } from "../ui";
 
 const ProjectShowcase: React.FC = () => {
@@ -152,11 +153,13 @@ const ProjectShowcase: React.FC = () => {
 
               {/* Project Image */}
               <div className="relative overflow-hidden">
-                <div className="aspect-[16/10] h-[200px] md:h-[280px] mx-auto">
-                  <img
+                <div className="aspect-[16/10] h-[200px] md:h-[280px] mx-auto relative">
+                  <Image
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
 

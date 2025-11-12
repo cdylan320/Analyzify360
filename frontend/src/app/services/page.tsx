@@ -86,12 +86,12 @@ export default function Services() {
   };
 
   return (
-    <div className="pt-0 overflow-hidden bg-white">
+    <div className="pt-16 overflow-hidden bg-white">
       {/* Artistic Hero Section */}
       <motion.section
         ref={heroRef}
         style={{ y: heroY, opacity: heroOpacity, scale: heroScale }}
-        className="relative min-h-[90vh] flex items-center justify-center overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
         {/* Layered Abstract Background */}
         <div className="absolute inset-0">

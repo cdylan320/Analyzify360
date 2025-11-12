@@ -51,21 +51,19 @@ const Navbar: React.FC = () => {
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="relative"
+              className="flex items-center space-x-2"
             >
               <img
-                src="/logo2.png"
+                src="/images/logo2.png"
+                alt="Analyzify360 Logo 2"
+                className="h-[52px] w-auto"
+              />
+              <img
+                src="/images/logo.png"
                 alt="Analyzify360 Logo"
-                className="h-13 object-contain"
+                className="h-[160px] w-auto"
               />
             </motion.div>
-            <div className="flex items-center mb-3">
-              <img
-                src="/logo.png"
-                alt="Analyzify360"
-                className="h-30 object-contain"
-              />
-            </div>
           </Link>
 
           {/* Desktop Navigation */}
