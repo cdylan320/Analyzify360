@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Icon } from "../ui";
 import { companyInfo } from "@/data/content";
 
@@ -27,10 +28,12 @@ const Footer: React.FC = () => {
               <div className="space-y-6">
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center space-x-3">
-                    <img
+                    <Image
                       src="/logo2.png"
                       alt="Analyzify360 Logo"
-                      className="h-12 object-contain"
+                      width={48}
+                      height={48}
+                      className="h-12 w-auto object-contain"
                     />
                     <div className="flex flex-col">
                       <h3 className="text-2xl font-black text-white tracking-tight">

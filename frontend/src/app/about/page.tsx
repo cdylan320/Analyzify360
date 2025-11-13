@@ -37,6 +37,7 @@ export default function About() {
   const [currentTimelineIndex, setCurrentTimelineIndex] = useState(-1);
   const [isDragging, setIsDragging] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const timelineRef = useRef<HTMLDivElement>(null);
 
   // Pre-computed static values for consistent SSR/CSR
@@ -71,6 +72,12 @@ export default function About() {
 
   useEffect(() => {
     setMounted(true);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const leadership = teamMembers.filter(
@@ -681,7 +688,7 @@ export default function About() {
           </AnimatedSection>
 
           {/* Serpentine Timeline Container */}
-          <div className="relative h-[1200px] w-full max-w-7xl mx-auto">
+          <div className="relative h-[600px] sm:h-[800px] md:h-[1000px] lg:h-[1200px] w-full max-w-7xl mx-auto">
             {/* Winding Zig-Zag Serpentine Road */}
             <div className="absolute inset-0">
               <svg
@@ -853,8 +860,8 @@ export default function About() {
                     {/* Year Icon Circle - BIGGER SIZE */}
                     <div className="relative" style={{ perspective: "1000px" }}>
                       <motion.div
-                        className={`w-20 h-20 rounded-full border-4 transition-all duration-500 flex items-center justify-center relative overflow-hidden ${isActive
-                          ? "bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500 border-white shadow-2xl scale-110 ring-4 ring-yellow-300/50"
+                        className={`w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full border-2 sm:border-3 md:border-4 transition-all duration-500 flex items-center justify-center relative overflow-hidden ${isActive
+                          ? "bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500 border-white shadow-2xl scale-110 ring-2 sm:ring-4 ring-yellow-300/50"
                           : isPast
                             ? "bg-gradient-to-br from-emerald-500 via-blue-600 to-blue-700 border-white shadow-xl"
                             : "bg-gradient-to-br from-slate-500 via-slate-600 to-slate-700 border-white/80 shadow-lg hover:shadow-xl"
@@ -878,7 +885,7 @@ export default function About() {
                         }}
                       >
                         {/* Inner Icon Circle - BIGGER */}
-                        <div className="w-12 h-12 rounded-full bg-white/95 flex items-center justify-center shadow-inner">
+                        <div className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 rounded-full bg-white/95 flex items-center justify-center shadow-inner">
                           <Icon
                             name={
                               index === 0
@@ -895,8 +902,8 @@ export default function About() {
                                           ? "external-link"
                                           : "cpu"
                             }
-                            size="lg"
-                            className={`transition-all duration-300 ${isActive
+                            size="sm"
+                            className={`sm:size-md md:size-lg transition-all duration-300 ${isActive
                               ? "text-yellow-700"
                               : isPast
                                 ? "text-blue-700"
@@ -920,7 +927,7 @@ export default function About() {
 
                       {/* Year Label - Positioned above icon */}
                       <motion.div
-                        className={`absolute -top-12 left-1/2 transform -translate-x-1/2 transition-all duration-500 ${isActive ? "scale-110" : ""
+                        className={`absolute -top-8 sm:-top-10 md:-top-12 left-1/2 transform -translate-x-1/2 transition-all duration-500 ${isActive ? "scale-110" : ""
                           }`}
                         animate={{ y: [0, -2, 0] }}
                         transition={{
@@ -932,7 +939,7 @@ export default function About() {
                         }}
                       >
                         <div
-                          className={`px-4 py-2 rounded-xl font-bold text-sm shadow-xl transition-all duration-500 ${isActive
+                          className={`px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm shadow-xl transition-all duration-500 ${isActive
                             ? "bg-yellow-400 text-yellow-900 shadow-yellow-400/50"
                             : "bg-white text-slate-800 shadow-slate-500/30"
                             }`}
@@ -951,11 +958,19 @@ export default function About() {
                   {/* Content Card - Only Show When Active */}
                   {isActive && (
                     <motion.div
-                      className="absolute z-40"
-                      style={{
+                      className={`absolute z-40 -translate-x-1/2 ${
+                        isMobile 
+                          ? 'left-1/2 bottom-5 w-[90%] max-w-[280px]' 
+                          : 'w-auto max-w-none'
+                      }`}
+                      style={isMobile ? {
+                        left: '50%',
+                        bottom: '20px',
+                        transform: 'translateX(-50%)',
+                      } : {
                         left: `${position.x + (index % 2 === 0 ? -22 : 22)}%`,
                         top: `${position.y - 5}%`,
-                        transform: "translateX(-50%)",
+                        transform: 'translateX(-50%)',
                       }}
                       initial={{
                         opacity: 0,
@@ -979,7 +994,7 @@ export default function About() {
                         damping: 30
                       }}
                     >
-                      <div className="w-80 bg-white/98 backdrop-blur-xl rounded-2xl border-2 border-yellow-300 ring-2 ring-yellow-400/30 shadow-2xl p-6 relative">
+                      <div className="w-[280px] sm:w-80 bg-white/98 backdrop-blur-xl rounded-xl sm:rounded-2xl border-2 border-yellow-300 ring-2 ring-yellow-400/30 shadow-2xl p-4 sm:p-6 relative max-w-full">
                         {/* Card Header */}
                         <div className="flex items-center justify-between mb-4">
                           <div className="inline-flex items-center justify-center px-3 py-1 bg-yellow-400 text-yellow-900 rounded-full text-xs font-bold">
@@ -1027,27 +1042,27 @@ export default function About() {
             })}
 
             {/* Navigation Controls */}
-            <div className="absolute top-108 left-8 z-50">
+            <div className="absolute top-4 sm:top-8 left-2 sm:left-4 md:left-8 z-50">
               <motion.button
                 onClick={() => handleTimelineNavigation("prev")}
                 disabled={currentTimelineIndex === -1}
-                className="w-14 h-14 bg-white/95 backdrop-blur-xl rounded-xl border border-white/50 flex items-center justify-center text-slate-700 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white hover:shadow-xl transition-all duration-300 shadow-lg"
+                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-white/95 backdrop-blur-xl rounded-lg sm:rounded-xl border border-white/50 flex items-center justify-center text-slate-700 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white hover:shadow-xl transition-all duration-300 shadow-lg"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Icon name="arrow-right" size="lg" className="rotate-180" />
+                <Icon name="arrow-right" size="md" className="sm:size-lg rotate-180" />
               </motion.button>
             </div>
 
-            <div className="absolute top-108 right-8 z-50">
+            <div className="absolute top-4 sm:top-8 right-2 sm:right-4 md:right-8 z-50">
               <motion.button
                 onClick={() => handleTimelineNavigation("next")}
                 disabled={currentTimelineIndex === timeline.length - 1}
-                className="w-14 h-14 bg-white/95 backdrop-blur-xl rounded-xl border border-white/50 flex items-center justify-center text-slate-700 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white hover:shadow-xl transition-all duration-300 shadow-lg"
+                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-white/95 backdrop-blur-xl rounded-lg sm:rounded-xl border border-white/50 flex items-center justify-center text-slate-700 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white hover:shadow-xl transition-all duration-300 shadow-lg"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Icon name="arrow-right" size="lg" />
+                <Icon name="arrow-right" size="md" className="sm:size-lg" />
               </motion.button>
             </div>
           </div>
